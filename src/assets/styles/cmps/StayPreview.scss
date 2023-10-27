@@ -1,0 +1,71 @@
+.stay-prev {
+
+    padding-block: 20px;
+    cursor: pointer;
+
+    .img-sec {
+        position: relative;
+
+
+        img {
+            border-radius: 10px;
+        }
+
+        .img-dots {
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            .dot {
+                padding: 3px;
+                background-color: lightgray;
+                border-radius: 50%;
+                margin-inline-end: 5px;
+
+                &.select {
+                    background-color: white;
+                }
+            }
+        }
+
+        .img-arrow {
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            .arrow {
+                background-color: white;
+                border-radius: 50px;
+                opacity: 0;
+                transition: .3s;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:hover .arrow {
+            opacity: .8;
+
+            &.hide {
+                opacity: 0;
+            }
+        }
+    }
+
+    .name,
+    .price {
+        color: $txtClr1;
+        font-weight: bolder;
+    }
+
+    .loc,
+    span {
+        color: $txtClr2;
+        font-weight: lighter;
+    }
+}

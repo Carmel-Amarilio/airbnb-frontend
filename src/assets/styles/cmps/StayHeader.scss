@@ -1,0 +1,60 @@
+.stay-header {
+  position:sticky;
+  top: 0;
+  background-color: white;
+  padding-block: 20px;
+  border-bottom: 1px solid $borderClr ;
+  z-index: 10;
+
+  .logo {
+    img {
+      width: 40px;
+    }
+
+    span {
+      font-size: 30px;
+      color: $logoClr;
+      font-weight: bold;
+      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    }
+  }
+
+  .set-stay {
+    border-radius: 50em;
+    border: 1px solid $borderClr;
+    box-shadow: 2px 2px 5px 0px $borderClr;
+    padding: 7px;
+
+    &:hover {
+      box-shadow: 3px 3px 7px 0px $borderClr;
+    }
+
+    button:not(:last-child) {
+      position: relative;
+      padding: 10px 15px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(-50%, -50%);
+        height: 60%;
+        width: 1px;
+        background-color: $borderClr;
+      }
+    }
+
+    button:last-child {
+      padding: 10px 15px;
+      color: $txtClr2;
+    }
+
+    .search-icon {
+      background-color: $logoClr;
+      color: white;
+      padding: 1px 2px;
+      border-radius: 50%;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    // font-family: airbnb;
+    color: $txtClr1;
+}
+
+body {
+    font-size: rem(14px);
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: caveat;
+    margin: 0 0 0.6em;
+    line-height: 1;
+}
+
+
+img {
+    width: 100%;
+}
+
+p {
+    margin: 0 0 5px;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+

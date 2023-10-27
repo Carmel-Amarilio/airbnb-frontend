@@ -1,0 +1,48 @@
+.stay-filter {
+    position:sticky;
+    top: 92px;
+    background-color: white;
+    padding: 1rem 3rem;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    z-index: 10;
+
+
+    .links-box {
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // align-items: center;
+        margin-right: 2rem;
+        opacity: 0.5;
+        border-bottom: 1px solid white;
+        min-width: 85px;
+
+        &:hover,
+        &.selected-box {
+            opacity: 1;
+            border-bottom: 1px solid black;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+    }
+
+    .links-img {
+        width: 1.5rem;
+        height: 1.5rem;
+        object-fit: contain;
+    }
+
+    .links-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: $txtClr2;
+    }
+
+    .selected-label {
+        color: black;
+    }
+
+
+}
