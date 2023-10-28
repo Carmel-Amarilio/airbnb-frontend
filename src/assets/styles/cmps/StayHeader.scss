@@ -1,5 +1,5 @@
 .stay-header {
-  position:sticky;
+  position: sticky;
   top: 0;
   background-color: white;
   padding-block: 20px;
@@ -55,6 +55,66 @@
       color: white;
       padding: 1px 2px;
       border-radius: 50%;
+    }
+  }
+
+  .sating {
+    position: relative;
+
+    &>* {
+      margin-inline-end: 20px;
+    }
+
+    .your-home {
+      border-radius: 2em;
+      padding: 10px;
+
+      &:hover {
+        background-color: #F7F7F7;
+      }
+    }
+
+    .user-log {
+      border-radius: 2em;
+      border: 1px solid $borderClr;
+      padding: 5px;
+      cursor: pointer;
+
+      .menu-icon {
+        font-size: 1.5em;
+      }
+
+      .user-icon {
+        margin-inline-start: 10px;
+        color: $txtClr2;
+        font-size: 2.5em;
+      }
+
+      &:hover {
+        box-shadow: 3px 3px 7px 0px $borderClr;
+      }
+    }
+
+    .log-modal {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      z-index: 20;
+      background-color: white;
+      border-radius: 10px;
+      // border: 1px solid $borderClr;
+      box-shadow: 0px 0px 10px .5px #e7e7e7;
+      padding: 10px 0px;
+
+      &>* {
+        padding: 10px;
+        padding-inline-end: 150px;
+        font-weight: bold;
+
+        &:hover {
+         background-color:  #F7F7F7;
+        }
+      }
     }
   }
 }
