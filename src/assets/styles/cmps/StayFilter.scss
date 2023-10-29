@@ -1,19 +1,16 @@
 .stay-filter {
-    position:sticky;
+    position: sticky;
     top: 92px;
     background-color: white;
     padding: 1rem 3rem;
     justify-content: flex-start;
     align-items: center;
-    overflow-x: auto;
-    z-index:5;
+    // overflow-x: auto;
+    // overflow-x:hidden;
+    z-index: 5;
 
 
     .links-box {
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: center;
-        // align-items: center;
         margin-right: 2rem;
         opacity: 0.5;
         border-bottom: 1px solid white;
@@ -25,6 +22,10 @@
             border-bottom: 1px solid black;
             transition: all 0.3s;
             cursor: pointer;
+        }
+
+        &:first-child {
+            margin-inline-start: 60px;
         }
     }
 
@@ -42,6 +43,35 @@
 
     .selected-label {
         color: black;
+    }
+
+
+    .arrow-cont {
+        position: absolute;
+        padding: 10px 20px;
+        background: linear-gradient(to left, white, rgba(255, 255, 255, 0.507));
+        background: linear-gradient(to left, white 70%, rgba(255, 255, 255, 0.507) 70%);
+        
+        &.left {
+            left: 50px;
+        }
+        
+        &.right {
+            right: 50px;
+        }
+
+        .arrow {
+            font-size: 2em;
+            background-color: white;
+            border-radius: 50px;
+            transition: .3s;
+            border: 1px solid $borderClr;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 
 
