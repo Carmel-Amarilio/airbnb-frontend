@@ -1,23 +1,58 @@
 button {
-    border:0;
+    border: 0;
     background-color: white;
     padding: 0px;
     margin: 0px;
     cursor: pointer;
 }
 
-form > * {
+form>* {
     display: block;
     width: 200px;
     margin: 10px 0px;
 }
 
 .btn-link {
-    border:0;
+    border: 0;
     background-color: transparent;
     text-decoration: underline;
     transition: .5s;
 }
+
 .btn-link:hover {
     transform: scale(1.1);
+}
+
+.action-btn {
+    --mouse-x: 0;
+    --mouse-y: 50;
+    padding: 15px 30px;
+    min-width: 300px;
+    background-size: 200% 200%;
+    background-position: calc((100 - var(--mouse-x, 0)) * 1%) calc((100 - var(--mouse-y, 0)) * 1%);
+    background-image: radial-gradient(circle, rgb(250, 50, 89) 0%, rgb(203, 30, 85) 100%);
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.142em;
+    font-weight: bolder;
+    color: white;
+}
+
+.form-btn {
+    border: black 1px solid;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-block: 20px;
+
+    h3 {
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

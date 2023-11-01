@@ -1,0 +1,89 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { stayService } from "../services/stay.service";
+
+import { StayHeader } from "../cmps/StayHeader";
+import { Reviews } from "../cmps/reviews";
+import { StayReviewDetail } from "../cmps/StayReviewDetail";
+import { OrderForm } from "../cmps/OrderForm";
+
+import StarIcon from '@mui/icons-material/Star';
+import { StayMap } from "../cmps/StayMap";
+import { HostStay } from "../cmps/HostStay";
+
+export function StayDetails() {
+    const params = useParams()
+    const navigate = useNavigate()
+    const [currStay, setCurrStay] = useState(null)
+    const rating = {}
+    const ratingName = [] //["Cleanliness", "Accuracy","Communication","Location","Check-in","Value" ]
+
+
+    useEffect(() => {
+        const { stayId } = params
+        getStay(stayId)
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
+    async function getStay(stayId) {
+        try {
+            const stay = await stayService.get(stayId)
+            if (!stay) return navigate("/stay");
+            setCurrStay(stay);
+        } catch (error) {
+            console.log("Had issues loading stay");
+        }
+    }
+
+
+    function mapRating() {
+        reviews.map(review => {
+            for (const key in review.rate) {
+                if (review.rate.hasOwnProperty(key)) {
+                    if (!ratingName.includes(key)) ratingName.push(key)
+                    if (rating[key]) rating[key] += review.rate[key]
+                    else rating[key] = review.rate[key]
+                }
+            }
+        })
+        for (const key in rating) {
+            if (rating.hasOwnProperty(key)) rating[key] = rating[key] / reviews.length;
+        }
+    }
+
+
+    if (!currStay || currStay.length === 0) return (<div>loading...</div>)
+    const { imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
+    mapRating()
+    console.log(currStay);
+    return (
+        <section className="stay-details main-container">
+            <StayHeader />
+            <header>
+                <h1>{name}</h1>
+                <p className='flex align-center'>
+                    <StarIcon className="star-icon" />
+                    <span> {rating.value} · {reviews.length} reviews · {loc.city}, {loc.country}</span>
+                </p>
+            </header>
+
+            <article className="image-container">
+                {Array.from({ length: 5 }).map((_, i) =>
+                    <img key={i} src={imgUrls[i]} />
+                )}
+            </article>
+
+            <main>
+                <StayReviewDetail currStay={currStay} />
+                <OrderForm currStay={currStay} />
+            </main>
+
+            <Reviews reviews={reviews} rating={rating} ratingName={ratingName} />
+            <StayMap loc={loc} />
+            <HostStay currStay={currStay}/>
+
+        </section>
+    )
+}

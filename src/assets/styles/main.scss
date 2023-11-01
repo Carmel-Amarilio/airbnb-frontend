@@ -14,6 +14,7 @@
 
 // Views
 @import "views/Home";
+@import "views/StayDetails";
 
 
 // Components
@@ -21,6 +22,13 @@
 @import "cmps/StayFilter.scss";
 @import "cmps/StayPreview.scss";
 @import "cmps/SingInUp.scss";
+
+@import "cmps/StayReviewDetail.scss";
+@import "cmps/OrderForm.scss";
+@import "cmps/DatePicker.scss";
+@import "cmps/Reviews.scss";
+@import "cmps/StayDetails.scss";
+@import "cmps/HostStay.scss";
 
 
 

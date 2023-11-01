@@ -1,9 +1,11 @@
 import { useState } from "react"
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
+import { useNavigate } from "react-router";
 
 export function StayPreview({ stay }) {
     const [selectedImg, setSelectedImg] = useState(0)
+    const navigate = useNavigate()
     const { imgUrls, name, loc, price } = stay
 
     function incImg(inc) {
@@ -12,8 +14,12 @@ export function StayPreview({ stay }) {
         setSelectedImg(prev => prev + inc)
     }
 
+    function onStay(stayId) {
+        navigate(`/stay/${stayId}`)
+    }
+
     return (
-        <section className="stay-prev ">
+        <section className="stay-prev" onClick={() => onStay(stay._id)}>
             <section className="img-sec">
                 <img src={imgUrls[selectedImg]} />
                 <article className="img-dots flex">
@@ -22,8 +28,8 @@ export function StayPreview({ stay }) {
                     )}
                 </article>
                 <article className="img-arrow flex space-between">
-                    <KeyboardArrowLeftSharpIcon className={`arrow left ${selectedImg <= 0 ? "hide" : ""} `} onClick={() => incImg(-1)} />
-                    <KeyboardArrowRightSharpIcon className={`arrow right ${selectedImg >= imgUrls.length - 1 ? "hide" : ""} `} onClick={() => incImg(1)} />
+                    <KeyboardArrowLeftSharpIcon className={`arrow left ${selectedImg <= 0 ? "hide" : ""} `} onClick={(ev) => { ev.stopPropagation(); incImg(-1)}} />
+                    <KeyboardArrowRightSharpIcon className={`arrow right ${selectedImg >= imgUrls.length - 1 ? "hide" : ""} `} onClick={(ev) => { ev.stopPropagation(); incImg(1)}} />
                 </article>
             </section>
 

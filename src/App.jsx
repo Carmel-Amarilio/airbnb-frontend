@@ -7,6 +7,7 @@ import { store } from './store/store'
 
 import { Home } from './views/Home'
 import { AppIndex } from './views/AppIndex'
+import { StayDetails } from './views/StayDetails'
 
 export function App() {
   return (
@@ -14,8 +15,9 @@ export function App() {
       <Router>
         <main>
           <Routes>
-            {/* <Route element={<Home />} path="/" /> */}
-            <Route element={<AppIndex />} path="/" />
+            <Route element={<Home />} path="/" />
+            <Route element={<AppIndex />} path="/stay" />
+            <Route path="/stay/:stayId" element={<StayDetails />} />
           </Routes>
         </main>
       </Router >

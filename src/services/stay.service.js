@@ -59,27 +59,51 @@ function _createStays() {
         host: {
             _id: "u101",
             fullname: "Davit Pok",
-            imgUrl: "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small",
+            imgUrl: "https://res.cloudinary.com/du1jrse2t/image/upload/v1698603637/download_jtm9hv.jpg",
         },
         loc: {
             country: "Portugal",
             countryCode: "PT",
             city: "Lisbon",
             address: "17 Kombo st",
-            lat: -8.61308,
-            lng: 41.1413
+            lat: 38.722252,
+            lng: -9.139337
         },
         reviews: [
             {
-                id: "madeId",
-                txt: "Very helpful hosts. Cooked traditional...",
-                rate: 4,
-                by: {
-                    _id: "u102",
-                    fullname: "user2",
-                    imgUrl: "/img/img2.jpg"
+                "id": "cex3BQ",
+                "txt": "I had a great experience working with Patty and Peter.  Both were very attentive in sorting out the booking details and following up directly when I had questions.  I rented a 2 bedroom unit at the Westin Villas  in Maui and both the unit and property was absolutely amazing.  I think we had the best unit on the resort complete with 2 outdoor patios with direct access  to  the  beach.  I would HIGHLY recommend renting with Patty and Peter.",
+                "rate": {
+                    "cleanliness": 4.7,
+                    "communication": 4.9,
+                    "check-in": 4.7,
+                    "accuracy": 4.6,
+                    "location": 4.5,
+                    "value": 4.8
+                },
+                "by": {
+                    "_id": "622f3407e36c59e6164fc004",
+                    "fullname": "Kiesha",
+                    "imgUrl": "https://res.cloudinary.com/dgzyxjapv/image/upload/v1670246635/stayby/avatars/male/68.jpg"
                 }
-            }
+            },
+            {
+                "id": "lc2vxY",
+                "txt": "Peter quickly responded to any questions I had before, and during the trip. Will use again, highly recommend. ",
+                "rate": {
+                    "cleanliness": 4.6,
+                    "communication": 4.6,
+                    "check-in": 4.7,
+                    "accuracy": 5,
+                    "location": 5,
+                    "value": 4.7
+                },
+                "by": {
+                    "_id": "622f3403e36c59e6164fb204",
+                    "fullname": "Chris",
+                    "imgUrl": "https://res.cloudinary.com/dgzyxjapv/image/upload/v1670246635/stayby/avatars/female/10.jpg"
+                }
+            },
         ],
         likedByUsers: ['mini-user']
     }
