@@ -1,7 +1,8 @@
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
+import { useState } from 'react';
 
 const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -19,7 +20,10 @@ const SignupSchema = Yup.object().shape({
 })
 
 
-export function SingInUp({operation, closeLog}) {
+export function SingInUp({ operation, closeLog }) {
+
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
     function textField(prop) {
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
     }
@@ -30,13 +34,19 @@ export function SingInUp({operation, closeLog}) {
         // else signup(val)
         // toggleSign()
     }
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) * 100) / e.currentTarget.clientWidth;
+        const y = ((e.clientY - rect.top) * 100) / e.currentTarget.clientHeight;
+        setMouseX(x);
+        setMouseY(y);
+    }
+
     return (
         <section className="sing-in-up">
-            <article className='flex align-center space-between'>
-                <KeyboardArrowLeftSharpIcon className="back" onClick={closeLog}/>
-                <header>Finish signing up</header>
-                <div></div>
-            </article>
+            <KeyboardArrowLeftSharpIcon className="back" onClick={closeLog} />
+            <h2>Finish signing up</h2>
 
 
             <Formik
@@ -48,7 +58,8 @@ export function SingInUp({operation, closeLog}) {
                 validationSchema={SignupSchema}
                 onSubmit={onSubmit}>
                 {({ errors, touched }) => (
-                    <Form className='flex column justify-between align-center'>
+                    // <Form className='flex column justify-between align-center'>
+                    <Form className='form-container'>
                         {operation === 'up' && <div>
                             <Field as={textField} label="Full name" name="fullName" className="input" />
                         </div>}
@@ -58,10 +69,14 @@ export function SingInUp({operation, closeLog}) {
                         <div>
                             <Field as={textField} label="Password" name="password" className="input" />
                         </div>
-                        <Button type="submit" variant="outlined" className='submit-bnt'>
+                        <button
+                            onMouseMove={handleMouseMove}
+                            style={{ '--mouse-x': mouseX, '--mouse-y': mouseY }}
+                            className='submit-bnt action-btn'
+                            type='submit'>
                             {operation === 'in' && 'Sign In'}
                             {operation === 'up' && 'Sign Up'}
-                        </Button>
+                        </button>
                     </Form>
                 )}
             </Formik>
