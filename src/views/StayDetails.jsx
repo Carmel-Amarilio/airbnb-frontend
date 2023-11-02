@@ -60,7 +60,7 @@ export function StayDetails() {
     console.log(currStay);
     return (
         <section className="stay-details main-container">
-            <StayHeader />
+            <StayHeader isDetails={true} />
             <header>
                 <h1>{name}</h1>
                 <p className='flex align-center'>
@@ -82,7 +82,7 @@ export function StayDetails() {
 
             <Reviews reviews={reviews} rating={rating} ratingName={ratingName} />
             <StayMap loc={loc} />
-            <HostStay currStay={currStay}/>
+            <HostStay currStay={currStay} />
 
         </section>
     )

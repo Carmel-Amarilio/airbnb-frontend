@@ -5,10 +5,12 @@ import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useState } from 'react';
 import { SingInUp } from './SingInUp';
+import { SearchStay } from './SearchStay';
 
-export function StayHeader() {
+export function StayHeader({ isDetails = false }) {
     const [isModal, setIsModal] = useState(false)
     const [isLog, setIsLog] = useState(false)
+    const [isSetStay, setIsSetStay] = useState(false)
 
     function toggleModal() {
         setIsModal(!isModal)
@@ -26,11 +28,12 @@ export function StayHeader() {
                     <span>aircnc</span>
                 </section>
 
-                <section className='set-stay flex align-center'>
-                    <article>
-                        <button>Anywhere</button>
-                        <button>Any week</button>
-                        <button>Add guests</button>
+                <section className='set-stay-btn flex align-center'>
+                    <article onClick={() => setIsSetStay(true)}>
+                        {!isDetails && <button>Anywhere</button>}
+                        {!isDetails && <button>Any week</button>}
+                        {!isDetails && <button>Add guests</button>}
+                        {isDetails && <button>Start your search</button>}
                     </article>
                     <div className='search-icon'><SearchIcon /></div>
                 </section>
@@ -53,6 +56,9 @@ export function StayHeader() {
 
                 {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
             </section>
+
+            {isSetStay && <SearchStay setIsSetStay={setIsSetStay}/>}
+            
         </header>
     )
 }
