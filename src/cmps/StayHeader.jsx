@@ -48,13 +48,15 @@ export function StayHeader({ isDetails = false }) {
                     <article className='user-log flex align-center'>
                         <MenuSharpIcon className='menu-icon' />
                         {!logInUser && <AccountCircleSharpIcon className='user-icon' />}
-                        {logInUser && <img src={logInUser.imgUrl} className='profile'/>}
+                        {logInUser && (logInUser.imgUrl ?
+                            <img src={logInUser.imgUrl} className='profile' />
+                            : <div className='no-img flex justify-center align-center'>{logInUser.fullName[0]}</div>)}
                     </article>
 
                     {isModal && <article className='log-modal flex column'>
                         <button onClick={() => setIsLog("in")}>Log in</button>
                         <button onClick={() => setIsLog("up")}>Sing up</button>
-                        {logInUser &&<button onClick={logout} className='log-out'>Log out</button>}
+                        {logInUser && <button onClick={logout} className='log-out'>Log out</button>}
                     </article>}
                 </section>
 

@@ -26,7 +26,7 @@ export function SingInUp({ operation, closeLog }) {
 
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
-    const [userImgUrl, setUserImgUrl] = useState("");
+    const [userImgUrl, setUserImgUrl] = useState(null);
     function textField(prop) {
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
     }
