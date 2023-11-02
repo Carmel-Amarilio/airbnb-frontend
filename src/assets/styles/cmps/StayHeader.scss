@@ -82,12 +82,17 @@
 
       .menu-icon {
         font-size: 1.5em;
+        margin-inline-end: 10px;
       }
 
       .user-icon {
-        margin-inline-start: 10px;
         color: $txtClr2;
         font-size: 2.5em;
+      }
+
+      .profile {
+        width: 30px;
+        height: 30px;
       }
 
       &:hover {
@@ -102,9 +107,13 @@
       z-index: 20;
       background-color: white;
       border-radius: 10px;
-      // border: 1px solid $borderClr;
       box-shadow: 0px 0px 10px .5px #e7e7e7;
       padding: 10px 0px;
+
+      .log-out {
+        border-top: $borderClr 1px solid ;
+        color: $txtClr2;
+      }
 
       &>* {
         padding: 10px;
@@ -112,8 +121,9 @@
         font-weight: bold;
 
         &:hover {
-         background-color:  #F7F7F7;
+          background-color: #F7F7F7;
         }
+
       }
     }
   }

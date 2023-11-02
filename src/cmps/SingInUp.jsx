@@ -3,6 +3,8 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
+import { login, signup } from '../store/actions/user.actions';
+import { cloudinaryServices } from '../services/cloudinary-service';
 
 const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -24,15 +26,22 @@ export function SingInUp({ operation, closeLog }) {
 
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
+    const [userImgUrl, setUserImgUrl] = useState("");
     function textField(prop) {
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
     }
 
     function onSubmit(val) {
+        val = { ...val, imgUrl: userImgUrl }
         console.log(val);
-        // if(operation === 'in') login(val)
-        // else signup(val)
-        // toggleSign()
+        if (operation === 'in') login(val)
+        else signup(val)
+        closeLog()
+    }
+
+    async function onAddImg(ev) {
+        const imgUrl = await cloudinaryServices.uploadImg(ev)
+        setUserImgUrl(imgUrl)
     }
 
     const handleMouseMove = (e) => {
@@ -58,8 +67,11 @@ export function SingInUp({ operation, closeLog }) {
                 validationSchema={SignupSchema}
                 onSubmit={onSubmit}>
                 {({ errors, touched }) => (
-                    // <Form className='flex column justify-between align-center'>
                     <Form className='form-container'>
+                        {operation === 'up' && <div>
+                            {/* <img src="https://res.cloudinary.com/du1jrse2t/image/upload/v1698934875/guest.f84f0eaceeb4fd681f59d0817c7aa81b_lmdrfa.svg" alt="Guest Icon" /> */}
+                            <input onChange={onAddImg} type="file" className="add-img" />
+                        </div>}
                         {operation === 'up' && <div>
                             <Field as={textField} label="Full name" name="fullName" className="input" />
                         </div>}

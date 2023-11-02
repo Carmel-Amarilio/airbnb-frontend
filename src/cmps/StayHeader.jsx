@@ -6,8 +6,11 @@ import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useState } from 'react';
 import { SingInUp } from './SingInUp';
 import { SearchStay } from './SearchStay';
+import { useSelector } from 'react-redux';
+import { logout } from '../store/actions/user.actions';
 
 export function StayHeader({ isDetails = false }) {
+    const logInUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
     const [isLog, setIsLog] = useState(false)
     const [isSetStay, setIsSetStay] = useState(false)
@@ -19,7 +22,6 @@ export function StayHeader({ isDetails = false }) {
     function closeLog() {
         setIsLog(false)
     }
-
     return (
         <header className="stay-header main-container full" >
             <section className="flex align-center space-between">
@@ -45,20 +47,22 @@ export function StayHeader({ isDetails = false }) {
 
                     <article className='user-log flex align-center'>
                         <MenuSharpIcon className='menu-icon' />
-                        <AccountCircleSharpIcon className='user-icon' />
+                        {!logInUser && <AccountCircleSharpIcon className='user-icon' />}
+                        {logInUser && <img src={logInUser.imgUrl} className='profile'/>}
                     </article>
 
                     {isModal && <article className='log-modal flex column'>
                         <button onClick={() => setIsLog("in")}>Log in</button>
                         <button onClick={() => setIsLog("up")}>Sing up</button>
+                        {logInUser &&<button onClick={logout} className='log-out'>Log out</button>}
                     </article>}
                 </section>
 
                 {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
             </section>
 
-            {isSetStay && <SearchStay setIsSetStay={setIsSetStay}/>}
-            
+            {isSetStay && <SearchStay setIsSetStay={setIsSetStay} />}
+
         </header>
     )
 }

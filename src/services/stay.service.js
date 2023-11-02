@@ -15,11 +15,13 @@ export const stayService = {
 }
 
 function query(filterBy = {}) {
-    return storageService.query(STAYS_KEY)
+    // return storageService.query(STAYS_KEY)
+    return httpService.get(BASE_URL)
 }
 
-function get(stayId) {
-    return storageService.get(STAYS_KEY, stayId)
+function get(id) {
+    // return storageService.get(STAYS_KEY, id)
+    return httpService.get(BASE_URL + id)
 }
 
 function save(stay) {
@@ -38,7 +40,7 @@ function _createStays() {
     const stay = {
         name: "Ribeira Charming Duplex",
         type: "House",
-        imgUrls: ["https://res.cloudinary.com/du1jrse2t/image/upload/v1698421405/hotel-4_laxlll.jpg","https://res.cloudinary.com/du1jrse2t/image/upload/v1698421399/hotel-5_ui82qg.jpg","https://res.cloudinary.com/du1jrse2t/image/upload/v1698426697/hotel-1_1_jw2n14.jpg","https://res.cloudinary.com/du1jrse2t/image/upload/v1698426708/hotel-2_w49htt.jpg","https://res.cloudinary.com/du1jrse2t/image/upload/v1698426786/hotel-3_1_mc4lxl.jpg"],
+        imgUrls: ["https://res.cloudinary.com/du1jrse2t/image/upload/v1698421405/hotel-4_laxlll.jpg", "https://res.cloudinary.com/du1jrse2t/image/upload/v1698421399/hotel-5_ui82qg.jpg", "https://res.cloudinary.com/du1jrse2t/image/upload/v1698426697/hotel-1_1_jw2n14.jpg", "https://res.cloudinary.com/du1jrse2t/image/upload/v1698426708/hotel-2_w49htt.jpg", "https://res.cloudinary.com/du1jrse2t/image/upload/v1698426786/hotel-3_1_mc4lxl.jpg"],
         price: 80.00,
         summary: "Fantastic duplex apartment...",
         capacity: 8,
