@@ -6,10 +6,10 @@ import { StayHeader } from "../cmps/StayHeader";
 import { Reviews } from "../cmps/reviews";
 import { StayReviewDetail } from "../cmps/StayReviewDetail";
 import { OrderForm } from "../cmps/OrderForm";
-
-import StarIcon from '@mui/icons-material/Star';
 import { StayMap } from "../cmps/StayMap";
 import { HostStay } from "../cmps/HostStay";
+
+import StarIcon from '@mui/icons-material/Star';
 
 export function StayDetails() {
     const params = useParams()

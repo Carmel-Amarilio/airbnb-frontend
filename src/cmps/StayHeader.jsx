@@ -3,25 +3,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import LanguageSharpIcon from '@mui/icons-material/LanguageSharp';
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
-import { useState } from 'react';
-import { SingInUp } from './SingInUp';
+import {  useState } from 'react';
 import { SearchStay } from './SearchStay';
 import { useSelector } from 'react-redux';
 import { logout } from '../store/actions/user.actions';
 
-export function StayHeader({ isDetails = false }) {
+export function StayHeader({ setIsLog, isDetails = false }) {
     const logInUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
-    const [isLog, setIsLog] = useState(false)
     const [isSetStay, setIsSetStay] = useState(false)
+
 
     function toggleModal() {
         setIsModal(!isModal)
     }
 
-    function closeLog() {
-        setIsLog(false)
-    }
     return (
         <header className="stay-header main-container full" >
             <section className="flex align-center space-between">
@@ -60,7 +56,7 @@ export function StayHeader({ isDetails = false }) {
                     </article>}
                 </section>
 
-                {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
+
             </section>
 
             {isSetStay && <SearchStay setIsSetStay={setIsSetStay} />}

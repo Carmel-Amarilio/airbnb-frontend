@@ -25,11 +25,14 @@ function get(id) {
 }
 
 function save(stay) {
-    if (stay._id) return storageService.put(STAYS_KEY, stay)
-    else return storageService.post(STAYS_KEY, stay)
+    if (stay._id) return httpService.put(BASE_URL, stay)
+    else return httpService.post(BASE_URL, stay)
+    // if (stay._id) return storageService.put(STAYS_KEY, stay)
+    // else return storageService.post(STAYS_KEY, stay)
 }
 
 function remove(stayId) {
+    // return httpService.delete(BASE_URL + toyId)
     return storageService.remove(STAYS_KEY, stayId)
 }
 
