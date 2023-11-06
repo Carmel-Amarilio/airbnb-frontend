@@ -1,6 +1,6 @@
 .order-form {
     position: sticky;
-    top: 150px;
+    top: 100px;
     padding: 20px;
     border: $borderClr 1px solid;
     height: max-content;
@@ -12,13 +12,25 @@
         margin-block-end: 20px;
     }
 
-    h1 {
-        padding: 0;
-        font-size: 1.57em;
+    header {
+        h1 {
+            padding: 0;
+            font-size: 1.57em;
 
-        span {
-            font-size: .72em;
-            font-weight: lighter;
+            span {
+                font-size: .72em;
+                font-weight: lighter;
+            }
+        }
+        p{
+          margin: 0;  
+        }
+        span{
+            margin-inline:3px;
+        }
+
+        .star-icon{
+            font-size: 1em;
         }
     }
 
@@ -42,6 +54,47 @@
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 0px;
             }
+        }
+    }
+
+    .sec {
+        position: absolute;
+        top: 40px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid $borderClr;
+        background-color: white;
+        z-index: 10;
+    }
+
+    .pic-date {
+        right: 0px;
+
+        .clears {
+            gap: 14px;
+            justify-content: flex-end;
+        }
+    }
+
+    .add-guests {
+        top: 195px;
+
+        article {
+            width: 300px;
+        }
+    }
+
+    .total-container {
+        text-align: center;
+
+        &>* {
+            padding-block: 10px;
+        }
+
+        .total {
+            padding-block-start: 20px;
+            padding-block-end: 0px;
+            border-block-start: $borderClr 1px solid;
         }
     }
 

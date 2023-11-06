@@ -12,11 +12,13 @@ import { HostStay } from "../cmps/HostStay";
 import StarIcon from '@mui/icons-material/Star';
 
 export function StayDetails() {
+    const [searchStay, setSearchStay] = useState({ checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 } })
     const params = useParams()
     const navigate = useNavigate()
     const [currStay, setCurrStay] = useState(null)
     const rating = {}
     const ratingName = [] //["Cleanliness", "Accuracy","Communication","Location","Check-in","Value" ]
+    const { checkIn, checkOut } = searchStay
 
 
     useEffect(() => {
@@ -76,8 +78,8 @@ export function StayDetails() {
             </article>
 
             <main>
-                <StayReviewDetail currStay={currStay} />
-                <OrderForm currStay={currStay} />
+                <StayReviewDetail currStay={currStay} setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} />
+                <OrderForm searchStay={searchStay} setSearchStay={setSearchStay}  currStay={currStay} rating={rating.value} reviews={reviews.length} />
             </main>
 
             <Reviews reviews={reviews} rating={rating} ratingName={ratingName} />

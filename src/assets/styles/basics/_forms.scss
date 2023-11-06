@@ -51,6 +51,27 @@ form>* {
     }
 }
 
+.black-btn{
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+
+    h3 {
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.underline-btn{
+    font-weight: bold;
+    text-decoration: underline;
+    &:hover{
+        background-color: rgba(211, 211, 211, 0.281);
+    }
+}
+
 .profile {
     width: 50px;
     height: 50px;

@@ -3,33 +3,26 @@ import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSha
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 
 export function DatePicker({ setDates, checkIn, checkOut }) {
-    const [startDate, setStartDate] = useState(checkIn);
-    const [endDate, setEndDate] = useState(checkOut);
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
-    useEffect(() => {
-        setDates(prev => ({ ...prev, checkIn: startDate, checkOut: endDate }))
-    }, [startDate, endDate]);
-
     const handleDateClick = (day) => {
-        if (!startDate) {
-            setStartDate(day);
-        } else if (!endDate) {
-            if (day < startDate) {
-                setEndDate(startDate);
-                setStartDate(day);
+        if (!checkIn) {
+            setDates(prev => ({ ...prev, checkIn: day}))
+        } else if (!checkOut) {
+            if (day < checkIn) {
+                setDates(prev => ({ ...prev, checkIn: day, checkOut: checkIn}))
             } else {
-                setEndDate(day);
+                setDates(prev => ({ ...prev, checkOut: day}))
             }
         } else {
-            setStartDate(day);
-            setEndDate(null);
+            setDates(prev => ({ ...prev, checkIn: day, checkOut: null}))
+
         }
     };
 
     const isInRange = (day) => {
-        if (!startDate || !endDate) return false;
-        return day >= startDate && day <= endDate;
+        if (!checkIn || !checkOut) return false;
+        return day >= checkIn && day <= checkOut;
     };
 
     const isFirstMonth = (date) => {
@@ -41,11 +34,11 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
     };
 
     const isStartDate = (day) => {
-        return startDate && day.getDate() === startDate.getDate() && day.getMonth() === startDate.getMonth() && day.getFullYear() === startDate.getFullYear();
+        return checkIn && day.getDate() === checkIn.getDate() && day.getMonth() === checkIn.getMonth() && day.getFullYear() === checkIn.getFullYear();
     };
 
     const isEndDate = (day) => {
-        return endDate && day.getDate() === endDate.getDate() && day.getMonth() === endDate.getMonth() && day.getFullYear() === endDate.getFullYear();
+        return checkOut && day.getDate() === checkOut.getDate() && day.getMonth() === checkOut.getMonth() && day.getFullYear() === checkOut.getFullYear();
     };
 
     const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
