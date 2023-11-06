@@ -1,19 +1,24 @@
 .search-stay {
+    margin: auto;
+
     .set-stay {
         border-radius: 50em;
         border: 1px solid $borderClr;
         box-shadow: 2px 2px 5px 0px $borderClr;
         padding: 7px;
-        margin: auto;
         margin-top: 20px;
         width: max-content;
         padding: 0px;
+
+        .set-stay-container {
+            position: relative;
+        }
 
         &:hover {
             box-shadow: 3px 3px 7px 0px $borderClr;
         }
 
-        button:not(:last-child) {
+        .btn:not(:last-child) {
             position: relative;
 
             &::after {
@@ -28,45 +33,61 @@
             }
         }
 
-        button {
+        .btn {
+            position: relative;
             padding: 10px 50px !important;
             border-radius: 2em;
+            text-align: left;
 
             &:hover {
                 background-color: $borderClr;
             }
+
+            input {
+                all: unset;
+                text-align: left;
+            }
+
+            p {
+                color: $txtClr2;
+                font-weight: lighter;
+                width: 70px;
+            }
         }
 
-        input {
-            all: unset;
-            text-align: left;
-        }
-
-        p {
-            color: $txtClr2;
-            font-weight: lighter;
+        .selected {
+            background-color: $borderClr;
         }
 
         .guests {
             padding: 7px 50px !important;
         }
 
-        .search-icon {
-            background-color: $logoClr;
-            color: white;
-            padding: 1px 2px;
+        .action-btn {
             margin-inline-start: 30px;
             width: 100px !important;
             padding: 10px !important;
+            border-radius: 2em;
         }
     }
 
-    .black-space{
+    .sec {
+        position: absolute;
+        top: 70px;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid $borderClr;
+        background-color: white;
+        z-index: 10;
+    }
+
+    .black-space {
         position: absolute;
         height: 100vh;
         width: 100vw;
         background-color: rgba(0, 0, 0, 0.171);
         left: 0;
-        top: 175px;
+        top: 173px;
     }
+
 }

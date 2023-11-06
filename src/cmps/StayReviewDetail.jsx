@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { amenitiesIcon } from "../assets/img/amenities-icon";
 import { DatePicker } from "../cmps/DatePicker";
 
 export function StayReviewDetail({currStay}) {
+    const [dates, setDates] = useState({ checkIn: null, checkOut: null})
+    const {  checkIn, checkOut } = dates
 
     const {  type, host, summary, amenities} = currStay
     return (
@@ -57,7 +60,7 @@ export function StayReviewDetail({currStay}) {
             <article>
                 <h2>Select check-in date</h2>
                 <p>Add your travel dates for exact pricing</p>
-                <DatePicker />
+                <DatePicker setDates ={setDates} checkIn={checkIn} checkOut={checkOut}/>
             </article>
         </section>
     )

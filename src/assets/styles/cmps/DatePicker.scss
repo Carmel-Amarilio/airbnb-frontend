@@ -1,13 +1,9 @@
 .calendar {
     border-radius: 4px;
     padding: 10px;
-    max-width: 300px;
     margin-block: 20px;
 
-    &-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .calendar-header {
         margin-bottom: 10px;
 
         button {
@@ -16,40 +12,46 @@
         }
     }
 
-    &-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-gap: 5px;
-        text-align: center;
+    .calendar-container {
+        gap: 50px;
 
-        .day {
-            font-weight: bold;
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
+            height: max-content;
+
+            .day {
+                font-weight: bold;
+                width: 30px;
+            }
+
+            .date {
+                border-radius: 50%;
+                padding: 8px 0px;
+                cursor: pointer;
+                border: 1px solid white;
+
+                &:hover {
+                    border: 1px solid black;
+
+
+                }
+
+                &.selected {
+                    background-color: #ebebeb;
+                }
+
+                &.end-date,
+                &.start-date {
+                    background-color: black;
+                    color: white;
+
+                }
+
+            }
+
         }
-
-        .date {
-            border-radius: 50%;
-            padding: 8px 0px;
-            cursor: pointer;
-            border: 1px solid white;
-
-            &:hover {
-                border: 1px solid black;
-
-
-            }
-
-            &.selected {
-                background-color: #ebebeb;
-            }
-
-            &.end-date,
-            &.start-date {
-                background-color: black;
-                color: white;
-                
-            }
-
-        }
-
     }
 }
