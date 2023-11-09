@@ -53,7 +53,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
                 </article>
                 <button onClick={() => setOpenModal('Who')}>
                     <h5>GUESTS</h5>
-                    <p>{adults + children + infants > 0 ? adults + children + infants : capacity} guests</p>
+                    <p>{adults + children + infants > 0 ? adults + children + infants : capacity.guests} guests</p>
                 </button>
 
                 {(openModal === 'checkIn' || openModal === 'checkOut') && <section className="pic-date sec">

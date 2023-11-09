@@ -1,0 +1,19 @@
+.add-stay-footer{
+    .line{
+        height: .5em;
+        gap: 5px;
+
+        .step-line{
+            width: 100%;
+            background-color: lightgray;
+        }
+        .dan{
+            background-color: black;
+        }
+    }
+
+    .next-disabled{
+        opacity: .5;
+        cursor: no-drop;
+    }
+}

@@ -7,9 +7,11 @@ import {  useState } from 'react';
 import { SearchStay } from './SearchStay';
 import { useSelector } from 'react-redux';
 import { logout } from '../store/actions/user.actions';
+import { useNavigate } from 'react-router';
 
 export function StayHeader({ setIsLog, isDetails = false }) {
-    const logInUser = useSelector((storeState) => storeState.userModule.user)
+    const navigate = useNavigate();
+    const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
     const [isSetStay, setIsSetStay] = useState(false)
 
@@ -18,10 +20,15 @@ export function StayHeader({ setIsLog, isDetails = false }) {
         setIsModal(!isModal)
     }
 
+    function onAirbnbYourHome(){
+        if (!loggedinUser) setIsLog("in")
+        else navigate("/about-your-place")
+    }
+
     return (
         <header className="stay-header main-container full" >
             <section className="flex align-center space-between">
-                <section className='logo flex align-center'>
+                <section className='logo flex align-center' onClick={()=> navigate("/stay")}>
                     <img src={imgUrl} />
                     <span>aircnc</span>
                 </section>
@@ -36,23 +43,23 @@ export function StayHeader({ setIsLog, isDetails = false }) {
                     <div className='search-icon'><SearchIcon /></div>
                 </section>
 
-                <section className='sating flex align-center' onClick={toggleModal}>
-                    <button className='your-home'>Airbnb your home</button>
+                <section className='sating flex align-center' >
+                    <button className='your-home' onClick={onAirbnbYourHome}>Airbnb your home</button>
 
                     <LanguageSharpIcon />
 
-                    <article className='user-log flex align-center'>
+                    <article className='user-log flex align-center' onClick={toggleModal}>
                         <MenuSharpIcon className='menu-icon' />
-                        {!logInUser && <AccountCircleSharpIcon className='user-icon' />}
-                        {logInUser && (logInUser.imgUrl ?
-                            <img src={logInUser.imgUrl} className='profile' />
-                            : <div className='no-img flex justify-center align-center'>{logInUser.fullName[0]}</div>)}
+                        {!loggedinUser && <AccountCircleSharpIcon className='user-icon' />}
+                        {loggedinUser && (loggedinUser.imgUrl ?
+                            <img src={loggedinUser.imgUrl} className='profile' />
+                            : <div className='no-img flex justify-center align-center'>{loggedinUser.fullName[0]}</div>)}
                     </article>
 
                     {isModal && <article className='log-modal flex column'>
                         <button onClick={() => setIsLog("in")}>Log in</button>
                         <button onClick={() => setIsLog("up")}>Sing up</button>
-                        {logInUser && <button onClick={logout} className='log-out'>Log out</button>}
+                        {loggedinUser && <button onClick={logout} className='log-out'>Log out</button>}
                     </article>}
                 </section>
 

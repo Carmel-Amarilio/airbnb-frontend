@@ -1,0 +1,46 @@
+.data-stay {
+    gap: 20px;
+
+    h3{
+        margin: 5px;
+    }
+
+    p{
+        margin-block-end: 20px;
+    }
+
+    textarea {
+        text-align: left;
+        padding: 20px;
+        border-radius: 10px;
+        width: 600px;
+        resize: vertical;
+        overflow: hidden;
+        font-size: 22px;
+        font-family: Avantgarde, "TeX Gyre Adventor", "URW Gothic L", sans-serif;
+    }
+
+    .max-char {
+        color: rgb(193, 53, 21);
+    }
+
+    .price {
+        font-weight: bolder;
+        font-size: 90px;
+        margin: auto;
+
+        input {
+
+            all: unset;
+            text-align: left;
+            width: 200px;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    }
+}

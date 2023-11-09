@@ -1,0 +1,20 @@
+.located-stay {
+    .stay-map {
+        height: 300px;
+    }
+
+    .search {
+        gap: 10px;
+        &>*{
+            gap: 10px;
+        }
+        input {
+            all: unset;
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            border-radius: 2em;
+            border: 1px solid $borderClr;
+        }
+    }
+}

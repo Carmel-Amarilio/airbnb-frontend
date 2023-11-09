@@ -23,6 +23,20 @@ form>* {
     transform: scale(1.1);
 }
 
+.logo {
+    cursor: pointer;
+    img {
+      width: 40px;
+    }
+
+    span {
+      font-size: 30px;
+      color: $logoClr;
+      font-weight: bold;
+      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    }
+  }
+
 .action-btn {
     --mouse-x: 0;
     --mouse-y: 50;

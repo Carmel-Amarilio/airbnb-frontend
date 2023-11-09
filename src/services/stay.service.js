@@ -1,10 +1,10 @@
+import axios from 'axios'
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 
 const BASE_URL = 'stay/'
 const STAYS_KEY = 'stayMB'
 
-// _createStays()
 
 export const stayService = {
     query,
@@ -12,6 +12,7 @@ export const stayService = {
     save,
     remove,
     getEmptyStay,
+    getLngLan
 }
 
 function query(filterBy = {}) {
@@ -36,7 +37,51 @@ function remove(stayId) {
     return storageService.remove(STAYS_KEY, stayId)
 }
 
-function getEmptyStay() {
+// async function getLngLan(city) {
+//     try {
+//         const x = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${'307b1a8173ac11cf753e139fe19fa56e'}`)
+//         console.log(x);
+//     } catch (error) {
+
+//     }
+// }
+
+async function getLngLan(city) {
+    try {
+        const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${'307b1a8173ac11cf753e139fe19fa56e'}`)
+        return res.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function getEmptyStay(host) {
+    return {
+        name: "",
+        type: "Cabins",
+        imgUrls: [],
+        price: 225.00,
+        summary: "Take it easy at this unique and tranquil getaway.",
+        capacity: {
+            guests: 4,
+            bedrooms: 1,
+            beds: 1,
+            bathrooms: 1
+        },
+        amenities: [],
+        labels: [],
+        host,
+        loc: {
+            country: "",
+            countryCode: "",
+            city: "",
+            address: "",
+            lat: 0,
+            lng: 0
+        },
+        reviews: [],
+        likedByUsers: []
+    }
 }
 
 function _createStays() {

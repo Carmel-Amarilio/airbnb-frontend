@@ -62,14 +62,21 @@
         border-bottom: $borderClr 1px solid;
     }
 
-    .stay-map {
+    .map-sec {
         padding-block: 20px;
         border-bottom: $borderClr 1px solid;
 
-        .map {
+        .stay-map {
             height: 70vh;
         }
 
+        h3 {
+            padding-block-start: 20px;
+        }
+
+        p {
+            margin-block-end: 30px;
+        }
 
     }
 

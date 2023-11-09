@@ -1,0 +1,37 @@
+.describes-stay {
+    // display: grid;
+    // justify-content: center;
+    // margin-block: 32px;
+   
+
+    h3 {
+        margin-block-end: 50px;
+    }
+
+    .stay-options-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+
+        .stay-option {
+            border: 2px solid $borderClr;
+            border-radius: 10px;
+            padding: 20px;
+            padding-inline-end: 80px;
+            cursor: pointer;
+            
+            img {
+                width: 30px;
+            }
+            
+            &:hover{
+                border: 2px solid black;
+            }
+        }
+
+        .select{
+            border: 2px solid black;
+            background-color: rgb(247,247,247);
+        }
+    }
+}

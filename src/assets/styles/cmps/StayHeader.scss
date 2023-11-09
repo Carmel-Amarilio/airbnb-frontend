@@ -6,19 +6,6 @@
   border-bottom: 1px solid $borderClr ;
   z-index: 10;
 
-  .logo {
-    img {
-      width: 40px;
-    }
-
-    span {
-      font-size: 30px;
-      color: $logoClr;
-      font-weight: bold;
-      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    }
-  }
-
   .set-stay-btn {
     border-radius: 50em;
     border: 1px solid $borderClr;

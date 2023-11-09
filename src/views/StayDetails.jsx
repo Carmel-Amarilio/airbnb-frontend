@@ -79,11 +79,16 @@ export function StayDetails() {
 
             <main>
                 <StayReviewDetail currStay={currStay} setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} />
-                <OrderForm searchStay={searchStay} setSearchStay={setSearchStay}  currStay={currStay} rating={rating.value} reviews={reviews.length} />
+                <OrderForm searchStay={searchStay} setSearchStay={setSearchStay} currStay={currStay} rating={rating.value} reviews={reviews.length} />
             </main>
 
             <Reviews reviews={reviews} rating={rating} ratingName={ratingName} />
-            <StayMap loc={loc} />
+            <article className="map-sec">
+                <h2>Where you’ll be</h2>
+                <StayMap loc={loc} />
+                <h3>{loc.address}, {loc.city}, {loc.country}</h3>
+                <p>Very quiet and pleasant neighborhood</p>
+            </article>
             <HostStay currStay={currStay} />
 
         </section>

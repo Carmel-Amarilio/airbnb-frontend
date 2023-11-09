@@ -16,6 +16,7 @@
 @import "views/Home";
 @import "views/AppIndex";
 @import "views/StayDetails";
+@import "views/AddStay";
 
 
 // Components
@@ -29,15 +30,18 @@
 @import "cmps/OrderForm.scss";
 @import "cmps/DatePicker.scss";
 @import "cmps/Reviews.scss";
-@import "cmps/StayDetails.scss";
+@import "cmps/StayMap.scss";
 @import "cmps/HostStay.scss";
 
 @import "cmps/WhereSec.scss";
 @import "cmps/CheckInOutSec.scss";
 @import "cmps/AddGuestsSec.scss";
 
-
-
-
-
-
+@import "cmps/addStay.cmps/AddStayFooter.scss";
+@import "cmps/addStay.cmps/AddStayStepOne.scss";
+@import "cmps/addStay.cmps/DescribesStay.scss";
+@import "cmps/addStay.cmps/LocatedStay.scss";
+@import "cmps/addStay.cmps/BasicsAboutStay.scss";
+@import "cmps/addStay.cmps/AddImgStay.scss";
+@import "cmps/addStay.cmps/DataStay.scss";
+@import "cmps/addStay.cmps/PublishStay.scss";

@@ -1,0 +1,40 @@
+.basics-about-stay{
+    p{
+        font-size: 1.28em;
+        color: rgb(34, 34, 34);
+    }
+    article{
+        padding-block: 20px;
+        border-bottom: 1px solid $borderClr;
+        
+        &:last-child{
+            border-bottom: 0;
+        }
+
+        .counter-container{
+            gap: 10px;
+            .icon{
+                padding: 3px;
+                border: 1px solid $borderClr;
+                border-radius: 50%;
+                font-size: .8em;
+                color: rgb(113,113,113);
+            }
+
+            .disabled{
+                opacity: .5;
+                cursor:no-drop;
+            }
+
+            .counter{
+                margin: 0;
+            }
+
+            p{
+                width: 20px;
+                text-align: center;
+            }
+
+        }
+    }
+}
