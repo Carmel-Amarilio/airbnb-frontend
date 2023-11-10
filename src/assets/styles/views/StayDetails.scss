@@ -1,5 +1,8 @@
 .stay-details {
+    grid-template-columns: 170px 1fr 170px;
+    
     header {
+        grid-template-columns: 170px 1fr 170px;
         padding-block: 20px;
 
         h1 {
@@ -19,11 +22,11 @@
 
     }
 
-
+ 
     .image-container {
         display: grid;
         grid-template-columns: (repeat(4, 1fr));
-        grid-auto-rows: 1fr;
+        grid-auto-rows: 200px;
         grid-gap: 10px;
 
 
@@ -69,12 +72,11 @@
         .stay-map {
             height: 70vh;
         }
-
-        h3 {
+        h3{
             padding-block-start: 20px;
         }
-
-        p {
+    
+        p{
             margin-block-end: 30px;
         }
 

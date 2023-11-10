@@ -12,6 +12,7 @@ import { AddImgStay } from "../cmps/addStay.cmps/AddImgStay";
 import { DataStay } from "../cmps/addStay.cmps/DataStay";
 import { PublishStay } from "../cmps/addStay.cmps/PublishStay";
 import { addStays } from "../store/actions/stay.actions";
+import { useNavigate } from "react-router-dom";
 
 export function AddStay() {
     const navigate = useNavigate();
@@ -36,7 +37,6 @@ export function AddStay() {
         if (step === 1 && inc === -1) return
         setStep(step + inc)
     }
-
 
     return (
         <section className="add-stay main-container">

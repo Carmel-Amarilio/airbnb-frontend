@@ -9,6 +9,7 @@ import { Home } from './views/Home'
 import { AppIndex } from './views/AppIndex'
 import { StayDetails } from './views/StayDetails'
 import { AddStay } from './views/AddStay'
+import { OrderStay } from './views/OrderStay'
 
 export function App() {
   return (
@@ -19,6 +20,7 @@ export function App() {
             <Route element={<Home />} path="/" />
             <Route element={<AppIndex />} path="/stay" />
             <Route path="/stay/:stayId" element={<StayDetails />} />
+            <Route path="/order/:stayId/:checkIn/:checkOut/:guests" element={<OrderStay />} />
             <Route element={<AddStay />} path="/about-your-place" />
           </Routes>
         </main>

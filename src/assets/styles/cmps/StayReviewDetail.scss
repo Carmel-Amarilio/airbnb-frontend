@@ -23,15 +23,29 @@
     }
 
     .amenities {
-        &>* {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-block: 10px;
+        h2{
+            margin-block-end: 30px;
+        }
+
+        .amenities-container {
+            display: grid;
+            grid-template-columns: (repeat(2, 1fr));
+            gap: 30px;
+
+            &>* {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                p{
+                    margin: 0;
+                    font-size: 1.14em;
+                }
+            }
         }
 
         img {
-            width: 20px;
+            width: 30px;
         }
 
     }

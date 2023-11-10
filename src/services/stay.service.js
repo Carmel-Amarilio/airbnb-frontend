@@ -33,23 +33,15 @@ function save(stay) {
 }
 
 function remove(stayId) {
-    // return httpService.delete(BASE_URL + toyId)
-    return storageService.remove(STAYS_KEY, stayId)
+    return httpService.delete(BASE_URL + stayId)
+    // return storageService.remove(STAYS_KEY, stayId)
 }
 
-// async function getLngLan(city) {
-//     try {
-//         const x = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${'307b1a8173ac11cf753e139fe19fa56e'}`)
-//         console.log(x);
-//     } catch (error) {
 
-//     }
-// }
-
-async function getLngLan(city) {
+async function getLngLan(houseNumber, street, city, country) {
     try {
-        const res = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${'307b1a8173ac11cf753e139fe19fa56e'}`)
-        return res.data
+        const res = await axios.get(`https://api.geoapify.com/v1/geocode/search?housenumber=${houseNumber}&street=${street}&postcode=60607&city=${city}&country=${country}&lang=en&limit=5&format=json&apiKey=${"39b01718a5614cf4bc536ee0344ddee0"}`)
+        return res.data.results
     } catch (error) {
         console.log(error);
     }
@@ -75,7 +67,8 @@ function getEmptyStay(host) {
             country: "",
             countryCode: "",
             city: "",
-            address: "",
+            street: "",
+            houseNumber: "",
             lat: 0,
             lng: 0
         },

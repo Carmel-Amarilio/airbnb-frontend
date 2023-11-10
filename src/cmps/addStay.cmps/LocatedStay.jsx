@@ -1,33 +1,40 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StayMap } from "../StayMap";
 import { stayService } from "../../services/stay.service";
 import { utilService } from "../../services/util.service";
+import SearchIcon from '@mui/icons-material/Search';
 
 export function LocatedStay({ loc, setStay, setIsNext }) {
-    const { country, countryCode, city, address, lat, lng } = loc
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
+    const { country, city, street, houseNumber, lat, lng } = loc
 
     useEffect(() => {
-        if (country.length < 2 || city.length < 2 || address.length < 2 || lat === 0 || lng === 0) setIsNext(false)
+        if (country.length < 2 || city.length < 2 || street.length < 2 || houseNumber.length < 0 || lat === 0 || lng === 0) setIsNext(false)
         else setIsNext(true)
-    }, [country, city, address, lat, lng])
+    }, [country, city, street, houseNumber, lat, lng])
 
 
     function handleSearch(key, { target }) {
         let val = target.value
         const newLoc = { ...loc, [key]: val }
-        // setStay("loc", newLoc)
-
-        if (key === "city") {
-            getLngLan(val)
-        } else setStay("loc", newLoc)
+        setStay("loc", newLoc)
     }
 
 
-    async function getLngLan(city) {
-        const res = await stayService.getLngLan(city);
-        console.log(res[0]);
-        const newLoc = { ...loc, ["city"]: city, ["lat"]: res[0].lat, ["lng"]: res[0].lon, ["countryCode"]: res[0].country }
+    async function getLocOnMap() {
+        const res = await stayService.getLngLan(country, city, street, houseNumber);
+        console.log(res);
+        const newLoc = { ...loc, ["lat"]: res[0].lat, ["lng"]: res[0].lon }
         setStay("loc", newLoc)
+    }
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) * 100) / e.currentTarget.clientWidth;
+        const y = ((e.clientY - rect.top) * 100) / e.currentTarget.clientHeight;
+        setMouseX(x);
+        setMouseY(y);
     }
 
     console.log(loc);
@@ -41,7 +48,18 @@ export function LocatedStay({ loc, setStay, setIsNext }) {
                     <input onChange={(ev) => handleSearch("country", ev)} value={country} placeholder="Enter your country" />
                     <input onChange={(ev) => handleSearch("city", ev)} value={city} placeholder="Enter your city" />
                 </div>
-                <input onChange={(ev) => handleSearch("address", ev)} value={address} placeholder="Enter your address" />
+                <div className=" flex">
+                    <input onChange={(ev) => handleSearch("street", ev)} value={street} placeholder="Enter your street" />
+                    <input onChange={(ev) => handleSearch("houseNumber", ev)} value={houseNumber} placeholder="Enter your house number" />
+                </div>
+                <div
+                    onMouseMove={handleMouseMove}
+                    style={{ '--mouse-x': mouseX, '--mouse-y': mouseY }}
+                    onClick={getLocOnMap}
+                    className='action-btn flex align-center justify-center'
+                >
+                    <SearchIcon /> Search
+                </div>
             </article>
         </section>
     )
