@@ -10,9 +10,11 @@ import { StayMap } from "../cmps/StayMap";
 import { HostStay } from "../cmps/HostStay";
 
 import StarIcon from '@mui/icons-material/Star';
+import { SingInUp } from "../cmps/SingInUp";
 
 export function StayDetails() {
     const [searchStay, setSearchStay] = useState({ checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 } })
+    const [isLog, setIsLog] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
     const [currStay, setCurrStay] = useState(null)
@@ -55,6 +57,10 @@ export function StayDetails() {
         }
     }
 
+    function closeLog() {
+        setIsLog(false)
+    }
+
 
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
     const { imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
@@ -62,7 +68,7 @@ export function StayDetails() {
     console.log(currStay);
     return (
         <section className="stay-details main-container">
-            <StayHeader isDetails={true} />
+            <StayHeader isDetails={true} setIsLog={setIsLog} />
             <header>
                 <h1>{name}</h1>
                 <p className='flex align-center'>
@@ -90,6 +96,8 @@ export function StayDetails() {
                 <p>Very quiet and pleasant neighborhood</p>
             </article>
             <HostStay currStay={currStay} />
+
+            {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
 
         </section>
     )

@@ -5,6 +5,7 @@ import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { login, signup } from '../store/actions/user.actions';
 import { cloudinaryServices } from '../services/cloudinary-service';
+import { ActionBtn } from './ActionBtn';
 
 const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -22,10 +23,10 @@ const SignupSchema = Yup.object().shape({
 })
 
 
-export function SingInUp({ operation, closeLog }) {
+export function SingInUp({ operation, closeLog, setOperation, isOrder = false }) {
 
-    const [mouseX, setMouseX] = useState(0);
-    const [mouseY, setMouseY] = useState(0);
+    // const [mouseX, setMouseX] = useState(0);
+    // const [mouseY, setMouseY] = useState(0);
     const [userImgUrl, setUserImgUrl] = useState(null);
     function textField(prop) {
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
@@ -36,7 +37,7 @@ export function SingInUp({ operation, closeLog }) {
         console.log(val);
         if (operation === 'in') login(val)
         else signup(val)
-        closeLog()
+        if (!isOrder) closeLog()
     }
 
     async function onAddImg(ev) {
@@ -44,17 +45,17 @@ export function SingInUp({ operation, closeLog }) {
         setUserImgUrl(imgUrl)
     }
 
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) * 100) / e.currentTarget.clientWidth;
-        const y = ((e.clientY - rect.top) * 100) / e.currentTarget.clientHeight;
-        setMouseX(x);
-        setMouseY(y);
-    }
+    // const handleMouseMove = (e) => {
+    //     const rect = e.currentTarget.getBoundingClientRect();
+    //     const x = ((e.clientX - rect.left) * 100) / e.currentTarget.clientWidth;
+    //     const y = ((e.clientY - rect.top) * 100) / e.currentTarget.clientHeight;
+    //     setMouseX(x);
+    //     setMouseY(y);
+    // }
 
     return (
         <section className="sing-in-up">
-            <KeyboardArrowLeftSharpIcon className="back" onClick={closeLog} />
+            {!isOrder && <KeyboardArrowLeftSharpIcon className="back" onClick={closeLog} />}
             <h2>Finish signing up</h2>
 
 
@@ -81,18 +82,23 @@ export function SingInUp({ operation, closeLog }) {
                         <div>
                             <Field as={textField} label="Password" name="password" className="input" />
                         </div>
-                        <button
+
+                        {operation === 'in' && <ActionBtn line={"Sign In"} className='submit-bnt' type='submit' />}
+                        {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' />}
+                        {/* <button
                             onMouseMove={handleMouseMove}
                             style={{ '--mouse-x': mouseX, '--mouse-y': mouseY }}
                             className='submit-bnt action-btn'
                             type='submit'>
                             {operation === 'in' && 'Sign In'}
                             {operation === 'up' && 'Sign Up'}
-                        </button>
+                        </button> */}
                     </Form>
                 )}
             </Formik>
 
+            {isOrder && operation === 'in' && <button className='underline-btn' onClick={() => setOperation("up")}>Sign Up</button>}
+            {isOrder && operation === 'up' && <button className='underline-btn' onClick={() => setOperation("in")}>Sign In</button>}
         </section>
     )
 }

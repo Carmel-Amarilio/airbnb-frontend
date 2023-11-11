@@ -20,7 +20,7 @@ export function App() {
             <Route element={<Home />} path="/" />
             <Route element={<AppIndex />} path="/stay" />
             <Route path="/stay/:stayId" element={<StayDetails />} />
-            <Route path="/order/:stayId/:checkIn/:checkOut/:guests" element={<OrderStay />} />
+            <Route path="/stay/order/:stayId/:checkIn/:checkOut/:adults/:children/:infants/:rating/:reviews" element={<OrderStay />} />
             <Route element={<AddStay />} path="/about-your-place" />
           </Routes>
         </main>

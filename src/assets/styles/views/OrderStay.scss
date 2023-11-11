@@ -1,0 +1,126 @@
+.order-stay {
+    position: relative;
+
+    header {
+        padding-block: 20px;
+        border-bottom: 1px solid $borderClr;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 150px;
+        padding: 50px 100px;
+
+        .request-book {
+            h1 {
+                font-size: 32px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+
+            img {
+                width: 40px;
+                margin-inline-end: 20px;
+            }
+
+            &>* {
+                padding-block: 30px;
+                border-bottom: 1px solid $borderClr;
+            }
+
+            .your-trip {
+                gap: 20px;
+            }
+
+            .sing-in-up {
+                position: relative;
+                top: 0%;
+                right: 0%;
+                transform: translate(0%, 0%);
+                width: 350px;
+                margin: auto;
+                margin-top: 20px;
+            }
+
+            .action-btn {
+                margin-top: 20px;
+            }
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 200px;
+            padding: 20px;
+            border: 1px solid $borderClr;
+            border-radius: 10px;
+            height: max-content;
+            min-width: 300px;
+
+            header {
+                gap: 20px;
+
+                h4 {
+                    color: rgb(34, 34, 34);
+                    font-weight: 100;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 10px;
+                }
+
+                span {
+                    margin-inline: 3px;
+                    font-size: 10px;
+                }
+
+                .star-icon {
+                    font-size: 1em;
+                }
+
+                img {
+                    width: 124px;
+                    height: 106px;
+                    border-radius: 10px;
+                    object-fit: cover;
+                }
+            }
+
+            .total-container {
+                h3 {
+                    font-size: 22px;
+                }
+
+                &>* {
+                    padding-block: 10px;
+                }
+
+                .total {
+                    padding-block-start: 20px;
+                    padding-block-end: 0px;
+                    border-block-start: $borderClr 1px solid;
+                }
+            }
+
+        }
+    }
+
+    .pic-date , .add-guests{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid $borderClr;
+        border-radius: 10px;
+
+        .clears {
+            gap: 14px;
+            justify-content: flex-end;
+        }
+    }
+}
