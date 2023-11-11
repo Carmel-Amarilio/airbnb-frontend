@@ -9,6 +9,7 @@ import { SingInUp } from "../cmps/SingInUp";
 import StarIcon from '@mui/icons-material/Star';
 import { DatePicker } from "../cmps/DatePicker";
 import { AddGuestsSec } from "../cmps/AddGuestsSec";
+import { addOrder } from "../store/actions/order.actions";
 
 export function OrderStay() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
@@ -38,6 +39,34 @@ export function OrderStay() {
         }
     }
 
+    async function newOrder() {
+        const order = {
+            hostId: host._id,
+            buyer: loggedinUser,
+            totalPrice: (price * calculateNights() + Math.floor((price * calculateNights()) * 0.14) + 30 * calculateNights()),
+            checkIn,
+            checkOut,
+            guests: {
+                adults: guests.adults + guests.children + guests.infants,
+                children: guests.children,
+                infants: guests.infants
+            },
+            stay: {
+                _id,
+                name,
+                price
+            },
+            msgs: [],
+            status: "pending"
+        }
+
+        try {
+            addOrder(order)
+        } catch (error) {
+            console.log("Had issues create a order", error);
+        }
+    }
+
     const { checkIn, checkOut, guests, rating, reviews } = order
     function calculateNights() {
         if (!checkIn || !checkOut) return
@@ -45,7 +74,7 @@ export function OrderStay() {
         return Math.ceil(timeDifference / (1000 * 3600 * 24));
     }
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { imgUrls, name, type, host, summary, amenities, price, capacity, labels, loc } = currStay
+    const { _id, imgUrls, name, host, price } = currStay
     return (
         <section className="order-stay main-container">
             <header className='logo flex align-center' onClick={() => navigate("/stay")}>
@@ -83,7 +112,7 @@ export function OrderStay() {
                         <h4>Your reservation won’t be confirmed until the Host accepts your request (within 24 hours). </h4>
                     </article>
                     {
-                        loggedinUser ? <ActionBtn line={"Request to book"} /> : <SingInUp operation={operation} setOperation={setOperation} isOrder={true} />
+                        loggedinUser ? <ActionBtn line={"Request to book"} onClick={newOrder} /> : <SingInUp operation={operation} setOperation={setOperation} isOrder={true} />
                     }
 
 

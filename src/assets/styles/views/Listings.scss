@@ -2,42 +2,12 @@
     main {
         padding-block: 50px;
 
-        h1{
+        h1 {
             font-size: 24px;
-            font-weight:400;
+            font-weight: 400;
         }
 
         table {
-            width: 90vw;
-
-            // tr{
-            //     &:hover{
-            //         background-color:  rgb(64,158,255);
-            //     }
-            // }
-
-            th,
-            td {
-                padding-block: 10px;
-                border-bottom: 1px solid $borderClr;
-            }
-
-            th {
-                color: $tableTxtClr;
-                text-align: start;
-                padding: 10px;
-            }
-
-            td {
-                text-align: center;
-                
-            }
-
-            p {
-                margin: 0;
-                color: $tableTxtClr2;
-            }
-
             .listings {
                 gap: 10px;
 
@@ -68,9 +38,9 @@
                     border: 1px solid $tableTxtClr;
                     color: $tableTxtClr2;
 
-                    &:hover{
-                        border: 1px solid rgb(64,158,255);
-                        color: rgb(64,158,255);
+                    &:hover {
+                        border: 1px solid rgb(64, 158, 255);
+                        color: rgb(64, 158, 255);
                     }
                 }
             }

@@ -22,7 +22,7 @@ export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) 
 
     function onAirbnbYourHome() {
         if (!loggedinUser) setIsLog("in")
-        else navigate("/stay/about-your-place")
+        else navigate("/about-your-place")
     }
 
     return (
@@ -61,9 +61,9 @@ export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) 
                         {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
                         {loggedinUser && <button onClick={() => navigate("/stay")}>Wishlist</button>}
                         {loggedinUser && <button onClick={() => navigate("/stay")} >Trips</button>}
-                        {loggedinUser && <button onClick={() => navigate("/stay/listings")} className='head-line'>Listings</button>}
-                        {loggedinUser && <button onClick={() => navigate("/stay/reservations")}>Reservations</button>}
-                        {loggedinUser && <button onClick={() => navigate("/stay/about-your-place")}>Add listing</button>}
+                        {loggedinUser && <button onClick={() => navigate("/listings")} className='head-line'>Listings</button>}
+                        {loggedinUser && <button onClick={() => navigate("/reservations")}>Reservations</button>}
+                        {loggedinUser && <button onClick={() => navigate("/about-your-place")}>Add listing</button>}
                         {loggedinUser && <button onClick={logout} className='head-line light-clr'>Log out</button>}
                     </article>}
                 </section>

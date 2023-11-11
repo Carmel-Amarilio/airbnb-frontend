@@ -23,9 +23,9 @@ export function App() {
             <Route element={<AppIndex />} path="/stay" />
             <Route element={<StayDetails />} path="/stay/:stayId" />
             <Route element={<OrderStay />} path="/stay/order/:stayId/:checkIn/:checkOut/:adults/:children/:infants/:rating/:reviews" />
-            <Route element={<AddStay />} path="/stay/about-your-place" />
-            <Route element={<Listings />} path="/stay/listings" />
-            <Route element={<Reservations />} path="/stay/reservations" />
+            <Route element={<AddStay />} path="/about-your-place" />
+            <Route element={<Listings />} path="/listings" />
+            <Route element={<Reservations />} path="/reservations" />
           </Routes>
         </main>
       </Router >

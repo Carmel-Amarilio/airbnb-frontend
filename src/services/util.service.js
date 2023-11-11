@@ -5,7 +5,7 @@ export const utilService = {
     debounce,
     saveToStorage,
     loadFromStorage,
-   
+    formatDate
 }
 
 function makeId(length = 6) {
@@ -52,6 +52,11 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
+function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const year = date.getUTCFullYear();
 
-
-
+    return `${day}/${month}/${year}`;
+}

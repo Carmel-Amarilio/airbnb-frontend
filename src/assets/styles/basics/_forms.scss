@@ -25,17 +25,18 @@ form>* {
 
 .logo {
     cursor: pointer;
+
     img {
-      width: 40px;
+        width: 40px;
     }
 
     span {
-      font-size: 30px;
-      color: $logoClr;
-      font-weight: bold;
-      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+        font-size: 30px;
+        color: $logoClr;
+        font-weight: bold;
+        font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
     }
-  }
+}
 
 .action-btn {
     --mouse-x: 0;
@@ -65,7 +66,7 @@ form>* {
     }
 }
 
-.black-btn{
+.black-btn {
     padding: 15px 20px;
     border-radius: 10px;
     background-color: black;
@@ -78,10 +79,11 @@ form>* {
     }
 }
 
-.underline-btn{
+.underline-btn {
     font-weight: bold;
     text-decoration: underline;
-    &:hover{
+
+    &:hover {
         background-color: rgba(211, 211, 211, 0.281);
     }
 }
@@ -92,11 +94,42 @@ form>* {
     border-radius: 50%;
 }
 
-.no-img{
+.no-img {
     width: 40px;
     height: 40px;
     background-color: black;
     color: white;
     border-radius: 50%;
     font-size: 1.5em;
-  }
+}
+
+.form-table {
+    width: 90vw;
+
+    th,
+    td {
+        padding-block: 10px;
+        border-bottom: 1px solid $borderClr;
+    }
+
+    th {
+        color: $tableTxtClr;
+        text-align: start;
+        padding: 10px;
+
+        &:last-child{
+            text-align: center;
+        }
+    }
+
+    td {
+        text-align: center;
+
+    }
+
+    p {
+        margin: 0;
+        color: $tableTxtClr2;
+    }
+
+}

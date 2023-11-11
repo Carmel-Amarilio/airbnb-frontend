@@ -23,7 +23,7 @@ export function Listings() {
             <StayHeader isUserPage={true} />
             <main className="">
                 <h1>{stays.length} listings</h1>
-                <table>
+                <table className="form-table">
                     <tbody>
                         <tr>
                             <th>LISTING</th>
@@ -37,7 +37,7 @@ export function Listings() {
                         </tr>
                         {stays.map(stay => {
                             const { _id, imgUrls, name, capacity, loc, price } = stay
-                            return <tr>
+                            return <tr key={_id}>
                                 <td className="listings flex align-center">
                                     <img src={imgUrls[0]} />
                                     <h3>{name}</h3>
