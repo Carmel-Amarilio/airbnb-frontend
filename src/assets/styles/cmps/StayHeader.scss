@@ -77,7 +77,8 @@
         font-size: 2.5em;
       }
 
-      .profile,  .no-img{
+      .profile,
+      .no-img {
         width: 30px;
         height: 30px;
       }
@@ -97,8 +98,12 @@
       box-shadow: 0px 0px 10px .5px #e7e7e7;
       padding: 10px 0px;
 
-      .log-out {
-        border-top: $borderClr 1px solid ;
+
+      .head-line {
+        border-top: $borderClr 1px solid;
+      }
+
+      .light-clr {
         color: $txtClr2;
       }
 
@@ -106,6 +111,7 @@
         padding: 10px;
         padding-inline-end: 150px;
         font-weight: bold;
+        text-align: start;
 
         &:hover {
           background-color: #F7F7F7;

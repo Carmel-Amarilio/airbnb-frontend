@@ -10,6 +10,8 @@ import { AppIndex } from './views/AppIndex'
 import { StayDetails } from './views/StayDetails'
 import { AddStay } from './views/AddStay'
 import { OrderStay } from './views/OrderStay'
+import { Listings } from './views/Listings'
+import { Reservations } from './views/Reservations'
 
 export function App() {
   return (
@@ -19,9 +21,11 @@ export function App() {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<AppIndex />} path="/stay" />
-            <Route path="/stay/:stayId" element={<StayDetails />} />
-            <Route path="/stay/order/:stayId/:checkIn/:checkOut/:adults/:children/:infants/:rating/:reviews" element={<OrderStay />} />
-            <Route element={<AddStay />} path="/about-your-place" />
+            <Route element={<StayDetails />} path="/stay/:stayId" />
+            <Route element={<OrderStay />} path="/stay/order/:stayId/:checkIn/:checkOut/:adults/:children/:infants/:rating/:reviews" />
+            <Route element={<AddStay />} path="/stay/about-your-place" />
+            <Route element={<Listings />} path="/stay/listings" />
+            <Route element={<Reservations />} path="/stay/reservations" />
           </Routes>
         </main>
       </Router >

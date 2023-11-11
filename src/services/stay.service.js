@@ -17,7 +17,7 @@ export const stayService = {
 
 function query(filterBy = {}) {
     // return storageService.query(STAYS_KEY)
-    return httpService.get(BASE_URL)
+    return httpService.get(BASE_URL, filterBy)
 }
 
 function get(id) {

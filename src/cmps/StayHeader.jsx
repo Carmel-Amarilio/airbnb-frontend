@@ -3,13 +3,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import LanguageSharpIcon from '@mui/icons-material/LanguageSharp';
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { SearchStay } from './SearchStay';
 import { useSelector } from 'react-redux';
 import { logout } from '../store/actions/user.actions';
 import { useNavigate } from 'react-router';
 
-export function StayHeader({ setIsLog, isDetails = false }) {
+export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -20,20 +20,20 @@ export function StayHeader({ setIsLog, isDetails = false }) {
         setIsModal(!isModal)
     }
 
-    function onAirbnbYourHome(){
+    function onAirbnbYourHome() {
         if (!loggedinUser) setIsLog("in")
-        else navigate("/about-your-place")
+        else navigate("/stay/about-your-place")
     }
 
     return (
         <header className="stay-header main-container full" >
             <section className="flex align-center space-between">
-                <section className='logo flex align-center' onClick={()=> navigate("/stay")}>
+                <section className='logo flex align-center' onClick={() => navigate("/stay")}>
                     <img src={imgUrl} />
                     <span>aircnc</span>
                 </section>
 
-                <section className='set-stay-btn flex align-center'>
+                {!isUserPage && <section className='set-stay-btn flex align-center'>
                     <article onClick={() => setIsSetStay(true)}>
                         {!isDetails && <button>Anywhere</button>}
                         {!isDetails && <button>Any week</button>}
@@ -41,10 +41,10 @@ export function StayHeader({ setIsLog, isDetails = false }) {
                         {isDetails && <button>Start your search</button>}
                     </article>
                     <div className='search-icon'><SearchIcon /></div>
-                </section>
+                </section>}
 
                 <section className='sating flex align-center' >
-                    <button className='your-home' onClick={onAirbnbYourHome}>Airbnb your home</button>
+                    {!isUserPage && <button className='your-home' onClick={onAirbnbYourHome}>Airbnb your home</button>}
 
                     <LanguageSharpIcon />
 
@@ -57,9 +57,14 @@ export function StayHeader({ setIsLog, isDetails = false }) {
                     </article>
 
                     {isModal && <article className='log-modal flex column'>
-                        <button onClick={() => setIsLog("in")}>Log in</button>
-                        <button onClick={() => setIsLog("up")}>Sing up</button>
-                        {loggedinUser && <button onClick={logout} className='log-out'>Log out</button>}
+                        {!loggedinUser && <button onClick={() => setIsLog("in")}>Log in</button>}
+                        {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
+                        {loggedinUser && <button onClick={() => navigate("/stay")}>Wishlist</button>}
+                        {loggedinUser && <button onClick={() => navigate("/stay")} >Trips</button>}
+                        {loggedinUser && <button onClick={() => navigate("/stay/listings")} className='head-line'>Listings</button>}
+                        {loggedinUser && <button onClick={() => navigate("/stay/reservations")}>Reservations</button>}
+                        {loggedinUser && <button onClick={() => navigate("/stay/about-your-place")}>Add listing</button>}
+                        {loggedinUser && <button onClick={logout} className='head-line light-clr'>Log out</button>}
                     </article>}
                 </section>
 

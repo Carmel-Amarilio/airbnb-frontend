@@ -2,9 +2,9 @@ import { stayService } from "../../services/stay.service.js";
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, UPDATE_STAY } from "../reducers/stay.reducer.js";
 import { store } from "../store.js";
 
-export async function loadStays() {
+export async function loadStays(filterBy) {
     try {
-        let stays = await stayService.query()
+        let stays = await stayService.query(filterBy)
         store.dispatch({
             type: SET_STAYS,
             stays

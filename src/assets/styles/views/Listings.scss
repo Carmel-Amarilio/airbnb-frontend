@@ -1,0 +1,79 @@
+.listings {
+    main {
+        padding-block: 50px;
+
+        h1{
+            font-size: 24px;
+            font-weight:400;
+        }
+
+        table {
+            width: 90vw;
+
+            // tr{
+            //     &:hover{
+            //         background-color:  rgb(64,158,255);
+            //     }
+            // }
+
+            th,
+            td {
+                padding-block: 10px;
+                border-bottom: 1px solid $borderClr;
+            }
+
+            th {
+                color: $tableTxtClr;
+                text-align: start;
+                padding: 10px;
+            }
+
+            td {
+                text-align: center;
+                
+            }
+
+            p {
+                margin: 0;
+                color: $tableTxtClr2;
+            }
+
+            .listings {
+                gap: 10px;
+
+                img {
+                    border-radius: 5px;
+                    width: 90px;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .status {
+                article {
+                    gap: 10px;
+
+                    div {
+                        padding: 4px;
+                        border-radius: 50%;
+                        background-color: rgb(12, 148, 0);
+                    }
+                }
+            }
+
+            .to-do {
+                button {
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    border: 1px solid $tableTxtClr;
+                    color: $tableTxtClr2;
+
+                    &:hover{
+                        border: 1px solid rgb(64,158,255);
+                        color: rgb(64,158,255);
+                    }
+                }
+            }
+        }
+    }
+}
