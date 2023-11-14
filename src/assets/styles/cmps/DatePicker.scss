@@ -33,21 +33,26 @@
                 cursor: pointer;
                 border: 1px solid white;
 
-                &:hover {
+                &:hover:not(.past-date){
                     border: 1px solid black;
 
 
                 }
 
-                &.selected {
+                &.selected:not(.past-date){
                     background-color: #ebebeb;
                 }
 
-                &.end-date,
-                &.start-date {
+                &.end-date:not(.past-date) ,
+                &.start-date:not(.past-date) {
                     background-color: black;
                     color: white;
 
+                }
+
+                &.past-date{
+                   color: gainsboro;
+                   cursor: auto;
                 }
 
             }

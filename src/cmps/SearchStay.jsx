@@ -41,7 +41,7 @@ export function SearchStay({ setIsSetStay }) {
 
                     {openModal === 'where' && <  WhereSec setSearchStay={setSearchStay} />}
                     {(openModal === 'checkIn' || openModal === 'checkOut') && < CheckInOutSec setSearchStay={setSearchStay} checkIn={checkIn} checkOut={checkOut} />}
-                    {openModal === 'Who' && < AddGuestsSec guests={guests} setSearchStay={setSearchStay} />}
+                    {openModal === 'Who' && < AddGuestsSec guests={guests} maxGuests= {50} setSearchStay={setSearchStay} />}
 
                 </article>
                 <div className='black-space' onClick={() => setIsSetStay(false)}></div>
