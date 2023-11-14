@@ -17,7 +17,7 @@ export function Reservations() {
         }
     }, [loggedinUser])
 
-    function _loadOrders(){
+    function _loadOrders() {
         loadOrders({ userId: loggedinUser._id })
             .catch((err) => {
                 console.log(err)
@@ -25,8 +25,14 @@ export function Reservations() {
     }
 
     function setStatus(order, newStatus) {
+        const newMsgs = order.msgs;
+        newMsgs.push({
+            id: utilService.makeId(),
+            text: `${newStatus === "approved" ? "Your invitation has been approved!" : "Sorry, your order has been rejected"}`,
+            by: loggedinUser
+        })
         try {
-            updateOrder({ ...order, status: newStatus })
+            updateOrder({ ...order, status: newStatus, msgs: newMsgs })
             _loadOrders()
         } catch (error) {
             console.log("Had issues changing thr status", error);

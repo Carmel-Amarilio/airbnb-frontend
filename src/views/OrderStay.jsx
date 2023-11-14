@@ -76,8 +76,7 @@ export function OrderStay() {
         return Math.ceil(timeDifference / (1000 * 3600 * 24));
     }
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { _id, imgUrls, name, host, price } = currStay
-    console.log(host);
+    const { _id, imgUrls, name, host, price, capacity} = currStay
     return (
         <section className="order-stay main-container">
             <header className='logo flex align-center' onClick={() => navigate("/stay")}>
@@ -170,7 +169,7 @@ export function OrderStay() {
                     </article>
                 </section>}
 
-            {openModal === 'who' && < AddGuestsSec guests={guests} setSearchStay={setOrder} isOrder={true} setOpenModal={setOpenModal} />}
+            {openModal === 'who' && < AddGuestsSec guests={guests}  maxGuests= { capacity.guests} setSearchStay={setOrder} isOrder={true} setOpenModal={setOpenModal} />}
         </section>
     )
 }

@@ -6,16 +6,17 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     const handleDateClick = (day) => {
+        if (isPastDate(day)) return
         if (!checkIn) {
-            setDates(prev => ({ ...prev, checkIn: day}))
+            setDates(prev => ({ ...prev, checkIn: day }))
         } else if (!checkOut) {
             if (day < checkIn) {
-                setDates(prev => ({ ...prev, checkIn: day, checkOut: checkIn}))
+                setDates(prev => ({ ...prev, checkIn: day, checkOut: checkIn }))
             } else {
-                setDates(prev => ({ ...prev, checkOut: day}))
+                setDates(prev => ({ ...prev, checkOut: day }))
             }
         } else {
-            setDates(prev => ({ ...prev, checkIn: day, checkOut: null}))
+            setDates(prev => ({ ...prev, checkIn: day, checkOut: null }))
 
         }
     };
@@ -25,20 +26,17 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
         return day >= checkIn && day <= checkOut;
     };
 
-    const isFirstMonth = (date) => {
-        return date.getMonth() === currentMonth.getMonth();
-    };
-
-    const isFirstMonthClass = (date) => {
-        return isFirstMonth(date) ? 'first-month' : '';
-    };
-
     const isStartDate = (day) => {
         return checkIn && day.getDate() === checkIn.getDate() && day.getMonth() === checkIn.getMonth() && day.getFullYear() === checkIn.getFullYear();
     };
 
     const isEndDate = (day) => {
         return checkOut && day.getDate() === checkOut.getDate() && day.getMonth() === checkOut.getMonth() && day.getFullYear() === checkOut.getFullYear();
+    };
+
+    const isPastDate = (date) => {
+        const today = new Date();
+        return date < today;
     };
 
     const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
@@ -74,14 +72,16 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                     {Array.from({ length: firstDayOfMonth }, (_, i) =>
                         <div key={`empty-${i}`} className="empty"></div>
                     )}
-                    {daysArray.map((day) =>
-                        <div
+                    {daysArray.map((day) =>{
+                        const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)
+                        console.log( currentMonth);
+                        return <div
                             key={day}
-                            className={`date ${isStartDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)) ? 'start-date' : ''} ${isEndDate(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)) ? 'end-date' : ''} ${isInRange(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)) ? 'selected' : ''} ${isFirstMonthClass(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day))}`}
-                            onClick={() => handleDateClick(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day))}
+                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isPastDate(date) ? 'past-date' : ''}`}
+                            onClick={() => handleDateClick(date)}
                         >
                             {day}
-                        </div>
+                        </div>}
                     )}
                 </div>
 
@@ -96,14 +96,16 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                     {Array.from({ length: nextMonthFirstDay }, (_, i) =>
                         <div key={`empty-${i}`} className="empty"></div>
                     )}
-                    {nextMonthDaysArray.map((day) =>
-                        <div
+                    {nextMonthDaysArray.map((day) => {
+                        const date = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day)
+                        return <div
                             key={day}
-                            className={`date ${isStartDate(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day)) ? 'start-date' : ''} ${isEndDate(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day)) ? 'end-date' : ''} ${isInRange(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day)) ? 'selected' : ''}`}
-                            onClick={() => handleDateClick(new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day))}
+                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isPastDate(date) ? 'past-date' : ''}`}
+                            onClick={() => handleDateClick(date)}
                         >
                             {day}
                         </div>
+                    }
                     )}
                 </div>
             </article>

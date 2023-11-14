@@ -23,6 +23,12 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
         return Math.ceil(timeDifference / (1000 * 3600 * 24));
     }
 
+    function checkAvailability() {
+        if (checkIn && checkOut && adults + children + infants > 0) {
+            navigate(`/stay/order/${_id}/${checkIn}/${checkOut}/${adults} /${children} /${infants}/${rating}/${reviews}`)
+        } else setOpenModal('checkIn')
+    }
+
     return (
         <section className="order-form">
             <header className="flex space-between align-center">
@@ -58,10 +64,10 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
                         <button onClick={() => setOpenModal('')} className="black-btn">Close</button>
                     </article>
                 </section>}
-                {openModal === 'Who' && < AddGuestsSec guests={guests} setSearchStay={setSearchStay} isOrder={true} setOpenModal={setOpenModal} />}
+                {openModal === 'Who' && < AddGuestsSec guests={guests} maxGuests={capacity.guests} setSearchStay={setSearchStay} isOrder={true} setOpenModal={setOpenModal} />}
             </article>
 
-            <ActionBtn line={"Check availability"} onClick={() => navigate(`/stay/order/${_id}/${checkIn}/${checkOut}/${adults} /${children} /${infants}/${rating}/${reviews}`)} />
+            <ActionBtn line={"Check availability"} onClick={checkAvailability} />
 
             {checkIn && checkOut && <article className="total-container flex column">
                 <p>You won't be charged yet</p>

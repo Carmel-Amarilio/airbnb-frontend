@@ -13,11 +13,11 @@ import StarIcon from '@mui/icons-material/Star';
 import { SingInUp } from "../cmps/SingInUp";
 
 export function StayDetails() {
-    const [searchStay, setSearchStay] = useState({ checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 } })
+    const [searchStay, setSearchStay] = useState({})
     const [isLog, setIsLog] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
-    const [currStay, setCurrStay] = useState(null)
+    const [currStay, setCurrStay] = useState()
     const rating = {}
     const ratingName = [] //["Cleanliness", "Accuracy","Communication","Location","Check-in","Value" ]
     const { checkIn, checkOut } = searchStay
@@ -36,6 +36,7 @@ export function StayDetails() {
             const stay = await stayService.get(stayId)
             if (!stay) return navigate("/stay");
             setCurrStay(stay);
+            setSearchStay({ checkIn: new Date(new Date().getFullYear(), new Date().getMonth(), today.getDate() +1), checkOut: new Date(new Date().getFullYear(), new Date().getMonth(), today.getDate() +3), guests: { adults: stay.capacity.guests, children: 0, infants: 0 } } )
         } catch (error) {
             console.log("Had issues loading stay");
         }

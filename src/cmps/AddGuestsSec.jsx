@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-export function AddGuestsSec({ guests, setSearchStay, isOrder = false, setOpenModal }) {
+export function AddGuestsSec({ guests, maxGuests , setSearchStay, isOrder = false, setOpenModal }) {
     // const [guestsMap, setGuestsMap] = useState(guests)
 
     const { adults, children, infants } = guests
@@ -13,9 +13,9 @@ export function AddGuestsSec({ guests, setSearchStay, isOrder = false, setOpenMo
                     <p>Ages 13 or above</p>
                 </div>
                 <div className="counter-container flex align-center">
-                    <button className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, adults: adults - 1 } }))}>< RemoveIcon /></button>
+                    <button disabled={adults <= 0 } className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, adults: adults - 1 } }))}>< RemoveIcon /></button>
                     <p className='counter'>{adults}</p>
-                    <button className='add icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, adults: adults + 1 } }))}>< AddIcon /></button>
+                    <button disabled={adults + children >= maxGuests} className='add icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, adults: adults + 1 } }))}>< AddIcon /></button>
 
                 </div>
             </article>
@@ -25,9 +25,9 @@ export function AddGuestsSec({ guests, setSearchStay, isOrder = false, setOpenMo
                     <p>Ages 2–12</p>
                 </div>
                 <div className="counter-container flex align-center">
-                    <button className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, children: children - 1 } }))}>< RemoveIcon /></button>
+                    <button disabled={children <= 0} className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, children: children - 1 } }))}>< RemoveIcon /></button>
                     <p className='counter'>{children}</p>
-                    <button className='add icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, children: children + 1 } }))}>< AddIcon /></button>
+                    <button disabled={adults + children >= maxGuests} className='add icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, children: children + 1 } }))}>< AddIcon /></button>
 
                 </div>
             </article>
@@ -37,7 +37,7 @@ export function AddGuestsSec({ guests, setSearchStay, isOrder = false, setOpenMo
                     <p>Under 2</p>
                 </div>
                 <div className="counter-container flex align-center">
-                    <button className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, infants: infants - 1 } }))}>< RemoveIcon /></button>
+                    <button disabled={infants <= 0} className='remove icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, infants: infants - 1 } }))}>< RemoveIcon /></button>
                     <p className='counter'>{infants}</p>
                     <button className='add icon' onClick={() => setSearchStay(prev => ({ ...prev, guests: { ...guests, infants: infants + 1 } }))}>< AddIcon /></button>
 
