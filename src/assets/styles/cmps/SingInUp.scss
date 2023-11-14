@@ -18,6 +18,25 @@
             background-color: $borderClr;
         }
     }
+    div{
+        margin: 0;
+        width: 100%;
+    }
+
+    .add-img {
+        display: none;
+    }
+
+    .upload-profile {
+        cursor: pointer;
+        .profile{
+            margin-block-end: 10px;
+        }
+        .user-icon{
+            font-size: 3em;
+        }
+    }
+
 
     h2 {
         text-align: center;

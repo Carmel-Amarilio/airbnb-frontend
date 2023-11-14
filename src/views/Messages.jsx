@@ -64,12 +64,12 @@ export function Messages() {
                     <h3> Reservations</h3>
                     <section className="orders-list">
                         {orders.map(order => {
-                            const { _id, buyer, msgs, status, checkIn, checkOut } = order
+                            const { _id, host, buyer, msgs, status, checkIn, checkOut } = order
+                            const chatWith = loggedinUser._id === host._id ? buyer : host
                             return <article key={_id} className="orders-prev flex" onClick={() => getOrder(_id)}>
-                                {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}
+                                {chatWith.imgUrl ? <img src={chatWith.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{chatWith.fullName[0]}</div>}
                                 <div>
-                                    <h4>{buyer.fullName}</h4>
-                                    <p>{ }</p>
+                                    <h4>{chatWith.fullName}</h4>
                                     <p>{status}  • {new Date(checkIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })} - {new Date(checkOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</p>
                                 </div>
                             </article>

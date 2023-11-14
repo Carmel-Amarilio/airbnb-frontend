@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { login, signup } from '../store/actions/user.actions';
 import { cloudinaryServices } from '../services/cloudinary-service';
 import { ActionBtn } from './ActionBtn';
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -45,13 +46,6 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
         setUserImgUrl(imgUrl)
     }
 
-    // const handleMouseMove = (e) => {
-    //     const rect = e.currentTarget.getBoundingClientRect();
-    //     const x = ((e.clientX - rect.left) * 100) / e.currentTarget.clientWidth;
-    //     const y = ((e.clientY - rect.top) * 100) / e.currentTarget.clientHeight;
-    //     setMouseX(x);
-    //     setMouseY(y);
-    // }
 
     return (
         <section className="sing-in-up">
@@ -68,10 +62,13 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                 validationSchema={SignupSchema}
                 onSubmit={onSubmit}>
                 {({ errors, touched }) => (
-                    <Form className='form-container'>
-                        {operation === 'up' && <div>
-                            {/* <img src="https://res.cloudinary.com/du1jrse2t/image/upload/v1698934875/guest.f84f0eaceeb4fd681f59d0817c7aa81b_lmdrfa.svg" alt="Guest Icon" /> */}
-                            <input onChange={onAddImg} type="file" className="add-img" />
+                    <Form className='form-container flex column'>
+                        {operation === 'up' && <div className='flex justify-center'>
+                            <input id="file-upload" onChange={onAddImg} type="file" className="add-img" />
+                            <label htmlFor="file-upload" className='upload-profile'>
+                                {userImgUrl ? <img src={userImgUrl} htmlFor="file-upload" className='profile' /> :
+                                <AccountCircleSharpIcon className='user-icon' htmlFor="file-upload" />}
+                            </label>
                         </div>}
                         {operation === 'up' && <div>
                             <Field as={textField} label="Full name" name="fullName" className="input" />
@@ -85,14 +82,7 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
 
                         {operation === 'in' && <ActionBtn line={"Sign In"} className='submit-bnt' type='submit' />}
                         {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' />}
-                        {/* <button
-                            onMouseMove={handleMouseMove}
-                            style={{ '--mouse-x': mouseX, '--mouse-y': mouseY }}
-                            className='submit-bnt action-btn'
-                            type='submit'>
-                            {operation === 'in' && 'Sign In'}
-                            {operation === 'up' && 'Sign Up'}
-                        </button> */}
+
                     </Form>
                 )}
             </Formik>

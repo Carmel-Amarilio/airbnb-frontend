@@ -42,6 +42,7 @@ export function OrderStay() {
     async function newOrder() {
         const order = {
             hostId: host._id,
+            host,
             buyer: loggedinUser,
             totalPrice: (price * calculateNights() + Math.floor((price * calculateNights()) * 0.14) + 30 * calculateNights()),
             checkIn,
@@ -76,6 +77,7 @@ export function OrderStay() {
     }
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
     const { _id, imgUrls, name, host, price } = currStay
+    console.log(host);
     return (
         <section className="order-stay main-container">
             <header className='logo flex align-center' onClick={() => navigate("/stay")}>
