@@ -12,15 +12,22 @@ export function Reservations() {
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
+        else {
+            _loadOrders()
+        }
+    }, [loggedinUser])
+
+    function _loadOrders(){
         loadOrders({ useId: loggedinUser._id })
             .catch((err) => {
                 console.log(err)
             })
-    }, [loggedinUser])
+    }
 
     function setStatus(order, newStatus) {
         try {
             updateOrder({ ...order, status: newStatus })
+            _loadOrders()
         } catch (error) {
             console.log("Had issues changing thr status", error);
         }
@@ -56,8 +63,8 @@ export function Reservations() {
                                 <td> <p>₪{stay.price}</p> </td>
                                 <td> <p className={status}>{status}</p> </td>
                                 <td className="to-do ">
-                                    <button className="approve btn" onClick={() => setStatus(order, "approved")}>Approve</button>
-                                    <button className="reject btn" onClick={() => setStatus(order, "rejected")}>Reject</button>
+                                    <button disabled={status != 'pending'} className="approve btn" onClick={() => setStatus(order, "approved")}>Approve</button>
+                                    <button disabled={status != 'pending'} className="reject btn" onClick={() => setStatus(order, "rejected")}>Reject</button>
                                 </td>
 
                             </tr>

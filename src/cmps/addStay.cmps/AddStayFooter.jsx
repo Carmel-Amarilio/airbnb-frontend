@@ -10,9 +10,8 @@ export function AddStayFooter({ incStep, step, stepCount, isNext }) {
             </article>
 
             <article className="flex align-center space-between">
-                <button className="underline-btn" onClick={() => incStep(-1)}>Back</button>
-                {isNext && <button className="black-btn" onClick={() => incStep(1)}>Next</button>}
-                {!isNext && <button className="black-btn next-disabled" >Next</button>}
+                <button disabled={step <=1} className="underline-btn" onClick={() => incStep(-1)}>Back</button>
+                <button disabled={!isNext} className="black-btn" onClick={() => incStep(1)}>Next</button>
             </article>
         </section>
     )

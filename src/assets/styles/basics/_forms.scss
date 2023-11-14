@@ -77,6 +77,8 @@ form>* {
         font-weight: bold;
         margin: 0;
     }
+
+
 }
 
 .underline-btn {
@@ -86,6 +88,11 @@ form>* {
     &:hover {
         background-color: rgba(211, 211, 211, 0.281);
     }
+}
+
+button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .profile {
@@ -117,7 +124,7 @@ form>* {
         text-align: start;
         padding: 10px;
 
-        &:last-child{
+        &:last-child {
             text-align: center;
         }
     }

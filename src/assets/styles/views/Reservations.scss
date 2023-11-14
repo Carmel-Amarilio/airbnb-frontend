@@ -43,6 +43,11 @@
                     border: 1px solid black;
                     padding: 5px 15px;
                     border-radius: 5px;
+
+                    &:disabled {
+                        opacity: 0.5; 
+                        pointer-events: none;
+                      }
                 }
 
                 .approve {
