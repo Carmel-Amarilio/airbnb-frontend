@@ -102,8 +102,10 @@ export function Messages() {
                     <h3>Details</h3>
                     {currOrder && <article className="flex column" >
                         <img src={currOrder.stay.imgUrl} />
-                        <h4>{currOrder.stay.name}</h4>
-                        {/* <p>Hosted by {currOrder.stay.}</p> */}
+                        <div>
+                            <h4>{currOrder.stay.name}</h4>
+                            <p>Hosted by {currOrder.host.fullName}</p>
+                        </div>
                         <div className="flex space-between align-center">
                             <div>
                                 <h5>Check-in:</h5>
