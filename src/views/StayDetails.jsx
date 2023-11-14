@@ -36,9 +36,9 @@ export function StayDetails() {
             const stay = await stayService.get(stayId)
             if (!stay) return navigate("/stay");
             setCurrStay(stay);
-            setSearchStay({ checkIn: new Date(new Date().getFullYear(), new Date().getMonth(), today.getDate() +1), checkOut: new Date(new Date().getFullYear(), new Date().getMonth(), today.getDate() +3), guests: { adults: stay.capacity.guests, children: 0, infants: 0 } } )
+            setSearchStay({ checkIn: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() +1), checkOut: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() +3), guests: { adults: stay.capacity.guests, children: 0, infants: 0 } } )
         } catch (error) {
-            console.log("Had issues loading stay");
+            console.log("Had issues loading stay", error);
         }
     }
 
@@ -65,6 +65,7 @@ export function StayDetails() {
 
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
     const { imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
+    console.log(searchStay);
     mapRating()
     console.log(currStay);
     return (

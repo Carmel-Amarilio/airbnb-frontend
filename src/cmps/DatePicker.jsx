@@ -74,7 +74,6 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                     )}
                     {daysArray.map((day) =>{
                         const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)
-                        console.log( currentMonth);
                         return <div
                             key={day}
                             className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isPastDate(date) ? 'past-date' : ''}`}
