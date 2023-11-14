@@ -12,6 +12,7 @@ import { AddStay } from './views/AddStay'
 import { OrderStay } from './views/OrderStay'
 import { Listings } from './views/Listings'
 import { Reservations } from './views/Reservations'
+import { Messages } from './views/Messages'
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
             <Route element={<AddStay />} path="/about-your-place" />
             <Route element={<Listings />} path="/listings" />
             <Route element={<Reservations />} path="/reservations" />
+            <Route element={<Messages />} path="/messages" />
           </Routes>
         </main>
       </Router >

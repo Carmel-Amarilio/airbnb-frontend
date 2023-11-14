@@ -54,7 +54,8 @@ export function OrderStay() {
             stay: {
                 _id,
                 name,
-                price
+                price, 
+                imgUrl: imgUrls[0]
             },
             msgs: [],
             status: "pending"

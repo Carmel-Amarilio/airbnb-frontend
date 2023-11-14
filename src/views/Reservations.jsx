@@ -18,7 +18,7 @@ export function Reservations() {
     }, [loggedinUser])
 
     function _loadOrders(){
-        loadOrders({ useId: loggedinUser._id })
+        loadOrders({ userId: loggedinUser._id })
             .catch((err) => {
                 console.log(err)
             })

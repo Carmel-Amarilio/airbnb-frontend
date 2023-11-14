@@ -59,6 +59,7 @@ export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) 
                     {isModal && <article className='log-modal flex column'>
                         {!loggedinUser && <button onClick={() => setIsLog("in")}>Log in</button>}
                         {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
+                        {loggedinUser && <button onClick={() => navigate("/messages")}>Messages</button>}
                         {loggedinUser && <button onClick={() => navigate("/stay")}>Wishlist</button>}
                         {loggedinUser && <button onClick={() => navigate("/stay")} >Trips</button>}
                         {loggedinUser && <button onClick={() => navigate("/listings")} className='head-line'>Listings</button>}

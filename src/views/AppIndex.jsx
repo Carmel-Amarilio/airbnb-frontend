@@ -10,6 +10,7 @@ export function AppIndex() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const stays = useSelector((storeState) => storeState.stayModule.stays)
     const [isLog, setIsLog] = useState(false)
+    
     useEffect(() => {
         loadStays()
             .catch((err) => {

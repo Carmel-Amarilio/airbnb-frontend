@@ -12,7 +12,7 @@ export function Listings() {
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
         else {
-            loadStays({ useId: loggedinUser._id })
+            loadStays({ userId: loggedinUser._id })
             .catch((err) => {
                 console.log(err)
             })
