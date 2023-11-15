@@ -62,20 +62,28 @@ export function Messages() {
             <main>
                 <section className="orders sec">
                     <h3> Reservations</h3>
-                    <section className="orders-list">
-                        {orders.map(order => {
-                            const { _id, host, buyer, msgs, status, checkIn, checkOut } = order
-                            const chatWith = loggedinUser._id === host._id ? buyer : host
-                            return <article key={_id} className="orders-prev flex" onClick={() => getOrder(_id)}>
-                                {chatWith.imgUrl ? <img src={chatWith.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{chatWith.fullName[0]}</div>}
-                                <div>
-                                    <h4>{chatWith.fullName}</h4>
-                                    <p>{status}  • {new Date(checkIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })} - {new Date(checkOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</p>
-                                </div>
-                            </article>
-                        }
-                        )}
-                    </section>
+                    {!orders.length ?
+                        <section className="empty-page" >
+                            <div>
+                                <h2>You have no unread messages</h2>
+                                <p>When you book a trip or experience, messages from your host will show up here</p>
+                                <button className="form-btn" onClick={() => navigate("/stay")}> Explore Airbnb</button>
+                            </div>
+                        </section> :
+                        <section className="orders-list">
+                            {orders.map(order => {
+                                const { _id, host, buyer, msgs, status, checkIn, checkOut } = order
+                                const chatWith = loggedinUser._id === host._id ? buyer : host
+                                return <article key={_id} className="orders-prev flex" onClick={() => getOrder(_id)}>
+                                    {chatWith.imgUrl ? <img src={chatWith.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{chatWith.fullName[0]}</div>}
+                                    <div>
+                                        <h4>{chatWith.fullName}</h4>
+                                        <p>{status}  • {new Date(checkIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })} - {new Date(checkOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</p>
+                                    </div>
+                                </article>
+                            }
+                            )}
+                        </section>}
 
                 </section>
 

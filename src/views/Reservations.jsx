@@ -40,14 +40,25 @@ export function Reservations() {
     }
 
     console.log(orders);
+
     return (
         <section className="reservations main-container">
             <StayHeader isUserPage={true} />
-            <main >
-                <h1>{orders.length} reservations</h1>
+
+            {!orders.length && <section className="empty-page" >
+                <h1> Reservations</h1>
+                <div>
+                    <h2>No trips reservations...yet!</h2>
+                    <p>It's time to advertise your home in the best possible way</p>
+                    <button className="form-btn" onClick={() => navigate("/about-your-place")}> <h3>Airbnb your home</h3></button>
+                </div>
+
+            </section>}
+            {!!orders.length && <main >
+                <h1>{orders.length} Reservations</h1>
                 <table className="form-table">
                     <tbody>
-                        <tr>
+                        <tr >
                             <th>Guest</th>
                             <th>Check-in</th>
                             <th>Check-out</th>
@@ -58,14 +69,17 @@ export function Reservations() {
                         </tr>
                         {orders.map(order => {
                             const { _id, buyer, checkIn, checkOut, stay, status } = order
-                            return <tr key={_id}>
+                            return <tr key={_id} >
                                 <td className="buyer flex align-center">
                                     {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}
                                     <h3>{buyer.fullName}</h3>
                                 </td>
                                 <td> <p>{utilService.formatDate(checkIn)}</p> </td>
                                 <td> <p>{utilService.formatDate(checkOut)}</p> </td>
-                                <td> <p>{stay.name}</p> </td>
+                                <td className="name ">
+                                    {/* <img src={stay.imgUrl} /> */}
+                                    <p>{stay.name}</p>
+                                </td>
                                 <td> <p>₪{stay.price}</p> </td>
                                 <td> <p className={status}>{status}</p> </td>
                                 <td className="to-do ">
@@ -77,7 +91,7 @@ export function Reservations() {
                         })}
                     </tbody>
                 </table>
-            </main>
+            </main>}
         </section>
     )
 }

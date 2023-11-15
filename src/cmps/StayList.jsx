@@ -1,7 +1,6 @@
 import { StayPreview } from "./StayPreview"
 
 export function StayList({ stays, onLike, loggedinUser }) {
-    if (stays.length === 0 || !stays) return (<div>loading...</div>)
     return (
         <section className="stays-list card-grid">
             {stays.map(stay =>

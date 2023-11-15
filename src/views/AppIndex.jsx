@@ -54,7 +54,14 @@ export function AppIndex() {
         <section className="app-index main-container">
             <StayHeader setIsLog={setIsLog} filter={filter} setFilter={setFilter} />
             <StayFilter filter={filter} />
-            <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />
+            {!stays.length ?
+                <section className="empty-page" >
+                    <div>
+                        <h2>No results</h2>
+                        <p>Try changing or removing some of your filters or adjusting your search area.</p>
+                    </div>
+                </section> :
+                <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
         </section>
     )

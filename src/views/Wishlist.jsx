@@ -4,6 +4,7 @@ import { StayHeader } from "../cmps/StayHeader";
 import { StayList } from "../cmps/StayList";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { main } from "@popperjs/core";
 
 export function Wishlist() {
     const navigate = useNavigate();
@@ -34,9 +35,17 @@ export function Wishlist() {
     return (
         <section className="wishlist main-container">
             <StayHeader isUserPage={true} />
-            <h1>Wishlists</h1>
-            <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />
-            {/* {isLog && <SingInUp operation={isLog} closeLog={closeLog} />} */}
+            {stays.length && <h1>Wishlists</h1>}
+            {!stays.length ?
+                <section className="empty-page" >
+                    <h1>Wishlists</h1>
+                    <div>
+                        <h2>Create your first wishlist</h2>
+                        <p>As you search, click the heart icon to save your favorite places and Experiences to a wishlist.</p>
+                        <button className="form-btn" onClick={() => navigate("/stay")}> <h3>Start searching</h3></button>
+                    </div>
+                </section> :
+                <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
         </section>
     )
 }

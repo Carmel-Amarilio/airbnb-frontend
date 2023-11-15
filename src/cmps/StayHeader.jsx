@@ -61,7 +61,7 @@ export function StayHeader({ setIsLog, filter, setFilter, isDetails = false, isU
                         {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
                         {loggedinUser && <button onClick={() => navigate("/messages")}>Messages</button>}
                         {loggedinUser && <button onClick={() => navigate(`/wishlist `)}>Wishlist</button>}
-                        {loggedinUser && <button onClick={() => navigate("/stay")} >Trips</button>}
+                        {loggedinUser && <button onClick={() => navigate("/trips")} >Trips</button>}
                         {loggedinUser && <button onClick={() => navigate("/listings")} className='head-line'>Listings</button>}
                         {loggedinUser && <button onClick={() => navigate("/reservations")}>Reservations</button>}
                         {loggedinUser && <button onClick={() => navigate("/about-your-place")}>Add listing</button>}
