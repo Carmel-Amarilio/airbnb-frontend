@@ -10,11 +10,15 @@
     z-index: 5;
 
 
-    .links-box {
+    .label-box {
         margin-right: 2rem;
         opacity: 0.5;
         border-bottom: 1px solid white;
         min-width: 85px;
+
+        img {
+            width: 40px;
+        }
 
         &:hover,
         &.selected-box {
@@ -29,33 +33,16 @@
         }
     }
 
-    .links-img {
-        width: 1.5rem;
-        height: 1.5rem;
-        object-fit: contain;
-    }
-
-    .links-label {
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: $txtClr2;
-    }
-
-    .selected-label {
-        color: black;
-    }
-
-
     .arrow-cont {
         position: absolute;
         padding: 10px 20px;
         background: linear-gradient(to left, white, rgba(255, 255, 255, 0.507));
         background: linear-gradient(to left, white 70%, rgba(255, 255, 255, 0.507) 70%);
-        
+
         &.left {
             left: 50px;
         }
-        
+
         &.right {
             right: 50px;
         }

@@ -3,17 +3,22 @@ import { useState } from 'react';
 import { WhereSec } from './WhereSec';
 import { CheckInOutSec } from './CheckInOutSec';
 import { AddGuestsSec } from './AddGuestsSec';
+import { useNavigate } from 'react-router';
 
-export function SearchStay({ setIsSetStay }) {
+export function SearchStay({ setIsSetStay, filter, setFilter }) {
+    const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false)
-    const [searchStay, setSearchStay] = useState({ destinations: "", checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 } })
 
     function handleSearch({ target }) {
         let val = target.value
-        setSearchStay((prev) => ({ ...prev, destinations: val }))
+        setFilter((prev) => ({ ...prev, destinations: val }))
     }
 
-    const { destinations, checkIn, checkOut, guests } = searchStay
+    function onSearch() {
+        navigate(`/stay?${label ? `label=${label}` : ''}${destinations ? `&destinations=${destinations}` : ''}${checkIn ? `&checkIn=${checkIn}` : ''}${checkOut ? `&checkOut=${checkOut}` : ''}${adults ? `&adults=${adults}` : ''}${children ? `&children=${children}` : ''}${infants ? `&infants=${infants}` : ''}`);
+    }
+
+    const { label, destinations, checkIn, checkOut, guests } = filter
     const { adults, children, infants } = guests
     return (
         <section className="search-stay">
@@ -36,12 +41,12 @@ export function SearchStay({ setIsSetStay }) {
                             <h5>Who</h5>
                             {(adults + children + infants === 0) ? <p> Add guests</p> : <p>{`${adults + children + infants} guests`}</p>}
                         </div>
-                        <div className='action-btn flex align-center justify-center'><SearchIcon /> Search</div>
+                        <div className='action-btn flex align-center justify-center' onClick={onSearch}><SearchIcon /> Search</div>
                     </button>
 
-                    {openModal === 'where' && <  WhereSec setSearchStay={setSearchStay} />}
-                    {(openModal === 'checkIn' || openModal === 'checkOut') && < CheckInOutSec setSearchStay={setSearchStay} checkIn={checkIn} checkOut={checkOut} />}
-                    {openModal === 'Who' && < AddGuestsSec guests={guests} maxGuests= {50} setSearchStay={setSearchStay} />}
+                    {openModal === 'where' && <  WhereSec setSearchStay={setFilter} />}
+                    {(openModal === 'checkIn' || openModal === 'checkOut') && < CheckInOutSec setSearchStay={setFilter} checkIn={checkIn} checkOut={checkOut} />}
+                    {openModal === 'Who' && < AddGuestsSec guests={guests} maxGuests={50} setSearchStay={setFilter} />}
 
                 </article>
                 <div className='black-space' onClick={() => setIsSetStay(false)}></div>

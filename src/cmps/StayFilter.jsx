@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { filters } from "../assets/img/filter-img";
+import { useNavigate } from "react-router";
+import { stayOptions } from "../assets/img/stayOptions-img"
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 
-export function StayFilter() {
-    const [selectedFilter, setSelectedFilter] = useState(0);
+export function StayFilter({ filter }) {
+    const navigate = useNavigate();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [chunkStartIndex, setChunkStartIndex] = useState(0);
-
-    const updateScreenWidth = () => {
-        setScreenWidth(window.innerWidth);
-    };
+    const labels = Object.keys(stayOptions);
+    const imgs = Object.values(stayOptions);
 
     useEffect(() => {
         window.addEventListener('resize', updateScreenWidth);
@@ -20,45 +19,52 @@ export function StayFilter() {
         };
     }, []);
 
-    const chunkSize = (screenWidth - 200) / 130 +1
+    const updateScreenWidth = () => {
+        setScreenWidth(window.innerWidth)
+    }
 
-    function handleNextChunk(){
+    function setFilter(label) {
+        const { destinations, checkIn, checkOut, guests } = filter
+        const { adults, children, infants } = guests
+        navigate(`/stay?${label ? `label=${label}` : ''}${destinations ? `&destinations=${destinations}` : ''}${checkIn ? `&checkIn=${checkIn}` : ''}${checkOut ? `&checkOut=${checkOut}` : ''}${adults ? `&adults=${adults}` : ''}${children ? `&children=${children}` : ''}${infants ? `&infants=${infants}` : ''}`);
+    }
+
+    const chunkSize = Math.floor((screenWidth - 200) / 130 + 1)
+
+    function handleNextChunk() {
+        const numberOfOptions = Object.keys(stayOptions).length;
         const nextChunkStart = chunkStartIndex + chunkSize;
-        if (nextChunkStart < filters.length) {
+        if (nextChunkStart < numberOfOptions) {
             setChunkStartIndex(nextChunkStart)
         }
     }
 
-    function handlePreviousChunk(){
+    function handlePreviousChunk() {
         const previousChunkStart = chunkStartIndex - chunkSize;
         if (previousChunkStart >= 0) {
             setChunkStartIndex(previousChunkStart)
-        }
+        } else setChunkStartIndex(0)
     }
 
     return (
         <section className="stay-filter flex full">
-            {filters.slice(chunkStartIndex, chunkStartIndex + chunkSize).map((item, i) => {
-                return (
-                    <div
-                        key={i}
-                        className={`links-box ${i === selectedFilter ? "selected-box" : ""} flex column justify-center align-center`}
-                        onClick={() => setSelectedFilter(chunkStartIndex + i)}
-                    >
-                        <img src={item.imgSrc} className="links-img" />
-                        <p className={`links-label ${i === selectedFilter - chunkStartIndex && "selected-label"}`}>
-                            {item.label}
-                        </p>
-                    </div>
-                );
-            })}
 
-            <div className="arrow-cont left" onClick={handlePreviousChunk}>
+            {labels.slice(chunkStartIndex, chunkStartIndex + chunkSize).map((label, i) =>
+                <div
+                    key={i}
+                    className={`label-box ${label === filter.label ? "selected-box" : ""} flex column justify-center align-center`}
+                    onClick={() => setFilter(label)}>
+                    <img src={imgs[Math.floor(chunkStartIndex) + i]} />
+                    <p>{label}</p>
+                </div>
+            )}
+
+            <button disabled={chunkStartIndex <= 0} className="arrow-cont left" onClick={handlePreviousChunk}>
                 <KeyboardArrowLeftSharpIcon className="arrow" />
-            </div>
-            <div className="arrow-cont right" onClick={handleNextChunk}>
+            </button>
+            <button disabled={Object.keys(stayOptions).length <= chunkStartIndex + chunkSize} className="arrow-cont right" onClick={handleNextChunk}>
                 <KeyboardArrowRightSharpIcon className="arrow" />
-            </div>
+            </button>
         </section>
     );
 }

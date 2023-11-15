@@ -13,6 +13,7 @@ import { OrderStay } from './views/OrderStay'
 import { Listings } from './views/Listings'
 import { Reservations } from './views/Reservations'
 import { Messages } from './views/Messages'
+import { Wishlist } from './views/Wishlist'
 
 export function App() {
   return (
@@ -28,6 +29,7 @@ export function App() {
             <Route element={<Listings />} path="/listings" />
             <Route element={<Reservations />} path="/reservations" />
             <Route element={<Messages />} path="/messages" />
+            <Route element={<Wishlist />} path="/wishlist" />
           </Routes>
         </main>
       </Router >

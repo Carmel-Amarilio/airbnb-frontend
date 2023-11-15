@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { logout } from '../store/actions/user.actions';
 import { useNavigate } from 'react-router';
 
-export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) {
+export function StayHeader({ setIsLog, filter, setFilter, isDetails = false, isUserPage = false }) {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -60,7 +60,7 @@ export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) 
                         {!loggedinUser && <button onClick={() => setIsLog("in")}>Log in</button>}
                         {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
                         {loggedinUser && <button onClick={() => navigate("/messages")}>Messages</button>}
-                        {loggedinUser && <button onClick={() => navigate("/stay")}>Wishlist</button>}
+                        {loggedinUser && <button onClick={() => navigate(`/wishlist `)}>Wishlist</button>}
                         {loggedinUser && <button onClick={() => navigate("/stay")} >Trips</button>}
                         {loggedinUser && <button onClick={() => navigate("/listings")} className='head-line'>Listings</button>}
                         {loggedinUser && <button onClick={() => navigate("/reservations")}>Reservations</button>}
@@ -72,7 +72,7 @@ export function StayHeader({ setIsLog, isDetails = false, isUserPage = false }) 
 
             </section>
 
-            {isSetStay && <SearchStay setIsSetStay={setIsSetStay} />}
+            {isSetStay && <SearchStay setIsSetStay={setIsSetStay} filter={filter}  setFilter={setFilter} />}
 
         </header>
     )
