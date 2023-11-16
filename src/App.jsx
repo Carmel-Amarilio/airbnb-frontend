@@ -15,6 +15,8 @@ import { Reservations } from './views/Reservations'
 import { Messages } from './views/Messages'
 import { Wishlist } from './views/Wishlist'
 import { Trips } from './views/Trips'
+import { ReviewStay } from './views/ReviewStay'
+import { UserMsg } from './cmps/UserMsg'
 
 export function App() {
   return (
@@ -33,8 +35,10 @@ export function App() {
             <Route element={<Messages />} path="/messages" />
             <Route element={<Wishlist />} path="/wishlist" />
             <Route element={<Trips />} path="/trips" />
+            <Route element={<ReviewStay />} path="/stay/review/:stayId/:orderId" />
           </Routes>
         </main>
+        <UserMsg />
       </Router >
     </Provider>
   )

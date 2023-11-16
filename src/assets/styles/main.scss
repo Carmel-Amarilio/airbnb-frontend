@@ -23,6 +23,7 @@
 @import "views/Messages";
 @import "views/wishlist";
 @import "views/Trips";
+@import "views/ReviewStay";
 
 
 // Components
@@ -32,6 +33,7 @@
 @import "cmps/StayPreview.scss";
 @import "cmps/SingInUp.scss";
 
+@import "cmps/StayImgHeader.scss";
 @import "cmps/StayReviewDetail.scss";
 @import "cmps/OrderForm.scss";
 @import "cmps/DatePicker.scss";
@@ -40,6 +42,7 @@
 @import "cmps/HostStay.scss";
 
 @import "cmps/AmenitiesModal.scss";
+@import "cmps/ReviewsModal.scss";
 
 @import "cmps/WhereSec.scss";
 @import "cmps/CheckInOutSec.scss";
@@ -53,3 +56,5 @@
 @import "cmps/addStay.cmps/AddImgStay.scss";
 @import "cmps/addStay.cmps/DataStay.scss";
 @import "cmps/addStay.cmps/PublishStay.scss";
+
+@import 'cmps/UserMsg.scss';

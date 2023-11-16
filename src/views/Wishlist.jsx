@@ -42,7 +42,7 @@ export function Wishlist() {
                     <div>
                         <h2>Create your first wishlist</h2>
                         <p>As you search, click the heart icon to save your favorite places and Experiences to a wishlist.</p>
-                        <button className="form-btn" onClick={() => navigate("/stay")}> <h3>Start searching</h3></button>
+                        <button className="form-btn" onClick={() => navigate("/stay")}>Start searching</button>
                     </div>
                 </section> :
                 <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}

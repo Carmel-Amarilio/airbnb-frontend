@@ -12,6 +12,7 @@ import { AddGuestsSec } from "../cmps/AddGuestsSec";
 import { addOrder, updateOrder } from "../store/actions/order.actions";
 import { orderService } from "../services/order.service";
 import { utilService } from "../services/util.service";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 export function OrderStay() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
@@ -63,10 +64,14 @@ export function OrderStay() {
     }
 
     async function newOrder() {
+        if (!checkIn || !checkOut ) return showErrorMsg('You have not specified dates for your trip ')
+        if (!guests.adults) return showErrorMsg('You did not specify the number of guests ')
         const totalPrice = (price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount)
         if (isUpdate) {
             try {
                 updateOrder({ ...order, status: 'pending', totalPrice })
+                showSuccessMsg('The request has been successfully updated')
+                navigate("/trips")
             } catch (error) {
                 console.log("Had issues update order", error);
             }
@@ -76,6 +81,8 @@ export function OrderStay() {
             const newOrder = orderService.getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, guests, miniStay, status: 'pending' })
             try {
                 addOrder(newOrder)
+                showSuccessMsg('booking request sent to host')
+                navigate("/trips")
             } catch (error) {
                 console.log("Had issues create a order", error);
             }

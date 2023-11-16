@@ -30,6 +30,12 @@
     &.justify-end {
        justify-content: flex-end;
     }
+    &.gap5{
+        gap: 5px;
+    }
+    &.gap10{
+        gap: 10px;
+    }
 }
 
 // Media helpers

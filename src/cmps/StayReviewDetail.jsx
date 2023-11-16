@@ -56,7 +56,7 @@ export function StayReviewDetail({ currStay, setDates, checkIn, checkOut }) {
                     ))}
                 </div>
                 <button className="form-btn" onClick={() => setIsModal(true)}>
-                    <h3>{`Show all ${amenities.length} amenities`}</h3>
+                    {`Show all ${amenities.length} amenities`}
                 </button>
             </article>
 

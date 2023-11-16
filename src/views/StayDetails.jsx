@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { orderService } from "../services/order.service";
 import { addOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
+import { StayImgHeader } from "../cmps/StayImgHeader";
 
 export function StayDetails() {
     const params = useParams()
@@ -58,25 +59,12 @@ export function StayDetails() {
     }
 
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { _id, imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
+    const { _id, imgUrls, name, host, price, reviews, loc } = currStay
     const { rating, ratingName } = utilService.mapRating(reviews)
     return (
         <section className="stay-details main-container">
             <StayHeader isDetails={true} setIsLog={setIsLog} filter={filter} setFilter={setFilter} />
-            <header>
-                <h1>{name}</h1>
-                <p className='flex align-center'>
-                    <StarIcon className="star-icon" />
-                    <span> {rating.value} · {reviews.length} reviews · {loc.city}, {loc.country}</span>
-                </p>
-            </header>
-
-            <article className="image-container">
-                {Array.from({ length: 5 }).map((_, i) =>
-                    <img key={i} src={imgUrls[i]} />
-                )}
-            </article>
-
+            <StayImgHeader stay={currStay} rating={rating} />
             <main>
                 <StayReviewDetail currStay={currStay} setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} />
                 <OrderForm searchStay={searchStay} setSearchStay={setSearchStay} currStay={currStay} rating={rating.value} reviews={reviews.length} />

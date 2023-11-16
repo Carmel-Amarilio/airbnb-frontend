@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { loadOrders, removeOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { func } from "prop-types";
+import { showSuccessMsg } from "../services/event-bus.service";
 
 export function Trips() {
 
@@ -29,6 +30,7 @@ export function Trips() {
     function onCancel(orderId) {
         removeOrder(orderId)
         _loadOrders()
+        showSuccessMsg('Trip been cancel')
     }
 
     function isPastDate(date) {
@@ -45,7 +47,7 @@ export function Trips() {
                 <div>
                     <h2>No trips booked...yet!</h2>
                     <p>Time to dust off your bags and start planning your next adventure</p>
-                    <button className="form-btn" onClick={() => navigate("/stay")}> <h3>Start searching</h3></button>
+                    <button className="form-btn" onClick={() => navigate("/stay")}> Start searching</button>
                 </div>
             </section>}
             {!!orders.length && <main >
@@ -62,8 +64,8 @@ export function Trips() {
                             <th>Actions</th>
                         </tr>
                         {orders.map(order => {
-                            const { _id, host, checkIn, checkOut, stay, status , totalPrice} = order
-                            if(status === 'negotiations') return
+                            const { _id, host, checkIn, checkOut, stay, status, totalPrice } = order
+                            if (status === 'negotiations') return
                             return <tr key={_id} >
                                 <td className="host flex align-center">
                                     {host.imgUrl ? <img src={host.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{host.fullName[0]}</div>}
@@ -75,7 +77,7 @@ export function Trips() {
                                 <td> <p>₪{totalPrice}</p> </td>
                                 <td> <p className={status}>{status}</p> </td>
                                 <td className="actions ">
-                                    <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(_id)}><h3>Cancel trip</h3></button>
+                                    <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(_id)}>Cancel trip</button>
                                 </td>
 
                             </tr>

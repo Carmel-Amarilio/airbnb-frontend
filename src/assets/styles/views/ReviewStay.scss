@@ -1,0 +1,61 @@
+.review-stay {
+    grid-template-columns: 170px 1fr 170px;
+
+    main {
+        &>* {
+            padding-block: 20px;
+            border-bottom: 1px solid $borderClr;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 0;
+        }
+
+        .stay-img-header {
+            header {
+                padding-block: 0px;
+
+                h1 {
+                    font-size: 18px;
+                }
+            }
+
+            .image-container {
+                grid-auto-rows: 150px;
+            }
+        }
+
+        .new-review {
+            .rate {
+                input[type="range"] {
+                    margin-inline-end: 10px;
+                }
+
+                h5 {
+                    width: 5px;
+                }
+            }
+
+            .review {
+                width: 600px;
+                gap: 10px;
+
+                header {
+                    gap: 10px;
+                }
+
+                textarea {
+                    text-align: left;
+                    padding: 20px;
+                    border-radius: 10px;
+                    resize: vertical;
+                    overflow: hidden;
+                    width: 100%;
+                    font-size: 22px;
+                    font-family: Avantgarde, "TeX Gyre Adventor", "URW Gothic L", sans-serif;
+                }
+            }
+        }
+    }
+}

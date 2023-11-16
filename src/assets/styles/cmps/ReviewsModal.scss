@@ -1,0 +1,20 @@
+.reviews-modal {
+
+
+    .container {
+        overflow-y: scroll;
+        max-height: 400px;
+        gap: 40px;
+        padding-block: 10px;
+        width: 500px;
+
+        header {
+            gap: 10px;
+            padding-block-end: 20px;
+        }
+    }
+
+    .review-in-modal {
+        border-bottom: 1px solid $borderClr;
+    }
+}

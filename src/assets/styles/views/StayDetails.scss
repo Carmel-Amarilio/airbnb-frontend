@@ -1,57 +1,6 @@
 .stay-details {
     grid-template-columns: 170px 1fr 170px;
     
-    header {
-        grid-template-columns: 170px 1fr 170px;
-        padding-block: 20px;
-
-        h1 {
-            padding-block-end: 10px;
-            margin: 0;
-        }
-
-        p {
-            color: rgb(34, 34, 34);
-            font-weight: 600;
-
-            .star-icon {
-                font-size: 1em;
-                margin-inline-end: 5px;
-            }
-        }
-
-    }
-
- 
-    .image-container {
-        display: grid;
-        grid-template-columns: (repeat(4, 1fr));
-        grid-auto-rows: 200px;
-        grid-gap: 10px;
-
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            &:first-child {
-                grid-column: span 2;
-                grid-row: span 2;
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
-            }
-
-            &:nth-child(3) {
-                border-top-right-radius: 10px;
-            }
-
-            &:last-child {
-                border-bottom-right-radius: 10px;
-            }
-        }
-    }
-
     main {
         display: grid;
         grid-template-columns: 2fr 1fr;

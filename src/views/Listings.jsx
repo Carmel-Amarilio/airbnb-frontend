@@ -29,7 +29,7 @@ export function Listings() {
                     <div>
                         <h2>You haven't posted your house yet</h2>
                         <p>It's time to advertise your home in the best possible way</p>
-                        <button className="form-btn" onClick={() => navigate("/about-your-place")}> <h3>Airbnb your home</h3></button>
+                        <button className="form-btn" onClick={() => navigate("/about-your-place")}> Airbnb your home</button>
                     </div>
                 </section> :
                 <main >
