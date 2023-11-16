@@ -1,14 +1,18 @@
 import { useSelector } from "react-redux";
 import { StayHeader } from "../cmps/StayHeader";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadOrders, updateOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { orderService } from "../services/order.service";
 import logoImgUrl from '../assets/img/logo.png'
+import { ActionBtn } from "../cmps/ActionBtn";
 
 export function Messages() {
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const orderId = new URLSearchParams(location.search).get('orderId');
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
     const [currOrder, setCurrOrder] = useState(false)
@@ -18,6 +22,7 @@ export function Messages() {
         if (!loggedinUser) navigate("/stay")
         else {
             _loadOrders()
+            if (orderId) getOrder(orderId)
         }
     }, [loggedinUser])
 
@@ -55,6 +60,10 @@ export function Messages() {
         setNewMsg('')
     }
 
+    async function onOrder() {
+        navigate(`/stay/order/${currOrder._id}`)
+    }
+
     console.log(currOrder);
     return (
         <section className="messages">
@@ -78,7 +87,8 @@ export function Messages() {
                                     {chatWith.imgUrl ? <img src={chatWith.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{chatWith.fullName[0]}</div>}
                                     <div>
                                         <h4>{chatWith.fullName}</h4>
-                                        <p>{status}  • {new Date(checkIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })} - {new Date(checkOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</p>
+                                        {status != 'negotiations' ? <p>{status}  • {new Date(checkIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })} - {new Date(checkOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</p> :
+                                            <p>{status} </p>}
                                     </div>
                                 </article>
                             }
@@ -114,7 +124,7 @@ export function Messages() {
                             <h4>{currOrder.stay.name}</h4>
                             <p>Hosted by {currOrder.host.fullName}</p>
                         </div>
-                        <div className="flex space-between align-center">
+                        {currOrder.status != 'negotiations' && <div className="flex space-between align-center">
                             <div>
                                 <h5>Check-in:</h5>
                                 <p>{utilService.formatDate(currOrder.checkIn)}</p>
@@ -123,12 +133,13 @@ export function Messages() {
                                 <h5>Check-out:</h5>
                                 <p>{utilService.formatDate(currOrder.checkOut)}</p>
                             </div>
-                        </div>
-                        <div className="flex space-between align-center">
+                        </div>}
+                        {currOrder.status != 'negotiations' && <div className="flex space-between align-center">
                             <h5>Guests: </h5>
-                            <p>{`${currOrder.guests.adults && `adults: ${currOrder.guests.adults}`}${currOrder.guests.children && `, children: ${currOrder.guests.children}`}${currOrder.guests.infants && `, infants: ${currOrder.guests.infants}`}`}</p>
-                        </div>
-                        <h5 className="total"><span>Total price:</span> ₪{currOrder.totalPrice}</h5>
+                            <p>{`${currOrder.guests.adults ? `adults: ${currOrder.guests.adults}` : ''}${currOrder.guests.children ? `, children: ${currOrder.guests.children}` : ''}${currOrder.guests.infants ? `, infants: ${currOrder.guests.infants}` : ''}`}</p>
+                        </div>}
+                        {currOrder.status != 'negotiations' && <h5 className="total"><span>Total price:</span> ₪{currOrder.totalPrice}</h5>}
+                        {currOrder.status === 'negotiations' && <ActionBtn line={"Request to book"} onClick={onOrder} />}
                     </article>}
                 </section>
             </main>

@@ -5,7 +5,9 @@ export const utilService = {
     debounce,
     saveToStorage,
     loadFromStorage,
-    formatDate
+    formatDate,
+    calculateNights,
+    mapRating
 }
 
 function makeId(length = 6) {
@@ -54,9 +56,32 @@ function loadFromStorage(key) {
 
 function formatDate(inputDate) {
     const date = new Date(inputDate);
-    const day = date.getUTCDate().toString().padStart(2, '0');
+    const day = (date.getUTCDate()+1).toString().padStart(2, '0');
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
     const year = date.getUTCFullYear();
-
     return `${day}/${month}/${year}`;
+}
+
+function calculateNights(checkIn, checkOut) {
+    if (!checkIn || !checkOut) return
+    const timeDifference = checkOut.getTime() - checkIn.getTime()
+    return Math.ceil(timeDifference / (1000 * 3600 * 24));
+}
+
+function mapRating(reviews) {
+    const rating = {}
+    const ratingName = []
+    reviews.map(review => {
+        for (const key in review.rate) {
+            if (review.rate.hasOwnProperty(key)) {
+                if (!ratingName.includes(key)) ratingName.push(key)
+                if (rating[key]) rating[key] += review.rate[key]
+                else rating[key] = review.rate[key]
+            }
+        }
+    })
+    for (const key in rating) {
+        if (rating.hasOwnProperty(key)) rating[key] = rating[key] / reviews.length;
+    }
+    return { rating, ratingName }
 }

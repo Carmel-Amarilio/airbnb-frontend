@@ -1,14 +1,16 @@
 import { useState } from "react"
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
+import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from "react-router";
 import heart1ImgUrl from '../assets/img/heart1.png'
 import heart2ImgUrl from '../assets/img/heart2.png'
+import { utilService } from "../services/util.service";
 
 export function StayPreview({ stay, onLike, loggedinUser }) {
     const [selectedImg, setSelectedImg] = useState(0)
     const navigate = useNavigate()
-    const { imgUrls, name, loc, price } = stay
+    const { imgUrls, name, loc, price, reviews } = stay
 
     function incImg(inc) {
         if (selectedImg <= 0 && inc < 0) return
@@ -21,12 +23,12 @@ export function StayPreview({ stay, onLike, loggedinUser }) {
     }
 
     function whichHeart() {
-        if(!loggedinUser) return heart1ImgUrl
+        if (!loggedinUser) return heart1ImgUrl
         const likeIndx = stay.likedByUsers.findIndex((user) => user._id === loggedinUser._id)
         return (likeIndx >= 0) ? heart2ImgUrl : heart1ImgUrl
-
     }
 
+    const { rating } = utilService.mapRating(reviews)
     return (
         <section className="stay-prev" onClick={() => onStay(stay._id)}>
             <section className="img-sec">
@@ -45,7 +47,13 @@ export function StayPreview({ stay, onLike, loggedinUser }) {
 
 
             <article>
-                <p className="name">{name}</p>
+                <article className="flex space-between">
+                    <p className="name">{name}</p>
+                    {rating.value && <div className=" rating flex align-center">
+                        <StarIcon className="star-icon" />
+                        <p>{rating.value}</p>
+                    </div>}
+                </article>
                 <p className="loc">{loc.city}, {loc.country}</p>
                 <p className="price">₪{price} <span>night</span></p>
             </article>

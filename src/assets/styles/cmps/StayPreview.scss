@@ -6,6 +6,8 @@
     .img-sec {
         position: relative;
         height: 300px;
+        margin-bottom: 10px;
+
 
 
         .stay-img {
@@ -64,6 +66,16 @@
             &.hide {
                 opacity: 0;
             }
+        }
+    }
+
+    .rating{
+        gap: 7px;
+        .star-icon{
+            font-size: 1.3em;
+        }
+        p{
+            margin: 0;
         }
     }
 

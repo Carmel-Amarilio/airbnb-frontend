@@ -8,7 +8,6 @@ import { ActionBtn } from "./ActionBtn";
 export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews }) {
     const navigate = useNavigate()
     const [openModal, setOpenModal] = useState(false)
-
     const { checkIn, checkOut, guests } = searchStay
     const { adults, children, infants } = guests
     const { _id, price, capacity } = currStay
@@ -25,7 +24,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
 
     function checkAvailability() {
         if (checkIn && checkOut && adults + children + infants > 0) {
-            navigate(`/stay/order/${_id}/${checkIn}/${checkOut}/${adults} /${children} /${infants}/${rating}/${reviews}`)
+            navigate(`/stay/order/${_id}/${checkIn}/${checkOut}/${adults} /${children} /${infants}`)
         } else setOpenModal('checkIn')
     }
 

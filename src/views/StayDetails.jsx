@@ -11,16 +11,19 @@ import { HostStay } from "../cmps/HostStay";
 
 import StarIcon from '@mui/icons-material/Star';
 import { SingInUp } from "../cmps/SingInUp";
+import { useSelector } from "react-redux";
+import { orderService } from "../services/order.service";
+import { addOrder } from "../store/actions/order.actions";
+import { utilService } from "../services/util.service";
 
 export function StayDetails() {
     const params = useParams()
     const navigate = useNavigate()
+    const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const [filter, setFilter] = useState({ label: 'Amazing views', destinations: "", checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 } });
     const [searchStay, setSearchStay] = useState({})
     const [isLog, setIsLog] = useState(false)
     const [currStay, setCurrStay] = useState()
-    const rating = {}
-    const ratingName = [] //["Cleanliness", "Accuracy","Communication","Location","Check-in","Value" ]
     const { checkIn, checkOut } = searchStay
 
 
@@ -43,32 +46,20 @@ export function StayDetails() {
         }
     }
 
-
-    function mapRating() {
-        reviews.map(review => {
-            for (const key in review.rate) {
-                if (review.rate.hasOwnProperty(key)) {
-                    if (!ratingName.includes(key)) ratingName.push(key)
-                    if (rating[key]) rating[key] += review.rate[key]
-                    else rating[key] = review.rate[key]
-                }
-            }
-        })
-        for (const key in rating) {
-            if (rating.hasOwnProperty(key)) rating[key] = rating[key] / reviews.length;
+    async function onContactHost() {
+        const miniStay = { _id, name, price, imgUrl: imgUrls[0] }
+        const order = orderService.getEmptyOrder({ host, loggedinUser, totalPrice: null, checkIn: null, checkOut: null, guests: { adults: 0, children: 0, infants: 0 }, miniStay, status: 'negotiations' })
+        try {
+            const saveOrder = await addOrder(order)
+            navigate(`/messages?orderId=${saveOrder._id}`)
+        } catch (error) {
+            console.log("Had issues create a order", error);
         }
     }
 
-    function closeLog() {
-        setIsLog(false)
-    }
-
-
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
-    console.log(searchStay);
-    mapRating()
-    console.log(currStay);
+    const { _id, imgUrls, name, type, host, summary, amenities, price, capacity, reviews, labels, loc } = currStay
+    const { rating, ratingName } = utilService.mapRating(reviews)
     return (
         <section className="stay-details main-container">
             <StayHeader isDetails={true} setIsLog={setIsLog} filter={filter} setFilter={setFilter} />
@@ -98,7 +89,7 @@ export function StayDetails() {
                 <h3>{loc.address}, {loc.city}, {loc.country}</h3>
                 <p>Very quiet and pleasant neighborhood</p>
             </article>
-            <HostStay currStay={currStay} />
+            <HostStay currStay={currStay} onContactHost={onContactHost} />
 
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
 

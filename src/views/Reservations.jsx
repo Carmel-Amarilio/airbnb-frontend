@@ -68,7 +68,8 @@ export function Reservations() {
                             <th>To do</th>
                         </tr>
                         {orders.map(order => {
-                            const { _id, buyer, checkIn, checkOut, stay, status } = order
+                            const { _id, buyer, checkIn, checkOut, stay, status, totalPrice } = order
+                            if(status === 'negotiations') return
                             return <tr key={_id} >
                                 <td className="buyer flex align-center">
                                     {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}
@@ -80,7 +81,7 @@ export function Reservations() {
                                     {/* <img src={stay.imgUrl} /> */}
                                     <p>{stay.name}</p>
                                 </td>
-                                <td> <p>₪{stay.price}</p> </td>
+                                <td> <p>₪{totalPrice}</p> </td>
                                 <td> <p className={status}>{status}</p> </td>
                                 <td className="to-do ">
                                     <button disabled={status != 'pending'} className="approve btn" onClick={() => setStatus(order, "approved")}>Approve</button>

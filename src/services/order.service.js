@@ -28,32 +28,21 @@ function remove(orderId) {
     return httpService.delete(BASE_URL + orderId)
 }
 
-function getEmptyOrder(host) {
+function getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, guests, miniStay, status }) {
     return {
-        name: "",
-        type: "Cabins",
-        imgUrls: [],
-        price: 225.00,
-        summary: "Take it easy at this unique and tranquil getaway.",
-        capacity: {
-            guests: 4,
-            bedrooms: 1,
-            beds: 1,
-            bathrooms: 1
-        },
-        amenities: [],
-        labels: [],
+        hostId: host._id,
         host,
-        loc: {
-            country: "",
-            countryCode: "",
-            city: "",
-            street: "",
-            houseNumber: "",
-            lat: 0,
-            lng: 0
+        buyer: loggedinUser,
+        totalPrice,
+        checkIn,
+        checkOut,
+        guests: {
+            adults: guests.adults,
+            children: guests.children,
+            infants: guests.infants
         },
-        reviews: [],
-        likedByUsers: []
+        stay: miniStay,
+        msgs: [],
+        status
     }
 }

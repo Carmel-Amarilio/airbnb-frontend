@@ -60,7 +60,7 @@ export function Listings() {
                                         </article>
                                     </td>
                                     <td className="to-do">
-                                        <button >Update</button>
+                                        <button onClick={() => navigate(`/about-your-place?stayId=${_id}`)}>Update</button>
                                     </td>
                                     <td> <p>{capacity.guests}</p> </td>
                                     <td> <p>{capacity.bedrooms}</p> </td>

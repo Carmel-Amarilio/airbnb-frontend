@@ -48,6 +48,7 @@ export async function addOrder(orderToAdd) {
             type: ADD_ORDER,
             order,
         })
+        return order
     } catch (error) {
         console.error("Cannot save order:", error)
         throw error

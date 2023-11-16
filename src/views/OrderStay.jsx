@@ -9,7 +9,9 @@ import { SingInUp } from "../cmps/SingInUp";
 import StarIcon from '@mui/icons-material/Star';
 import { DatePicker } from "../cmps/DatePicker";
 import { AddGuestsSec } from "../cmps/AddGuestsSec";
-import { addOrder } from "../store/actions/order.actions";
+import { addOrder, updateOrder } from "../store/actions/order.actions";
+import { orderService } from "../services/order.service";
+import { utilService } from "../services/util.service";
 
 export function OrderStay() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
@@ -19,15 +21,25 @@ export function OrderStay() {
     const [order, setOrder] = useState({})
     const [operation, setOperation] = useState("in")
     const [openModal, setOpenModal] = useState(false)
+    const [isUpdate, setIsUpdate] = useState(false)
+    const { checkIn, checkOut, guests } = order
+    const nightsCount = checkIn && checkOut ? utilService.calculateNights(checkIn, checkOut) : null
 
     useEffect(() => {
-        const { stayId, checkIn, checkOut, adults, children, infants, rating, reviews } = params
-        setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants }, rating, reviews })
-        getStay(stayId)
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+        if (!loggedinUser) navigate("/stay")
+        else {
+            const { orderId, stayId, checkIn, checkOut, adults, children, infants } = params
+            if (!orderId) {
+                setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants } })
+                getStay(stayId)
+            }
+            else {
+                setIsUpdate(true)
+                getOrder(orderId)
+            }
+
+        }
+    }, [loggedinUser])
 
     async function getStay(stayId) {
         try {
@@ -35,48 +47,45 @@ export function OrderStay() {
             if (!stay) return navigate("/stay");
             setCurrStay(stay);
         } catch (error) {
-            console.log("Had issues loading stay", error);
+            console.log("Had issues loading stay", error)
+        }
+    }
+
+    async function getOrder(orderId) {
+        try {
+            const order = await orderService.get(orderId)
+            if (!order) return navigate("/messages")
+            setOrder(order)
+            getStay(order.stay._id)
+        } catch (error) {
+            console.log("Had issues loading order", error)
         }
     }
 
     async function newOrder() {
-        const order = {
-            hostId: host._id,
-            host,
-            buyer: loggedinUser,
-            totalPrice: (price * calculateNights() + Math.floor((price * calculateNights()) * 0.14) + 30 * calculateNights()),
-            checkIn,
-            checkOut,
-            guests: {
-                adults: guests.adults + guests.children + guests.infants,
-                children: guests.children,
-                infants: guests.infants
-            },
-            stay: {
-                _id,
-                name,
-                price, 
-                imgUrl: imgUrls[0]
-            },
-            msgs: [],
-            status: "pending"
-        }
+        const totalPrice = (price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount)
+        if (isUpdate) {
+            try {
+                updateOrder({ ...order, status: 'pending', totalPrice })
+            } catch (error) {
+                console.log("Had issues update order", error);
+            }
 
-        try {
-            addOrder(order)
-        } catch (error) {
-            console.log("Had issues create a order", error);
+        } else {
+            const miniStay = { _id, name, price, imgUrl: imgUrls[0] }
+            const newOrder = orderService.getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, guests, miniStay, status: 'pending' })
+            try {
+                addOrder(newOrder)
+            } catch (error) {
+                console.log("Had issues create a order", error);
+            }
         }
     }
 
-    const { checkIn, checkOut, guests, rating, reviews } = order
-    function calculateNights() {
-        if (!checkIn || !checkOut) return
-        const timeDifference = checkOut.getTime() - checkIn.getTime()
-        return Math.ceil(timeDifference / (1000 * 3600 * 24));
-    }
+
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { _id, imgUrls, name, host, price, capacity} = currStay
+    const { _id, imgUrls, name, host, price, capacity, reviews } = currStay
+    const { rating } = utilService.mapRating(reviews)
     return (
         <section className="order-stay main-container">
             <header className='logo flex align-center' onClick={() => navigate("/stay")}>
@@ -130,8 +139,8 @@ export function OrderStay() {
                             </div>
                             <div className="flex align-center">
                                 <StarIcon className="star-icon" />
-                                <span>{rating}</span>
-                                <p> · {reviews} reviews</p>
+                                <span>{rating.value}</span>
+                                <p> · {reviews.length} reviews</p>
                             </div>
                         </div>
                     </header>
@@ -139,20 +148,20 @@ export function OrderStay() {
                     <article className="total-container flex column">
                         <h3>Price details</h3>
                         <div className="flex space-between align-center">
-                            <p>₪{price} x {calculateNights()} nights</p>
-                            <p>₪{price * calculateNights()}</p>
+                            <p>₪{price} x {nightsCount} nights</p>
+                            <p>₪{price * nightsCount}</p>
                         </div>
                         <div className="flex space-between align-center">
                             <p>Cleaning fee</p>
-                            <p>₪{Math.floor((price * calculateNights()) * 0.14)}</p>
+                            <p>₪{Math.floor((price * nightsCount) * 0.14)}</p>
                         </div>
                         <div className="flex space-between align-center">
                             <p>Airbnb service fee</p>
-                            <p>₪{30 * calculateNights()}</p>
+                            <p>₪{30 * nightsCount}</p>
                         </div>
                         <div className="total flex space-between align-center">
                             <h3>Total</h3>
-                            <p>₪{price * calculateNights() + Math.floor((price * calculateNights()) * 0.14) + 30 * calculateNights()}</p>
+                            <p>₪{price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount}</p>
                         </div>
                     </article>
 
@@ -169,7 +178,7 @@ export function OrderStay() {
                     </article>
                 </section>}
 
-            {openModal === 'who' && < AddGuestsSec guests={guests}  maxGuests= { capacity.guests} setSearchStay={setOrder} isOrder={true} setOpenModal={setOpenModal} />}
+            {openModal === 'who' && < AddGuestsSec guests={guests} maxGuests={capacity.guests} setSearchStay={setOrder} isOrder={true} setOpenModal={setOpenModal} />}
         </section>
     )
 }

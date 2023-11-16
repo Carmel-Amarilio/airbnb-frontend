@@ -1,4 +1,4 @@
-export function HostStay({ currStay }) {
+export function HostStay({ currStay, onContactHost }) {
     const { host, reviews } = currStay
     console.log(host);
     return (
@@ -13,7 +13,7 @@ export function HostStay({ currStay }) {
                     <p>Joined in September 2023</p>
                 </div>
             </div>
-            <button className="form-btn">
+            <button className="form-btn" onClick={onContactHost}>
                 <h3>Contact Host</h3>
             </button>
         </section>
