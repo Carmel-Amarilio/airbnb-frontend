@@ -11,8 +11,8 @@ export const orderService = {
     getEmptyOrder,
 }
 
-function query(filterBy = {}) {
-    return httpService.get(BASE_URL, filterBy)
+function query(filterBy = {}, sortBy = '') {
+    return httpService.get(BASE_URL,{ filterBy, sortBy})
 }
 
 function get(id) {

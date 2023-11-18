@@ -2,26 +2,47 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { StayHeader } from "../cmps/StayHeader";
 import { loadOrders, updateOrder } from "../store/actions/order.actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { utilService } from "../services/util.service";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export function Reservations() {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
+    const [sort, setSort] = useState('')
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
         else {
-            _loadOrders()
+            _loadOrders('')
         }
     }, [loggedinUser])
 
-    function _loadOrders() {
-        loadOrders({ userId: loggedinUser._id })
+    useEffect(() => {
+        let sortBy = ''
+        switch (sort) {
+            case 'Guest': sortBy = 'buyer.fullName'; break;
+            case 'Check-in': sortBy = 'checkIn'; break;
+            case 'Check-Out': sortBy = 'checkOut'; break;
+            case 'Listing': sortBy = 'stay.name'; break;
+            case 'Total payout': sortBy = 'totalPrice'; break;
+            case 'Status': sortBy = 'status'; break;
+            default: break;
+        }
+        _loadOrders(sortBy)
+    }, [sort])
+
+    function _loadOrders(sortBy) {
+        loadOrders({ userId: loggedinUser._id }, sortBy)
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    function onLabel(label) {
+        sort === label ? setSort('') : setSort(label)
     }
 
     function setStatus(order, newStatus) {
@@ -33,14 +54,14 @@ export function Reservations() {
         })
         try {
             updateOrder({ ...order, status: newStatus, msgs: newMsgs })
-            _loadOrders()
+            _loadOrders('')
         } catch (error) {
             console.log("Had issues changing thr status", error);
         }
     }
 
     console.log(orders);
-
+    const thsLabel = ['Guest', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'To do']
     return (
         <section className="reservations main-container">
             <StayHeader isUserPage={true} />
@@ -59,17 +80,18 @@ export function Reservations() {
                 <table className="form-table">
                     <tbody>
                         <tr >
-                            <th>Guest</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Listing</th>
-                            <th>Total payout</th>
-                            <th>Status</th>
-                            <th>To do</th>
+                            {thsLabel.map(label =>
+                                <th key={label}>
+                                    {label === 'To do' ? label :
+                                        <div className=" flex align-center" onClick={() => onLabel(label)}>
+                                            {label}
+                                            {sort === label ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                                        </div>}
+                                </th>)}
                         </tr>
                         {orders.map(order => {
                             const { _id, buyer, checkIn, checkOut, stay, status, totalPrice } = order
-                            if(status === 'negotiations') return
+                            if (status === 'negotiations') return
                             return <tr key={_id} >
                                 <td className="buyer flex align-center">
                                     {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}

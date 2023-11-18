@@ -123,6 +123,10 @@ button:disabled {
         color: $tableTxtClr;
         text-align: start;
         padding: 10px;
+        div{
+            cursor: pointer;
+        }
+
 
         &:last-child {
             text-align: center;

@@ -1,27 +1,43 @@
 import { useNavigate } from "react-router";
 import { StayHeader } from "../cmps/StayHeader";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadOrders, removeOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
-import { func } from "prop-types";
 import { showSuccessMsg } from "../services/event-bus.service";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export function Trips() {
 
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
+    const [sort, setSort] = useState('')
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
         else {
-            _loadOrders()
+            _loadOrders('')
         }
     }, [loggedinUser])
 
-    function _loadOrders() {
-        loadOrders({ userId: loggedinUser._id, isGuest: true })
+    useEffect(() => {
+        let sortBy = ''
+        switch (sort) {
+            case 'host': sortBy = 'host.fullName'; break;
+            case 'Check-in': sortBy = 'checkIn'; break;
+            case 'Check-Out': sortBy = 'checkOut'; break;
+            case 'Listing': sortBy = 'stay.name'; break;
+            case 'Total payout': sortBy = 'totalPrice'; break;
+            case 'Status': sortBy = 'status'; break;
+            default: break;
+        }
+        _loadOrders(sortBy)
+    }, [sort])
+
+    function _loadOrders(sortBy) {
+        loadOrders({ userId: loggedinUser._id, isGuest: true }, sortBy)
             .catch((err) => {
                 console.log(err)
             })
@@ -33,12 +49,17 @@ export function Trips() {
         showSuccessMsg('Trip been cancel')
     }
 
+    function onLabel(label) {
+        sort === label ? setSort('') : setSort(label)
+    }
+
     function isPastDate(date) {
         const today = new Date()
         return new Date(date) < today
     }
 
     console.log(orders);
+    const thsLabel = ['host', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'Actions']
     return (
         <section className="trips main-container">
             <StayHeader isUserPage={true} />
@@ -55,13 +76,14 @@ export function Trips() {
                 <table className="form-table">
                     <tbody>
                         <tr >
-                            <th>host</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Listing</th>
-                            <th>Total payout</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            {thsLabel.map(label =>
+                                <th key={label}>
+                                    {label === 'Actions' ? label :
+                                        <div className=" flex align-center" onClick={() => onLabel(label)}>
+                                            {label}
+                                            {sort === label ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                                        </div>}
+                                </th>)}
                         </tr>
                         {orders.map(order => {
                             const { _id, host, checkIn, checkOut, stay, status, totalPrice } = order

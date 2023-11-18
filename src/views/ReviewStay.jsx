@@ -66,6 +66,7 @@ export function ReviewStay() {
     }
 
     function onPost() {
+        if(!newReview.txt) return showErrorMsg('Add text')
         const stayToUpdate = currStay
         stayToUpdate.reviews.unshift({ ...newReview, by: loggedinUser, at: new Date() })
         updateStays(stayToUpdate)
