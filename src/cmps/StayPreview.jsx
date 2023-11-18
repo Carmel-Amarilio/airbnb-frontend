@@ -46,7 +46,7 @@ export function StayPreview({ stay, onLike, loggedinUser }) {
             </section>
 
 
-            <article>
+            <article className="text-sec">
                 <article className="flex space-between">
                     <p className="name">{name}</p>
                     {rating.value && <div className=" rating flex align-center">

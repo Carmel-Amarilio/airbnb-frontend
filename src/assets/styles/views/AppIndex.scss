@@ -1,3 +1,25 @@
-.app-index{
-    position: relative;
+.app-index {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    height: 100vh;
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        max-height: calc(100vh - 187px);
+
+        .stays-list {
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
+        }
+
+        .stay-map {
+            width: 25vw;
+            padding: 0;
+            margin-inline-start: 20px;
+        }
+    }
 }

@@ -6,6 +6,7 @@ import { loadStays, updateStays } from "../store/actions/stay.actions";
 import { StayFilter } from "../cmps/StayFilter";
 import { SingInUp } from "../cmps/SingInUp";
 import { useLocation } from "react-router";
+import { StaysMap } from "../cmps/StaysMap";
 
 export function AppIndex() {
     const location = useLocation();
@@ -50,18 +51,23 @@ export function AppIndex() {
         updateStays(stayLike)
     }
 
+    console.log(stays);
     return (
         <section className="app-index main-container">
             <StayHeader setIsLog={setIsLog} filter={filter} setFilter={setFilter} />
             <StayFilter filter={filter} />
-            {!stays.length ?
-                <section className="empty-page" >
-                    <div>
-                        <h2>No results</h2>
-                        <p>Try changing or removing some of your filters or adjusting your search area.</p>
-                    </div>
-                </section> :
-                <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
+            <main>
+                {!stays.length ?
+                    <section className="empty-page" >
+                        <div>
+                            <h2>No results</h2>
+                            <p>Try changing or removing some of your filters or adjusting your search area.</p>
+                        </div>
+                    </section> :
+                    <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
+                {(stays.length && filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser}  />}
+            </main>
+
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
         </section>
     )

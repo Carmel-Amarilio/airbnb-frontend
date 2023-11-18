@@ -1,22 +1,52 @@
 .stay-map {
     padding-block: 20px;
+    position: relative;
+
 
     .stay-icon {
-        position: relative;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 60px;
         border-radius: 50%;
         background-color: #ff385d46;
 
         i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             padding: 10px;
             border-radius: 50%;
             background-color: $logoClr;
             color: white;
             font-size: 1.7em;
+        }
+    }
+
+    .stay-price-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 2em;
+        box-shadow: 1px 1px 7px 0px $borderClr;
+
+        p {
+            margin: 0;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        &.selected {
+            background-color: black;
+            color: white;
+            z-index: 10;
+        }
+
+        &:hover {
+            // transform: scale(2);
+            z-index: 10;
         }
     }
 }
