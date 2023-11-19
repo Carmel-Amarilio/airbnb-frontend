@@ -1,0 +1,41 @@
+.reservations-dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: 200px;
+    margin-block-end: 20px;
+    justify-content: center;
+    gap: 20px;
+
+    .chart {
+        background-color: white;
+        box-shadow: 2px 2px 5px 2px $borderClr;
+        border-radius: 10px;
+        padding: 20px;
+
+        h1 {
+            font-size: 22px;
+            font-weight: bolder;
+        }
+    }
+
+
+    .status {
+
+        h1,
+        article {
+            margin-block-end: 20px;
+        }
+
+        .pending {
+            color: orange;
+        }
+
+        .approved {
+            color: green;
+        }
+
+        .rejected {
+            color: red;
+        }
+    }
+}

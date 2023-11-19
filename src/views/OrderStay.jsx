@@ -146,7 +146,7 @@ export function OrderStay() {
                             </div>
                             <div className="flex align-center">
                                 <StarIcon className="star-icon" />
-                                <span>{rating.value}</span>
+                                <span>{rating.value ? rating.value.toFixed(2) : 5}</span>
                                 <p> · {reviews.length} reviews</p>
                             </div>
                         </div>

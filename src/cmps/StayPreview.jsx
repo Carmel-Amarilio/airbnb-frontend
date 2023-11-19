@@ -49,10 +49,10 @@ export function StayPreview({ stay, onLike, loggedinUser }) {
             <article className="text-sec">
                 <article className="flex space-between">
                     <p className="name">{name}</p>
-                    {rating.value && <div className=" rating flex align-center">
+                    <div className=" rating flex align-center">
                         <StarIcon className="star-icon" />
-                        <p>{rating.value}</p>
-                    </div>}
+                        <p>{rating.value ? rating.value.toFixed(2) : 5}</p>
+                    </div>
                 </article>
                 <p className="loc">{loc.city}, {loc.country}</p>
                 <p className="price">₪{price} <span>night</span></p>

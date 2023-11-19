@@ -65,7 +65,7 @@ export function AppIndex() {
                         </div>
                     </section> :
                     <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
-                {(stays.length && filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser}  />}
+                {(!!stays.length && !!filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
             </main>
 
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}

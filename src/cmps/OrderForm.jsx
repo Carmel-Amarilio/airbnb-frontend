@@ -34,7 +34,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
                 <h1>₪{price} <span>night</span></h1>
                 <div className="flex align-center">
                     <StarIcon className="star-icon" />
-                    <span>{rating}</span>
+                    <span>{rating ? rating.toFixed(2) : 5}</span>
                     <p> · {reviews} reviews</p>
                 </div>
             </header>

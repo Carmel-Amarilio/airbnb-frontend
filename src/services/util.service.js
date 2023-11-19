@@ -7,7 +7,8 @@ export const utilService = {
     loadFromStorage,
     formatDate,
     calculateNights,
-    mapRating
+    mapRating,
+    getLastMonthDates
 }
 
 function makeId(length = 6) {
@@ -83,4 +84,29 @@ function mapRating(reviews) {
         if (rating.hasOwnProperty(key)) rating[key] = rating[key] / reviews.length
     }
     return { rating, ratingName }
+}
+
+
+
+
+function getLastMonthDates() {
+    const currentDate = new Date();
+    const lastMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 1,
+        1
+    );
+    const datesArray = [];
+
+    while (lastMonth.getMonth() === currentDate.getMonth() - 1) {
+        datesArray.push(
+            `${lastMonth.getDate()} ${lastMonth.toLocaleString('default', {
+                month: 'short',
+            })}`
+        );
+        lastMonth.setDate(lastMonth.getDate() + 1);
+    }
+
+    return datesArray;
+    return dates;
 }
