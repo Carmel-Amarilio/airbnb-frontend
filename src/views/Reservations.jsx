@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { StayHeader } from "../cmps/StayHeader";
-import { loadOrders, updateOrder } from "../store/actions/order.actions";
+import { addOrderToReservations, loadOrders, updateOrder } from "../store/actions/order.actions";
 import { useEffect, useState } from "react";
 import { utilService } from "../services/util.service";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { socketService } from "../services/socket.service";
 
 export function Reservations() {
     const navigate = useNavigate();
@@ -17,6 +18,10 @@ export function Reservations() {
         if (!loggedinUser) navigate("/stay")
         else {
             _loadOrders('')
+
+            socketService.on('order-added', order => {
+                addOrderToReservations(order)
+            })
         }
     }, [loggedinUser])
 

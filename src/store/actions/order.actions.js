@@ -18,10 +18,7 @@ export async function loadOrders(filterBy, sort) {
 export async function removeOrder(orderId) {
     try {
         await orderService.remove(orderId)
-        store.dispatch({
-            type: REMOVE_ORDER,
-            orderId
-        })
+        removeOrderToReservations(orderId)
     } catch (error) {
         console.error("Cannot remove order:", error)
         throw error
@@ -31,10 +28,7 @@ export async function removeOrder(orderId) {
 export async function updateOrder(order) {
     try {
         const savedOrder = await orderService.save(order)
-        store.dispatch({
-            type: UPDATE_ORDER,
-            order: savedOrder,
-        })
+        updateOrderToMsg(savedOrder)
     } catch (error) {
         console.error("Cannot save order:", error)
         throw error
@@ -44,13 +38,29 @@ export async function updateOrder(order) {
 export async function addOrder(orderToAdd) {
     try {
         const order = await orderService.save(orderToAdd)
-        store.dispatch({
-            type: ADD_ORDER,
-            order,
-        })
+        addOrderToReservations(order)
         return order
     } catch (error) {
         console.error("Cannot save order:", error)
         throw error
     }
+}
+
+export function addOrderToReservations(order) {
+    store.dispatch({
+        type: ADD_ORDER,
+        order,
+    })
+}
+export function removeOrderToReservations(orderId) {
+    store.dispatch({
+        type: REMOVE_ORDER,
+        orderId
+    })
+}
+export function updateOrderToMsg(order) {
+    store.dispatch({
+        type: UPDATE_ORDER,
+        order
+    })
 }

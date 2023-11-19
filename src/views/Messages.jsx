@@ -2,11 +2,12 @@ import { useSelector } from "react-redux";
 import { StayHeader } from "../cmps/StayHeader";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { loadOrders, updateOrder } from "../store/actions/order.actions";
+import { loadOrders, updateOrder, updateOrderToMsg } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { orderService } from "../services/order.service";
 import logoImgUrl from '../assets/img/logo.png'
 import { ActionBtn } from "../cmps/ActionBtn";
+import { socketService } from "../services/socket.service";
 
 export function Messages() {
     const location = useLocation();
@@ -23,6 +24,11 @@ export function Messages() {
         else {
             _loadOrders()
             if (orderId) getOrder(orderId)
+
+            socketService.on('order-updated', order => {
+                console.log('hi');
+                updateOrderToMsg(order)
+            })
         }
     }, [loggedinUser])
 
