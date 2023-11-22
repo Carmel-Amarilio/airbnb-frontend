@@ -41,7 +41,8 @@ export function StayDetails() {
             const stay = await stayService.get(stayId)
             if (!stay) return navigate("/stay");
             setCurrStay(stay);
-            setSearchStay({ checkIn: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1), checkOut: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 3), guests: { adults: stay.capacity.guests, children: 0, infants: 0 } })
+            const { checkIn, checkOut } = utilService.findConsecutiveAvailableDates(stay.DateNotAvailable)
+            setSearchStay({ checkIn, checkOut, guests: { adults: stay.capacity.guests, children: 0, infants: 0 } })
         } catch (error) {
             console.log("Had issues loading stay", error);
         }

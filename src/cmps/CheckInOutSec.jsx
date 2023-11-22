@@ -7,7 +7,7 @@ export function CheckInOutSec({setSearchStay, checkIn, checkOut}) {
                 <p>Choose dates</p>
                 <p>Flexible dates</p>
             </article>
-            <DatePicker setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut}/>
+            <DatePicker setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} />
         </section>
     )
 }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { StayHeader } from "../cmps/StayHeader";
 import { StayList } from "../cmps/StayList";
 import { useEffect, useState } from "react";
-import { loadStays, updateStays } from "../store/actions/stay.actions";
+import { loadStays, updateStay } from "../store/actions/stay.actions";
 import { StayFilter } from "../cmps/StayFilter";
 import { SingInUp } from "../cmps/SingInUp";
 import { useLocation } from "react-router";
@@ -48,7 +48,7 @@ export function AppIndex() {
         const likeIndx = stayLike.likedByUsers.findIndex((user) => user._id === loggedinUser._id)
         if (likeIndx >= 0) stayLike.likedByUsers.splice(likeIndx, 1);
         else stayLike.likedByUsers.push(loggedinUser)
-        updateStays(stayLike)
+        updateStay(stayLike)
     }
 
     console.log(stays);

@@ -11,7 +11,7 @@ import { HasInStay } from "../cmps/addStay.cmps/HasInStay";
 import { AddImgStay } from "../cmps/addStay.cmps/AddImgStay";
 import { DataStay } from "../cmps/addStay.cmps/DataStay";
 import { PublishStay } from "../cmps/addStay.cmps/PublishStay";
-import { addStays, removeStays, updateStays } from "../store/actions/stay.actions";
+import { addStay, removeStay, updateStay } from "../store/actions/stay.actions";
 import { useLocation, useNavigate } from "react-router-dom";
 import { StayType } from "../cmps/addStay.cmps/StayType";
 
@@ -44,12 +44,12 @@ export function AddStay() {
     }
 
     function onDelete() {
-        removeStays(stayId)
+        removeStay(stayId)
         navigate("/stay")
     }
 
     function onAddStay() {
-        stayId ? updateStays(newStay) : addStays(newStay)
+        stayId ? updateStay(newStay) : addStay(newStay)
         navigate("/stay")
     }
 

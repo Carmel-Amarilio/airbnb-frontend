@@ -10,7 +10,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
     const [openModal, setOpenModal] = useState(false)
     const { checkIn, checkOut, guests } = searchStay
     const { adults, children, infants } = guests
-    const { _id, price, capacity } = currStay
+    const { _id, price, capacity, DateNotAvailable } = currStay
 
     useEffect(() => {
         if (checkIn && checkOut) setOpenModal('')
@@ -57,7 +57,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
                 {(openModal === 'checkIn' || openModal === 'checkOut') && <section className="pic-date sec">
                     <h2>Select dates</h2>
                     <p>Minimum stay: {2} nights</p>
-                    <DatePicker setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} />
+                    <DatePicker setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} DateNotAvailable={DateNotAvailable} />
                     <article className="clears flex">
                         <button onClick={() => setSearchStay(prev => ({ ...prev, checkIn: null, checkOut: null }))} className="underline-btn">Clear data</button>
                         <button onClick={() => setOpenModal('')} className="black-btn">Close</button>

@@ -59,7 +59,7 @@ function getEmptyStay(host) {
             bedrooms: 1,
             beds: 1,
             bathrooms: 1
-        }, 
+        },
         amenities: [],
         labels: [],
         host,
@@ -73,7 +73,8 @@ function getEmptyStay(host) {
             lng: 0
         },
         reviews: [],
-        likedByUsers: []
+        likedByUsers: [],
+        DateNotAvailable: []
     }
 }
 
