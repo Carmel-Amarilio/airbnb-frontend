@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { amenitiesIcon } from "../../assets/img/amenities-icon"
 
-export function HasInStay({ amenities, setStay }) {
-
+export function HasInStay({ amenities, setStay, setIsNext }) {
     const labels = Object.keys(amenitiesIcon);
     const imgs = Object.values(amenitiesIcon);
+
+    useEffect(() => {
+        amenities.length > 0 ? setIsNext(true): setIsNext(false)
+    }, [amenities])
 
     function setAmenities(label) {
         const newAmenities = [...amenities]

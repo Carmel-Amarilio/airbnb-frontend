@@ -13,6 +13,7 @@ import { DataStay } from "../cmps/addStay.cmps/DataStay";
 import { PublishStay } from "../cmps/addStay.cmps/PublishStay";
 import { addStays, removeStays, updateStays } from "../store/actions/stay.actions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { StayType } from "../cmps/addStay.cmps/StayType";
 
 export function AddStay() {
     const location = useLocation();
@@ -23,8 +24,8 @@ export function AddStay() {
     const [newStay, setNewStay] = useState(stayService.getEmptyStay(loggedinUser))
     const [step, setStep] = useState(1)
     const [isNext, setIsNext] = useState(true)
-    const stepCount = 8
-    const { name, type, imgUrls, price, summary, capacity, amenities, loc } = newStay
+    const stepCount = 9
+    const { name, type, labels, imgUrls, price, summary, capacity, amenities, loc } = newStay
 
     useEffect(() => {
         if (stayId) {
@@ -66,13 +67,14 @@ export function AddStay() {
             <AddStayHeader />
             <main>
                 {step === 1 && <AddStayStepOne isExistsStay={!!stayId} onDelete={onDelete} />}
-                {step === 2 && <DescribesStay type={type} setStay={setStay} setIsNext={setIsNext} />}
-                {step === 3 && <LocatedStay loc={loc} setStay={setStay} setIsNext={setIsNext} />}
-                {step === 4 && <BasicsAboutStay capacity={capacity} setStay={setStay} />}
-                {step === 5 && <HasInStay amenities={amenities} setStay={setStay} />}
-                {step === 6 && <AddImgStay imgUrls={imgUrls} setStay={setStay} setIsNext={setIsNext} />}
-                {step === 7 && <DataStay name={name} summary={summary} price={price} setStay={setStay} setIsNext={setIsNext} />}
-                {step === 8 && <PublishStay setIsNext={setIsNext} onAddStay={onAddStay} isExistsStay={!!stayId} />}
+                {step === 2 && <StayType type={type} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 3 && <DescribesStay labels={labels} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 4 && <LocatedStay loc={loc} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 5 && <BasicsAboutStay capacity={capacity} setStay={setStay} />}
+                {step === 6 && <HasInStay amenities={amenities} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 7 && <AddImgStay imgUrls={imgUrls} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 8 && <DataStay name={name} summary={summary} price={price} setStay={setStay} setIsNext={setIsNext} />}
+                {step === 9 && <PublishStay setIsNext={setIsNext} onAddStay={onAddStay} isExistsStay={!!stayId} />}
             </main>
             <AddStayFooter incStep={incStep} step={step} stepCount={stepCount} isNext={isNext} />
         </section>
