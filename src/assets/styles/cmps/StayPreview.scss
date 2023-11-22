@@ -14,8 +14,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+
+
+            &.loading {
+                background-color: $lodeClr;
+                animation: loadingAnimation 2s infinite;
+            }
         }
-        .heart{
+
+        .heart {
             position: absolute;
             width: 20px;
             top: 15px;
@@ -68,25 +75,59 @@
         }
     }
 
-    .rating{
-        gap: 7px;
-        .star-icon{
-            font-size: 1.3em;
+
+    .text-sec {
+        &.text-loading {
+
+            .rating, .name, .price, .loc, span {
+                color: $lodeClr;
+            }
+
+            &>*>* {
+                width: max-content;
+                background-color: $lodeClr;
+                animation: loadingAnimation 2s infinite;
+            }
         }
-        p{
-            margin: 0;
+
+        .rating {
+            gap: 7px;
+
+            .star-icon {
+                font-size: 1.3em;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .name,
+        .price {
+            color: $txtClr1;
+            font-weight: bolder;
+        }
+
+        .loc,
+        span {
+            color: $txtClr2;
+            font-weight: lighter;
         }
     }
+}
 
-    .name,
-    .price {
-        color: $txtClr1;
-        font-weight: bolder;
+
+
+@keyframes loadingAnimation {
+    0% {
+        opacity: 0.5;
     }
 
-    .loc,
-    span {
-        color: $txtClr2;
-        font-weight: lighter;
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
     }
 }
