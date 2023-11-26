@@ -28,8 +28,6 @@ export function OrderStay() {
     const nightsCount = checkIn && checkOut ? utilService.calculateNights(checkIn, checkOut) : null
 
     useEffect(() => {
-        if (!loggedinUser) navigate("/stay")
-        else {
             const { orderId, stayId, checkIn, checkOut, adults, children, infants } = params
             if (!orderId) {
                 setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants } })
@@ -39,8 +37,6 @@ export function OrderStay() {
                 setIsUpdate(true)
                 getOrder(orderId)
             }
-
-        }
     }, [loggedinUser])
 
     async function getStay(stayId) {

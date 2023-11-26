@@ -4,7 +4,6 @@ import GoogleMapReact from 'google-map-react';
 export function StayMap({ loc }) {
     // const [location, setLocation] = useState({ lat: loc.lat, lng: loc.lng })
     const [zoom, setZoom] = useState(14)
-    console.log(zoom)
 
     const defaultProps = {
         center: {

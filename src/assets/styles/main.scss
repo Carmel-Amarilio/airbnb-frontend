@@ -3,6 +3,7 @@
 @import "setup/functions";
 @import "setup/mixins";
 @import "setup/typography";
+@import "setup/animations";
 
 // Basics
 @import "basics/helpers";
@@ -34,6 +35,7 @@
 @import "cmps/SingInUp.scss";
 
 @import "cmps/StayImgHeader.scss";
+@import "cmps/AllStayImgs.scss";
 @import "cmps/StayReviewDetail.scss";
 @import "cmps/OrderForm.scss";
 @import "cmps/DatePicker.scss";

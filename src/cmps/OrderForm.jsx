@@ -4,8 +4,10 @@ import { DatePicker } from "./DatePicker";
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from "react-router-dom";
 import { ActionBtn } from "./ActionBtn";
+import { useSelector } from "react-redux";
 
 export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews }) {
+    const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const navigate = useNavigate()
     const [openModal, setOpenModal] = useState(false)
     const { checkIn, checkOut, guests } = searchStay
@@ -27,6 +29,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
             navigate(`/stay/order/${_id}/${checkIn}/${checkOut}/${adults} /${children} /${infants}`)
         } else setOpenModal('checkIn')
     }
+    
 
     return (
         <section className="order-form">

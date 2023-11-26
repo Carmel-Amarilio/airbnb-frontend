@@ -7,6 +7,7 @@ import { login, signup } from '../store/actions/user.actions';
 import { cloudinaryServices } from '../services/cloudinary-service';
 import { ActionBtn } from './ActionBtn';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 
 const SignupSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -25,19 +26,30 @@ const SignupSchema = Yup.object().shape({
 
 
 export function SingInUp({ operation, closeLog, setOperation, isOrder = false }) {
-
-    // const [mouseX, setMouseX] = useState(0);
-    // const [mouseY, setMouseY] = useState(0);
     const [userImgUrl, setUserImgUrl] = useState(null);
     function textField(prop) {
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
     }
 
-    function onSubmit(val) {
+    async function onSubmit(val) {
         val = { ...val, imgUrl: userImgUrl }
-        console.log(val);
-        if (operation === 'in') login(val)
-        else signup(val)
+        if (operation === 'in') {
+            try {
+                const user = await login(val)
+                if (user) showSuccessMsg(`Welcome back ${user.fullName}`)
+            } catch (error) {
+                showErrorMsg('There was an error logging in to your user ')
+            }
+        }
+
+        else {
+            try {
+                const user = await signup(val)
+                if (user) showSuccessMsg(`Welcome ${user.fullName}`)
+            } catch (error) {
+                showErrorMsg('There was an error with your registration')
+            }
+        }
         if (!isOrder) closeLog()
     }
 
@@ -45,7 +57,6 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
         const imgUrl = await cloudinaryServices.uploadImg(ev)
         setUserImgUrl(imgUrl)
     }
-
 
     return (
         <section className="sing-in-up">
@@ -67,7 +78,7 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                             <input id="file-upload" onChange={onAddImg} type="file" className="add-img" />
                             <label htmlFor="file-upload" className='upload-profile'>
                                 {userImgUrl ? <img src={userImgUrl} htmlFor="file-upload" className='profile' /> :
-                                <AccountCircleSharpIcon className='user-icon' htmlFor="file-upload" />}
+                                    <AccountCircleSharpIcon className='user-icon' htmlFor="file-upload" />}
                             </label>
                         </div>}
                         {operation === 'up' && <div>

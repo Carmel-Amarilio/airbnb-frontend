@@ -4,7 +4,15 @@ import imgUrl from '../../assets/img/dragImg.png'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export function AddImgStay({ imgUrls, setStay, setIsNext }) {
-    const [dragging, setDragging] = useState(false);
+    const [dragging, setDragging] = useState(false)
+    const [imagesLoaded, setImagesLoaded] = useState(Array(imgUrls.length).fill(false))
+
+    function handleImageLoad(index) {
+        setImagesLoaded(prev => {
+            prev[index] = true
+            return [...prev]
+        })
+    }
 
     useEffect(() => {
         if (imgUrls.length < 5) setIsNext(false)
@@ -78,9 +86,9 @@ export function AddImgStay({ imgUrls, setStay, setIsNext }) {
             </section>
 
             <section className="select-img">
-                {imgUrls.map(imgUrl =>
+                {imgUrls.map((imgUrl, i) =>
                     <div key={imgUrl}>
-                        <img src={imgUrl} />
+                        <img src={imgUrl} onLoad={() => handleImageLoad(i)} className={`${imagesLoaded[i] ? '' : 'loading'}`} />
                         <button className='delete' onClick={() => deleteImg(imgUrl)}> <DeleteIcon /> </button>
                     </div>
                 )}

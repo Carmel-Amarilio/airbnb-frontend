@@ -59,6 +59,10 @@ export function StayDetails() {
         }
     }
 
+    function closeLog() {
+        setIsLog(false)
+    }
+
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
     const { _id, imgUrls, name, host, price, reviews, loc } = currStay
     const { rating, ratingName } = utilService.mapRating(reviews)
@@ -74,7 +78,7 @@ export function StayDetails() {
             <Reviews reviews={reviews} rating={rating} ratingName={ratingName} />
             <article className="map-sec">
                 <h2>Where you’ll be</h2>
-                <StayMap loc={loc} />
+                {/* <StayMap loc={loc} /> */}
                 <h3>{loc.address}, {loc.city}, {loc.country}</h3>
                 <p>Very quiet and pleasant neighborhood</p>
             </article>

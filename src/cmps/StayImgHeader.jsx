@@ -1,7 +1,20 @@
 import StarIcon from '@mui/icons-material/Star';
+import { useState } from 'react';
+import { AllStayImgs } from './AllStayImgs';
+import gridImgUrl from '../assets/img/grid.png'
 
 export function StayImgHeader({ stay, rating }) {
     const { imgUrls, name, reviews, loc } = stay
+    const [imagesLoaded, setImagesLoaded] = useState(Array(imgUrls.length).fill(false))
+    const [allImgPage, setAllImgPage] = useState(false)
+
+    function handleImageLoad(index) {
+        setImagesLoaded(prev => {
+            prev[index] = true
+            return [...prev]
+        })
+    }
+
     return (
         <section className='stay-img-header'>
             <header>
@@ -12,11 +25,19 @@ export function StayImgHeader({ stay, rating }) {
                 </p>
             </header>
 
-            <article className="image-container">
+            <article className="image-container" onClick={()=> setAllImgPage(true)}>
                 {Array.from({ length: 5 }).map((_, i) =>
-                    <img key={i} src={imgUrls[i]} />
+                    <img
+                        key={i}
+                        src={imgUrls[i]}
+                        className={`${imagesLoaded[i] ? '' : 'loading'}`}
+                        onLoad={() => handleImageLoad(i)}
+                        alt={`Stay Image ${i + 1}`} />
                 )}
+                <div className='show-btn form-btn flex align-center'><img src={gridImgUrl} />  Show all photos</div>
             </article>
+
+            {allImgPage&& <AllStayImgs imgUrls={imgUrls} setAllImgPage={setAllImgPage}/>}
         </section>
     )
 }
