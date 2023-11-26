@@ -55,7 +55,7 @@ export function DatePicker({ setDates, checkIn, checkOut, DateNotAvailable = [] 
                     <KeyboardArrowLeftSharpIcon />
                 </button>
                 <h2>{currentMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
-                <h2>{nextMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
+                <h2 className='nex-month'>{nextMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
                 <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, currentMonth.getDate()))}>
                     <KeyboardArrowRightSharpIcon />
                 </button>
@@ -85,7 +85,7 @@ export function DatePicker({ setDates, checkIn, checkOut, DateNotAvailable = [] 
                     )}
                 </div>
 
-                <div className="calendar-grid">
+                <div className="calendar-grid nex-month">
                     <div className="day">Su</div>
                     <div className="day">Mo</div>
                     <div className="day">Tu</div>

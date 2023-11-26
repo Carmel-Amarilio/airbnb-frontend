@@ -5,7 +5,7 @@ import { CheckInOutSec } from './CheckInOutSec';
 import { AddGuestsSec } from './AddGuestsSec';
 import { useNavigate } from 'react-router';
 
-export function SearchStay({ setIsSetStay, filter, setFilter }) {
+export function SearchStay({ setIsSetStay, filter, setFilter }) { 
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false)
 

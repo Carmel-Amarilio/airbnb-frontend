@@ -54,12 +54,12 @@
                 border-bottom-right-radius: 10px;
             }
 
-            &:hover{
+            &:hover {
                 opacity: .9;
             }
         }
 
-        .show-btn{
+        .show-btn {
             position: absolute;
             gap: 10px;
             bottom: 10px;
@@ -70,8 +70,22 @@
             font-size: 1em;
             cursor: pointer;
 
-            img{
+            img {
                 width: 20px;
+            }
+        }
+    }
+
+    @include for-normal-layout {
+
+        .image-container {
+            grid-template-columns: 1fr;
+            img{
+                border-radius: 0;
+            }
+
+            & :not(:first-child, :last-child) {
+                display: none;
             }
         }
     }

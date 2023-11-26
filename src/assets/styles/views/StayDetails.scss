@@ -1,7 +1,35 @@
 .stay-details {
-    grid-template-columns: 170px 1fr 170px;
-    
-    main {
+    grid-template-columns: 120px 1fr 120px;
+
+    .stay-header {
+        grid-template-columns: 120px 1fr 120px;
+
+        .set-stay-btn {
+
+            .anywhere,
+            .week,
+            .guests {
+                display: none;
+            }
+
+            .search {
+                display: inline;
+                margin-inline-end: 20px;
+            }
+        }
+    }
+
+    .heder-normal-layout {
+        display: none;
+        padding-block: 10px;
+
+        .back-btn :hover {
+            background-color: rgb(240, 240, 240);
+            border-radius: 2em;
+        }
+    }
+
+    .main-details {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-gap: 100px;
@@ -21,14 +49,39 @@
         .stay-map {
             height: 70vh;
         }
-        h3{
+
+        h3 {
             padding-block-start: 20px;
         }
-    
-        p{
+
+        p {
             margin-block-end: 30px;
         }
 
+    }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        .main-details {
+            grid-template-columns: 1fr;    
+        }
+
+        .heder-normal-layout {
+            display: inline;
+        }
+
+        .stay-header {
+            display: none;
+        }
+
+        main {
+            grid-template-columns: 1fr;
+        }
+
+        .host-stay{
+            margin-block-end: 60px;
+        }
     }
 
 }

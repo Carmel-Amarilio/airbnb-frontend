@@ -1,7 +1,7 @@
-import StarIcon from '@mui/icons-material/Star';
 import { useState } from 'react';
 import { AllStayImgs } from './AllStayImgs';
 import gridImgUrl from '../assets/img/grid.png'
+import StarIcon from '@mui/icons-material/Star';
 
 export function StayImgHeader({ stay, rating }) {
     const { imgUrls, name, reviews, loc } = stay

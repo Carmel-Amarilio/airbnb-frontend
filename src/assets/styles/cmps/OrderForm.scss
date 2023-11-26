@@ -1,102 +1,129 @@
 .order-form {
-    position: sticky;
-    top: 100px;
-    padding: 20px;
-    border: $borderClr 1px solid;
-    height: max-content;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 0 5px 5px #00000015;
-
-    &>* {
-        margin-block-end: 20px;
-    }
-
-    header {
-        margin-block-end: 30px;
-        h1 {
-            padding: 0;
-            margin: 0;
-            font-size: 1.57em;
-
-            span {
-                font-size: .72em;
-                font-weight: lighter;
-            }
-        }
-        p{
-          margin: 0;  
-        }
-        span{
-            margin-inline:3px;
-        }
-
-        .star-icon{
-            font-size: 1em;
-        }
-    }
-
-    .date-order {
-        border: $borderClr 1px solid;
-        border-radius: 10px;
-
-        button {
-            padding: 10px;
-            text-align: left;
-            border-radius: 10px;
-        }
-
-        .btn-date {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-block-end: $borderClr 1px solid;
-
-            .btn {
-                border-inline-end: $borderClr 1px solid;
-                border-top-right-radius: 0px;
-                border-bottom-right-radius: 0px;
-            }
-        }
-    }
-
-    .sec {
-        position: absolute;
-        top: 40px;
+    main {
+        position: sticky;
+        top: 100px;
         padding: 20px;
-        border-radius: 20px;
-        border: 1px solid $borderClr;
-        background-color: white;
-        z-index: 10;
-    }
-
-    .pic-date {
-        right: 0px;
-
-        .clears {
-            gap: 14px;
-            justify-content: flex-end;
-        }
-    }
-
-    .add-guests {
-        top: 195px;
-
-        article {
-            width: 300px;
-        }
-    }
-
-    .total-container {
-        text-align: center;
+        border: $borderClr 1px solid;
+        height: max-content;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 0 5px 5px #00000015;
 
         &>* {
-            padding-block: 10px;
+            margin-block-end: 20px;
         }
 
-        .total {
-            padding-block-start: 20px;
-            padding-block-end: 0px;
-            border-block-start: $borderClr 1px solid;
+        header {
+            margin-block-end: 30px;
+
+            h1 {
+                padding: 0;
+                margin: 0;
+                font-size: 1.57em;
+
+                span {
+                    font-size: .72em;
+                    font-weight: lighter;
+                }
+            }
+
+            p {
+                margin: 0;
+            }
+
+            span {
+                margin-inline: 3px;
+            }
+
+            .star-icon {
+                font-size: 1em;
+            }
+        }
+
+        .date-order {
+            border: $borderClr 1px solid;
+            border-radius: 10px;
+
+            button {
+                padding: 10px;
+                text-align: left;
+                border-radius: 10px;
+            }
+
+            .btn-date {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                border-block-end: $borderClr 1px solid;
+
+                .btn {
+                    border-inline-end: $borderClr 1px solid;
+                    border-top-right-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                }
+            }
+        }
+
+        .sec {
+            position: absolute;
+            top: 40px;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid $borderClr;
+            background-color: white;
+            z-index: 10;
+        }
+
+        .pic-date {
+            right: 0px;
+
+            .clears {
+                gap: 14px;
+                justify-content: flex-end;
+            }
+        }
+
+        .add-guests {
+            top: 195px;
+
+            article {
+                width: 300px;
+            }
+        }
+
+        .total-container {
+            text-align: center;
+
+            &>* {
+                padding-block: 10px;
+            }
+
+            .total {
+                padding-block-start: 20px;
+                padding-block-end: 0px;
+                border-block-start: $borderClr 1px solid;
+            }
+        }
+    }
+
+    .stay-details-footer {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        left: 0;
+        background-color: white;
+        z-index: 100;
+        padding: 20px;
+        margin: 0;
+    }
+
+    @include for-normal-layout {
+        main {
+            display: none;
+        }
+
+        .stay-details-footer {
+            display: block;
         }
     }
 

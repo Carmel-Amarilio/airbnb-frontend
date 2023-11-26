@@ -2,6 +2,7 @@
     border-radius: 4px;
     padding: 10px;
     margin-block: 20px;
+    max-width: 610px;
 
     .calendar-header {
         margin-bottom: 10px;
@@ -33,30 +34,38 @@
                 cursor: pointer;
                 border: 1px solid white;
 
-                &:hover:not(.past-date){
+                &:hover:not(.past-date) {
                     border: 1px solid black;
 
 
                 }
 
-                &.selected:not(.past-date){
+                &.selected:not(.past-date) {
                     background-color: #ebebeb;
                 }
 
-                &.end-date:not(.past-date) ,
+                &.end-date:not(.past-date),
                 &.start-date:not(.past-date) {
                     background-color: black;
                     color: white;
 
                 }
 
-                &.past-date{
-                   color: gainsboro;
-                   cursor: auto;
+                &.past-date {
+                    color: gainsboro;
+                    cursor: auto;
                 }
 
             }
 
         }
+    }
+
+    @include for-wide-layout {
+        max-width: 300px;
+        .nex-month {
+            display: none !important;
+        }
+
     }
 }

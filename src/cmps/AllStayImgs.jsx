@@ -1,6 +1,5 @@
 import { useState } from "react"
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
-import { Flag } from "@mui/icons-material";
 
 export function AllStayImgs({ imgUrls, setAllImgPage }) {
     const [imagesLoaded, setImagesLoaded] = useState(Array(imgUrls.length).fill(false))

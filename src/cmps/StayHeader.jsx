@@ -1,6 +1,5 @@
 import imgUrl from '../assets/img/logo.png'
 import SearchIcon from '@mui/icons-material/Search';
-import LanguageSharpIcon from '@mui/icons-material/LanguageSharp';
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import { useState } from 'react';
@@ -9,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { logout } from '../store/actions/user.actions';
 import { useNavigate } from 'react-router';
 
-export function StayHeader({ setIsLog, filter, setFilter, isDetails = false, isUserPage = false }) {
+export function StayHeader({ setIsLog, filter, setFilter, isUserPage = false }) {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -35,18 +34,16 @@ export function StayHeader({ setIsLog, filter, setFilter, isDetails = false, isU
 
                 {!isUserPage && <section className='set-stay-btn flex align-center'>
                     <article onClick={() => setIsSetStay(true)}>
-                        {!isDetails && <button>Anywhere</button>}
-                        {!isDetails && <button>Any week</button>}
-                        {!isDetails && <button>Add guests</button>}
-                        {isDetails && <button>Start your search</button>}
+                        <button className='anywhere'>Anywhere</button>
+                        <button className='week'>Any week</button>
+                        <button className='guests'>Add guests</button>
+                        <button className='search'>Start your search</button>
                     </article>
                     <div className='search-icon'><SearchIcon /></div>
                 </section>}
 
                 <section className='sating flex align-center' >
                     {!isUserPage && <button className='your-home' onClick={onAirbnbYourHome}>Airbnb your home</button>}
-
-                    <LanguageSharpIcon />
 
                     <article className='user-log flex align-center' onClick={toggleModal}>
                         <MenuSharpIcon className='menu-icon' />
@@ -69,10 +66,9 @@ export function StayHeader({ setIsLog, filter, setFilter, isDetails = false, isU
                     </article>}
                 </section>
 
-
             </section>
 
-            {isSetStay && <SearchStay setIsSetStay={setIsSetStay} filter={filter}  setFilter={setFilter} />}
+            {isSetStay && <SearchStay setIsSetStay={setIsSetStay} filter={filter} setFilter={setFilter} />}
 
         </header>
     )

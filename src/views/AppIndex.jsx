@@ -7,6 +7,7 @@ import { StayFilter } from "../cmps/StayFilter";
 import { SingInUp } from "../cmps/SingInUp";
 import { useLocation } from "react-router";
 import { StaysMap } from "../cmps/StaysMap";
+import { StayFooter } from "../cmps/StayFooter";
 
 export function AppIndex() {
     const location = useLocation();
@@ -67,6 +68,7 @@ export function AppIndex() {
                     <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
                 {(!!stays.length && !!filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
             </main>
+            <StayFooter setIsLog={setIsLog} />
 
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
         </section>

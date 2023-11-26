@@ -1,6 +1,4 @@
 .stay-header {
-  // position: sticky;
-  // top: 0;
   background-color: white;
   padding-block: 20px;
   border-bottom: 1px solid $borderClr ;
@@ -32,7 +30,7 @@
       }
     }
 
-    button:last-child {
+    .guests {
       padding: 10px 15px;
       color: $txtClr2;
     }
@@ -118,6 +116,20 @@
         }
 
       }
+    }
+  }
+
+  @include for-normal-layout {
+    grid-template-columns: 20px 1fr 20px;
+
+    .user-log,
+    .logo span,
+    .sating {
+      display: none;
+    }
+
+    .set-stay-btn {
+      width: 100%;
     }
   }
 }
