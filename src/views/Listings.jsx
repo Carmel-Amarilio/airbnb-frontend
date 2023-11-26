@@ -37,14 +37,14 @@ export function Listings() {
                     <table className="form-table">
                         <tbody>
                             <tr>
-                                <th>LISTING</th>
-                                <th>STATUS</th>
-                                <th>TO DO</th>
-                                <th>CAPACITY</th>
-                                <th>BEDROOMS</th>
-                                <th>BEDS</th>
-                                <th>PRICE</th>
-                                <th>LOCATION</th>
+                                <th className="listings">LISTING</th>
+                                <th className="status">STATUS</th>
+                                <th className="to-do">TO DO</th>
+                                <th className="capacity">CAPACITY</th>
+                                <th className="bedrooms">BEDROOMS</th>
+                                <th className="beds">BEDS</th>
+                                <th className="price">PRICE</th>
+                                <th className="loc">LOCATION</th>
                             </tr>
                             {stays.map(stay => {
                                 const { _id, imgUrls, name, capacity, loc, price } = stay
@@ -62,11 +62,11 @@ export function Listings() {
                                     <td className="to-do">
                                         <button onClick={() => navigate(`/about-your-place?stayId=${_id}`)}>Update</button>
                                     </td>
-                                    <td> <p>{capacity.guests}</p> </td>
-                                    <td> <p>{capacity.bedrooms}</p> </td>
-                                    <td> <p>{capacity.beds}</p> </td>
-                                    <td> <p>₪{price}</p> </td>
-                                    <td> <p>{loc.city}, {loc.country}</p> </td>
+                                    <td className="capacity"> <p>{capacity.guests}</p> </td>
+                                    <td className="bedrooms"> <p>{capacity.bedrooms}</p> </td>
+                                    <td className="beds"> <p>{capacity.beds}</p> </td>
+                                    <td className="price" > <p>₪{price}</p> </td>
+                                    <td className="loc"> <p>{loc.city}, {loc.country}</p> </td>
                                 </tr>
                             })}
                         </tbody>

@@ -2,6 +2,10 @@
     main {
         padding-block: 50px;
 
+        .dashboard-btn{
+        margin-block-end: 20px;
+        }
+    
         h1 {
             font-size: 24px;
             font-weight: 400;
@@ -31,7 +35,7 @@
             }
 
             .name {
-                
+
                 gap: 10px;
 
                 img {
@@ -93,6 +97,25 @@
                     }
                 }
             }
+        }
+    }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        .Total,
+        // .Guest,
+        .Check-in,
+        .Check-Out {
+            display: none !important;
+        }
+    }
+
+    @include for-narrow-layout {
+
+        .Total,
+        .Guest {
+            display: none !important;
         }
     }
 }

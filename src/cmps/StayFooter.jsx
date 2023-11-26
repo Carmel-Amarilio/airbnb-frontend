@@ -39,10 +39,10 @@ export function StayFooter({ setIsLog, filter, setFilter, isDetails = false, isU
                 <i className="fa-regular fa-rectangle-list"></i>
                 Reservations
             </button>}
-            {loggedinUser && <button className='flex column align-center' onClick={() => navigate("/about-your-place")}>
+            {/* {loggedinUser && <button className='flex column align-center' onClick={() => navigate("/about-your-place")}>
                 <i className="fa-regular fa-square-plus"></i>
                 Add listing
-            </button>}
+            </button>} */}
             {loggedinUser && <button className='flex column align-center' onClick={logout} >
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 Log out

@@ -25,5 +25,7 @@
         font-size: 18px;
     }
 
-
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px; 
+    }
 }

@@ -2,7 +2,8 @@
     gap: 20px;
 
     img {
-        width: 40vw;
+        height: 40vh;
+        width: 60vh;
     }
 
     h4 {
@@ -13,8 +14,36 @@
         font-size: 18px;
     }
 
-    .action-btn{
-         margin-block-start: 20px;
-         width: 100%;
+    .action-btn {
+        margin-block-start: 20px;
+        width: 100%;
+    }
+
+    @include for-normal-layout {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr;
+
+        img {
+            order: 1;
+            height: 30vh;
+            width: 40vh;
+        }
+
+        article {
+            order: 2;
+
+            h4 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+            .action-btn {
+                width: 300px;
+            }
+        }
+
     }
 }

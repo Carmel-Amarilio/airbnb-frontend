@@ -2,7 +2,7 @@
     // display: grid;
     // justify-content: center;
     // margin-block: 32px;
-   
+
 
     h3 {
         margin-block-end: 50px;
@@ -19,19 +19,30 @@
             padding: 20px;
             padding-inline-end: 80px;
             cursor: pointer;
-            
+
             img {
                 width: 30px;
             }
-            
-            &:hover{
+
+            &:hover {
                 border: 2px solid black;
             }
         }
 
-        .select{
+        .select {
             border: 2px solid black;
-            background-color: rgb(247,247,247);
+            background-color: rgb(247, 247, 247);
         }
+    }
+
+    @include for-normal-layout {
+        .stay-options-container {
+            grid-template-columns: repeat(2, 1fr);
+
+            .stay-option {
+                padding-inline-end: 40px;
+            }
+        }
+
     }
 }

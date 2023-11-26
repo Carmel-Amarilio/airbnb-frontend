@@ -1,11 +1,12 @@
 import { BarChartLogInUp } from "./BarChartLogInUp";
 import { DoughnutStayNames } from "./DoughnutStayNames";
 
-export function ReservationsDashboard({orders}) {
+export function ReservationsDashboard({ orders }) {
 
     return (
-        <section className="reservations-dashboard ">
-            <BarChartLogInUp orders={orders}/>
+        <section className="reservations-dashboard" >
+            
+            <BarChartLogInUp orders={orders} />
             <section className="status chart">
                 <h1>Reservations status</h1>
                 <article className="flex align-center space-between">
@@ -21,7 +22,7 @@ export function ReservationsDashboard({orders}) {
                     <p className="rejected"> {orders.filter(order => order.status === 'rejected').length}</p>
                 </article>
             </section>
-            <DoughnutStayNames orders={orders}/>
+            <DoughnutStayNames orders={orders} />
         </section>
     )
 }

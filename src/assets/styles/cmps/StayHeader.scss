@@ -123,13 +123,12 @@
     grid-template-columns: 20px 1fr 20px;
 
     .user-log,
-    .logo span,
-    .sating {
+    .logo span {
       display: none;
     }
 
     .set-stay-btn {
-      width: 100%;
+      // width: 100%;
     }
   }
 }

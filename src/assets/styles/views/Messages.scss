@@ -8,6 +8,7 @@
         grid-template-columns: 1fr 2fr 1fr;
 
         .sec {
+            position: relative;
             display: grid;
             grid-template-rows: auto 1fr auto;
             border: 1px solid $borderClr2;
@@ -18,9 +19,28 @@
                 padding: 30px 20px;
                 margin: 0;
             }
+
+            .nav-btn {
+                position: absolute;
+                display: none;
+                top: 0;
+                left: 0;
+                border-radius: 2em;
+                cursor: pointer;
+
+
+                &:hover {
+                    background-color: lightgray;
+                }
+            }
+
+            .underline-btn {
+                position: absolute;
+                right: 0;
+            }
         }
 
-        .empty-page{
+        .empty-page {
             text-align: center;
         }
 
@@ -103,6 +123,28 @@
                     text-align: end;
                 }
             }
+        }
+    }
+
+    @include for-normal-layout {
+        main {
+            grid-template-columns: 1fr;
+        }
+
+        .sec {
+            position: fixed !important;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            z-index: 0;
+
+            .nav-btn {
+                display: block !important;
+            }
+        }
+
+        .over {
+            z-index: 50 !important;
         }
     }
 }

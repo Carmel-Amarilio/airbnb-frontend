@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { loadOrders, updateOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { orderService } from "../services/order.service";
-import logoImgUrl from '../assets/img/logo.png'
 import { ActionBtn } from "../cmps/ActionBtn";
+import logoImgUrl from '../assets/img/logo.png'
+import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 
 export function Messages() {
     const location = useLocation();
@@ -17,6 +18,7 @@ export function Messages() {
     const orders = useSelector((storeState) => storeState.orderModule.orders)
     const [currOrder, setCurrOrder] = useState(false)
     const [newMsg, setNewMsg] = useState('')
+    const [secOver, setSecOver] = useState('orders')
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
@@ -41,6 +43,7 @@ export function Messages() {
         } catch (error) {
             console.log("Had issues loading order", error);
         }
+        setSecOver('messages')
     }
 
     function sendMsg() {
@@ -73,7 +76,7 @@ export function Messages() {
         <section className="messages">
             <StayHeader isUserPage={true} />
             <main>
-                <section className="orders sec">
+                <section className={`orders sec ${secOver === 'orders' ? "over" : ''}`}>
                     <h3> Reservations</h3>
                     {!orders.length ?
                         <section className="empty-page" >
@@ -101,8 +104,10 @@ export function Messages() {
 
                 </section>
 
-                <section className="messages-txt sec">
+                <section className={`messages-txt sec ${secOver === 'messages' ? "over" : ''}`}>
+                    <KeyboardArrowLeftSharpIcon className="nav-btn" onClick={() => setSecOver('orders')} />
                     <h3>Messages</h3>
+                    <button className=" underline-btn"  onClick={() => setSecOver('details')}>Details</button>
                     {currOrder && <article className="msg-list flex column">
                         {currOrder.msgs.map(msg =>
                             <div className="msg flex" key={msg.id}>
@@ -120,7 +125,8 @@ export function Messages() {
                     </article>}
                 </section>
 
-                <section className="details sec">
+                <section className={`details sec ${secOver === 'details' ? "over" : ''}`}>
+                    <KeyboardArrowLeftSharpIcon className="nav-btn" onClick={() => setSecOver('messages')} />
                     <h3>Details</h3>
                     {currOrder && <article className="flex column" >
                         <img src={currOrder.stay.imgUrl} />

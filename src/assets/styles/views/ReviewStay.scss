@@ -58,4 +58,16 @@
             }
         }
     }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        .review {
+            width: 300px !important;
+        }
+        textarea {
+            // width: 300px !important;
+        }
+
+    }
 }
