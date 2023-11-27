@@ -44,28 +44,29 @@
         }
     }
 
-    @include for-normal-layout {
-        .rate {
-            gap: 10px 50px;
-        }    
-
-        .reviews-container {
-            gap: 40px 50px;
-           
-        }
-    }
-
     @include for-narrow-layout {
         .rate {
             grid-template: repeat(6, 1fr)/1fr;
-        }    
+        }
+
         .reviews-container {
-            grid-template-columns: 1fr;
-           
+            grid-template-columns: minmax(300px, 1fr);
         }
     }
+
+    @include for-normal-layout {
+        .rate {
+            gap: 10px 50px;
+        }
+
+        .reviews-container {
+            gap: 40px 50px;
+
+        }
+    }
+
     @include for-wide-layout {
-          
+
         .reviews-container {
             gap: 40px 50px;
         }

@@ -31,6 +31,12 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
         return <TextField id="outlined-basic" {...prop} variant="outlined" />
     }
 
+    function checkErrors(errors) {
+        if (errors.fullName) return showErrorMsg(`Full name is ${errors.fullName}`)
+        if (errors.userName) return showErrorMsg(`User name is ${errors.userName}`)
+        if (errors.password) return showErrorMsg(`Password name is ${errors.password}`)
+    }
+
     async function onSubmit(val) {
         val = { ...val, imgUrl: userImgUrl }
         if (operation === 'in') {
@@ -63,7 +69,6 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
             {!isOrder && <KeyboardArrowLeftSharpIcon className="back" onClick={closeLog} />}
             <h2>Finish signing up</h2>
 
-
             <Formik
                 initialValues={{
                     fullName: `${(operation === 'in') ? '404' : ''}`,
@@ -72,8 +77,8 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={onSubmit}>
-                {({ errors, touched }) => (
-                    <Form className='form-container flex column'>
+                {({ errors }) => {
+                    return (<Form className='form-container flex column'>
                         {operation === 'up' && <div className='flex justify-center'>
                             <input id="file-upload" onChange={onAddImg} type="file" className="add-img" />
                             <label htmlFor="file-upload" className='upload-profile'>
@@ -91,11 +96,11 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                             <Field as={textField} label="Password" name="password" className="input" />
                         </div>
 
-                        {operation === 'in' && <ActionBtn line={"Sign In"} className='submit-bnt' type='submit' />}
-                        {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' />}
-
+                        {operation === 'in' && <ActionBtn line={"Sign In"} className='submit-bnt' type='submit' onClick={() => checkErrors(errors)} />}
+                        {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' onClick={() => checkErrors(errors)}/>}
                     </Form>
-                )}
+                    )
+                }}
             </Formik>
 
             {isOrder && operation === 'in' && <button className='underline-btn' onClick={() => setOperation("up")}>Sign Up</button>}
@@ -103,3 +108,4 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
         </section>
     )
 }
+

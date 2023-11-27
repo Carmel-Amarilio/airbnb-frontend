@@ -1,6 +1,5 @@
 .reviews-modal {
 
-
     .container {
         overflow-y: scroll;
         max-height: 400px;
@@ -16,5 +15,11 @@
 
     .review-in-modal {
         border-bottom: 1px solid $borderClr;
+    }
+
+    @include for-narrow-layout {
+        .container {
+            width: 300px;
+        }
     }
 }

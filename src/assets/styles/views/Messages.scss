@@ -35,6 +35,7 @@
             }
 
             .underline-btn {
+                display: none;
                 position: absolute;
                 right: 0;
             }
@@ -138,7 +139,7 @@
             background-color: white;
             z-index: 0;
 
-            .nav-btn {
+            .nav-btn , .underline-btn{
                 display: block !important;
             }
         }

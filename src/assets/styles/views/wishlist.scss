@@ -3,4 +3,8 @@
         margin-block: 20px;
         font-size: 32px;
     }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+    }
 }
