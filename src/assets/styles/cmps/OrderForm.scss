@@ -115,6 +115,10 @@
         z-index: 100;
         padding: 20px;
         margin: 0;
+
+        .action-btn{
+            width: 150px;
+        }
     }
 
     @include for-normal-layout {

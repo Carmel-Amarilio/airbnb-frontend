@@ -101,7 +101,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
                         </p>
                     </div>
 
-                    <ActionBtn line={"Check availability"} onClick={checkAvailability} />
+                    <ActionBtn line={"Reserve"} onClick={checkAvailability} />
                 </article>
             </footer>
         </section>
