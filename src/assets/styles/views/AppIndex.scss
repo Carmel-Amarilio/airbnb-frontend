@@ -2,7 +2,7 @@
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     height: 100vh;
-    min-width: 470px;
+    min-width: 380px;
 
     .stay-header {
         .set-stay-btn {
@@ -40,7 +40,7 @@
     }
 
 
-    
+
     @include for-normal-layout {
         grid-template-columns: 20px 1fr 20px;
 
@@ -54,6 +54,7 @@
             }
 
             .set-stay-btn {
+
                 .anywhere,
                 .week,
                 .guests {
@@ -75,4 +76,9 @@
             display: flex;
         }
     }
+
+    // @include for-narrow-layout {
+    //     grid-template-columns: 10px 1fr 10px;
+
+    // }
 }

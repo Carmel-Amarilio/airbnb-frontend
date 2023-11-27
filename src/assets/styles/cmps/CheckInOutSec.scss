@@ -1,4 +1,9 @@
 .check-in-out{
     right: 0px;
     width: 880px;
+
+    @include for-normal-layout {
+        width: min-content;
+        padding: 0 !important;
+    }
 }

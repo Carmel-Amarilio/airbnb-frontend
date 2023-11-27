@@ -81,7 +81,7 @@
         .image-container {
             grid-template-columns: 1fr;
             img{
-                border-radius: 0;
+                border-radius: 0 !important;
             }
 
             & :not(:first-child, :last-child) {

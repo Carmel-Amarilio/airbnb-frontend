@@ -2,7 +2,7 @@
     margin: auto;
 
     .set-stay {
-        border-radius: 50em; 
+        border-radius: 2em;
         border: 1px solid $borderClr;
         box-shadow: 2px 2px 5px 0px $borderClr;
         padding: 7px;
@@ -94,4 +94,44 @@
         right: 0px;
     }
 
+    @include for-normal-layout {
+        .set-stay-container {
+            width: 335px;
+            flex-direction: column;
+            align-items: center !important;
+
+            .btn {
+                flex-direction: column;
+                padding: 20px !important;
+                text-align: left !important;
+                width: 100%;
+
+                &::after {
+                    height: 0 !important;
+                    width: 0 !important;
+                }
+            }
+
+            .guests {
+                align-items: start !important;
+                .action-btn {
+                    margin-inline-start: 0px;
+                    width: 300px !important;
+                }
+            }
+
+            .check-out{
+                display: none;
+            }
+        }
+
+        .sec {
+            position: relative;
+            top: 0px;
+        }
+
+        .black-space {
+            display: none;
+        }
+    }
 }

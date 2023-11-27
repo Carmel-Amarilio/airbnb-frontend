@@ -33,7 +33,7 @@ export function StayHeader({ setIsLog, filter, setFilter, isUserPage = false }) 
                 </section>
 
                 {!isUserPage && <section className='set-stay-btn flex align-center'>
-                    <article onClick={() => setIsSetStay(true)}>
+                    <article onClick={() => setIsSetStay(!isSetStay)}>
                         <button className='anywhere'>Anywhere</button>
                         <button className='week'>Any week</button>
                         <button className='guests'>Add guests</button>
