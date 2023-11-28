@@ -66,7 +66,7 @@ export function OrderStay() {
         const totalPrice = (price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount)
         if (isUpdate) {
             try {
-                updateOrder({ ...order, status: 'pending', totalPrice })
+                updateOrder({ ...order, status: 'pending', totalPrice,  lastUpdate: Date.now() })
                 updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable , ...utilService.getDatesBetween(checkIn, checkOut)]})
                 showSuccessMsg('The request has been successfully updated')
                 navigate("/trips")

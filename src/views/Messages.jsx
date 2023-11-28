@@ -6,6 +6,8 @@ import { loadOrders, updateOrder, updateOrderToMsg } from "../store/actions/orde
 import { utilService } from "../services/util.service";
 import { orderService } from "../services/order.service";
 import { ActionBtn } from "../cmps/ActionBtn";
+import logoImgUrl from '../assets/img/logo.png'
+import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import { socketService } from "../services/socket.service";
 
 export function Messages() {
@@ -19,6 +21,7 @@ export function Messages() {
     const [newMsg, setNewMsg] = useState('')
     const [secOver, setSecOver] = useState('orders')
 
+
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
         else {
@@ -26,8 +29,8 @@ export function Messages() {
             if (orderId) getOrder(orderId)
 
             socketService.on('order-updated', order => {
-                console.log('hi');
-                updateOrderToMsg(order)
+                _loadOrders()
+                if (currOrder._id && currOrder._id === order._id) setCurrOrder(order)
             })
         }
     }, [loggedinUser])
@@ -59,7 +62,7 @@ export function Messages() {
             by: loggedinUser
         })
         try {
-            updateOrder({ ...currOrder, msgs: newMsgs })
+            updateOrder({ ...currOrder, msgs: newMsgs, lastUpdate: Date.now() })
             _loadOrders()
         } catch (error) {
             console.log("Had issues send the msg", error);
@@ -75,7 +78,7 @@ export function Messages() {
         return new Date(date) < new Date()
     }
 
-    console.log(currOrder);
+    if (!loggedinUser) navigate("/stay")
     return (
         <section className="messages">
             <StayHeader isUserPage={true} />
@@ -111,7 +114,7 @@ export function Messages() {
                 <section className={`messages-txt sec ${secOver === 'messages' ? "over" : ''}`}>
                     <KeyboardArrowLeftSharpIcon className="nav-btn" onClick={() => setSecOver('orders')} />
                     <h3>Messages</h3>
-                    <button className=" underline-btn"  onClick={() => setSecOver('details')}>Details</button>
+                    <button className=" underline-btn" onClick={() => setSecOver('details')}>Details</button>
                     {currOrder && <article className="msg-list flex column">
                         {currOrder.msgs.map(msg =>
                             <div className="msg flex" key={msg.id}>

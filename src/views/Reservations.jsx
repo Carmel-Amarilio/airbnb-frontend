@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { utilService } from "../services/util.service";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { ReservationsDashboard } from "../cmps/ReservationsDashboard";
 import { socketService } from "../services/socket.service";
 
 export function Reservations() {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
-    const [sort, setSort] = useState('')
+    const [sort, setSort] = useState('lastUpdate')
     const [showDashboard, setShowDashboard] = useState(true)
 
 
@@ -22,14 +23,19 @@ export function Reservations() {
         else {
             _loadOrders('')
 
-            socketService.on('order-added', order => {
-                addOrderToReservations(order)
-            })
         }
+        socketService.on('order-updated', order => {
+            console.log('hi updated');
+            _loadOrders('lastUpdate')
+        })
+        socketService.on('order-added', order => {
+            console.log('hi added');
+            _loadOrders('lastUpdate')
+        })
     }, [loggedinUser])
 
     useEffect(() => {
-        let sortBy = ''
+        let sortBy = 'lastUpdate'
         switch (sort) {
             case 'Guest': sortBy = 'buyer.fullName'; break;
             case 'Check-in': sortBy = 'checkIn'; break;
@@ -61,7 +67,7 @@ export function Reservations() {
             by: loggedinUser
         })
         try {
-            updateOrder({ ...order, status: newStatus, msgs: newMsgs })
+            updateOrder({ ...order, status: newStatus, msgs: newMsgs,  lastUpdate: Date.now() })
             _loadOrders('')
         } catch (error) {
             console.log("Had issues changing thr status", error);

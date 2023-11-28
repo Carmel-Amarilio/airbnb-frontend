@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { loadOrders, removeOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
+import { socketService } from "../services/socket.service";
 import { showSuccessMsg } from "../services/event-bus.service";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -13,17 +14,22 @@ export function Trips() {
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
-    const [sort, setSort] = useState('')
+    const [sort, setSort] = useState('lastUpdate')
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
         else {
-            _loadOrders('')
+            _loadOrders('lastUpdate')
+
+            socketService.on('order-updated', order => {
+                console.log('hi updated');
+                _loadOrders('lastUpdate')
+            })
         }
     }, [loggedinUser])
 
     useEffect(() => {
-        let sortBy = ''
+        let sortBy = 'lastUpdate'
         switch (sort) {
             case 'host': sortBy = 'host.fullName'; break;
             case 'Check-in': sortBy = 'checkIn'; break;
@@ -50,7 +56,7 @@ export function Trips() {
     }
 
     function onLabel(label) {
-        sort === label ? setSort('') : setSort(label)
+        sort === label ? setSort('lastUpdate') : setSort(label)
     }
 
     function isPastDate(date) {

@@ -12,7 +12,7 @@ export const orderService = {
 }
 
 function query(filterBy = {}, sortBy = '') {
-    return httpService.get(BASE_URL,{ filterBy, sortBy})
+    return httpService.get(BASE_URL, { filterBy, sortBy })
 }
 
 function get(id) {
@@ -43,6 +43,7 @@ function getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, gues
         },
         stay: miniStay,
         msgs: [],
-        status
+        status,
+         lastUpdate: Date.now()
     }
 }
