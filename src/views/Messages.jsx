@@ -97,7 +97,7 @@ export function Messages() {
                             {orders.map(order => {
                                 const { _id, host, buyer, msgs, status, checkIn, checkOut } = order
                                 const chatWith = loggedinUser._id === host._id ? buyer : host
-                                return <article key={_id} className="orders-prev flex" onClick={() => getOrder(_id)}>
+                                return <article key={_id} className={`orders-prev flex ${currOrder._id === _id ? 'select' : ''}`} onClick={() => getOrder(_id)}>
                                     {chatWith.imgUrl ? <img src={chatWith.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{chatWith.fullName[0]}</div>}
                                     <div>
                                         <h4>{chatWith.fullName}</h4>

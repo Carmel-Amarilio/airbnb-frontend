@@ -55,7 +55,7 @@
                     border-bottom: 1px solid $borderClr2;
                     cursor: pointer;
 
-                    &:hover {
+                    &:hover, &.select {
                         background-color: rgb(247, 247, 247);
                     }
                 }
