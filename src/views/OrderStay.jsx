@@ -13,6 +13,7 @@ import { addOrder, updateOrder } from "../store/actions/order.actions";
 import { orderService } from "../services/order.service";
 import { utilService } from "../services/util.service";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { updateStay } from "../store/actions/stay.actions";
 
 export function OrderStay() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
@@ -27,8 +28,6 @@ export function OrderStay() {
     const nightsCount = checkIn && checkOut ? utilService.calculateNights(checkIn, checkOut) : null
 
     useEffect(() => {
-        if (!loggedinUser) navigate("/stay")
-        else {
             const { orderId, stayId, checkIn, checkOut, adults, children, infants } = params
             if (!orderId) {
                 setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants } })
@@ -38,8 +37,6 @@ export function OrderStay() {
                 setIsUpdate(true)
                 getOrder(orderId)
             }
-
-        }
     }, [loggedinUser])
 
     async function getStay(stayId) {
@@ -64,12 +61,13 @@ export function OrderStay() {
     }
 
     async function newOrder() {
-        if (!checkIn || !checkOut ) return showErrorMsg('You have not specified dates for your trip ')
+        if (!checkIn || !checkOut) return showErrorMsg('You have not specified dates for your trip ')
         if (!guests.adults) return showErrorMsg('You did not specify the number of guests ')
         const totalPrice = (price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount)
         if (isUpdate) {
             try {
                 updateOrder({ ...order, status: 'pending', totalPrice })
+                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable , ...utilService.getDatesBetween(checkIn, checkOut)]})
                 showSuccessMsg('The request has been successfully updated')
                 navigate("/trips")
             } catch (error) {
@@ -81,6 +79,7 @@ export function OrderStay() {
             const newOrder = orderService.getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, guests, miniStay, status: 'pending' })
             try {
                 addOrder(newOrder)
+                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable , ...utilService.getDatesBetween(checkIn, checkOut)]})
                 showSuccessMsg('booking request sent to host')
                 navigate("/trips")
             } catch (error) {
@@ -88,10 +87,12 @@ export function OrderStay() {
             }
         }
     }
-
-
+    console.log(checkIn, checkOut);
+    
+    
+    
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
-    const { _id, imgUrls, name, host, price, capacity, reviews } = currStay
+    const { _id, imgUrls, name, host, price, capacity, reviews, DateNotAvailable } = currStay
     const { rating } = utilService.mapRating(reviews)
     return (
         <section className="order-stay main-container">
@@ -146,7 +147,7 @@ export function OrderStay() {
                             </div>
                             <div className="flex align-center">
                                 <StarIcon className="star-icon" />
-                                <span>{rating.value}</span>
+                                <span>{rating.value ? rating.value.toFixed(2) : 5}</span>
                                 <p> · {reviews.length} reviews</p>
                             </div>
                         </div>
@@ -179,7 +180,7 @@ export function OrderStay() {
                 <section className="pic-date">
                     <h2>Select dates</h2>
                     <p>Minimum stay: {2} nights</p>
-                    <DatePicker setDates={setOrder} checkIn={checkIn} checkOut={checkOut} />
+                    <DatePicker setDates={setOrder} checkIn={checkIn} checkOut={checkOut} DateNotAvailable={DateNotAvailable} />
                     <article className="clears flex">
                         <button onClick={() => setOpenModal('')} className="black-btn">Close</button>
                     </article>

@@ -5,7 +5,7 @@ import { AmenitiesModal } from "./AmenitiesModal";
 
 export function StayReviewDetail({ currStay, setDates, checkIn, checkOut }) {
     const [isModal, setIsModal] = useState(false)
-    const { type, host, summary, capacity, amenities } = currStay
+    const { type, host, summary, capacity, amenities, DateNotAvailable } = currStay
     return (
         <section className="stay-review-detail">
             <article className="host flex space-between">
@@ -65,7 +65,7 @@ export function StayReviewDetail({ currStay, setDates, checkIn, checkOut }) {
             <article>
                 <h2>Select check-in date</h2>
                 <p>Add your travel dates for exact pricing</p>
-                <DatePicker setDates={setDates} checkIn={checkIn} checkOut={checkOut} />
+                <DatePicker setDates={setDates} checkIn={checkIn} checkOut={checkOut}  DateNotAvailable={DateNotAvailable}/>
             </article>
         </section>
     )

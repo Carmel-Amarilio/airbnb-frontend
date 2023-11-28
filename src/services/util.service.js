@@ -7,7 +7,10 @@ export const utilService = {
     loadFromStorage,
     formatDate,
     calculateNights,
-    mapRating
+    mapRating,
+    getLastMonthDates,
+    getDatesBetween,
+    findConsecutiveAvailableDates
 }
 
 function makeId(length = 6) {
@@ -84,3 +87,57 @@ function mapRating(reviews) {
     }
     return { rating, ratingName }
 }
+
+
+
+
+function getLastMonthDates() {
+    const currentDate = new Date();
+    const lastMonth = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 1,
+        1
+    );
+    const datesArray = [];
+
+    while (lastMonth.getMonth() === currentDate.getMonth() - 1) {
+        datesArray.push(
+            `${lastMonth.getDate()} ${lastMonth.toLocaleString('default', {
+                month: 'short',
+            })}`
+        );
+        lastMonth.setDate(lastMonth.getDate() + 1);
+    }
+
+    return datesArray;
+    return dates;
+}
+
+function getDatesBetween(startDate, endDate) {
+    const dateArray = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= new Date(endDate)) {
+        dateArray.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dateArray;
+}
+
+
+function findConsecutiveAvailableDates(DateNotAvailable) {
+    const today = new Date();
+    const threeDaysLater = new Date(today);
+    threeDaysLater.setDate(today.getDate() + 3);
+
+    for (let i = 0; i <= DateNotAvailable.length + 1; i++) {
+        const day1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 1)
+        const day2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 2)
+        const day3 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 3)
+        const isAllDaysAvailable = [day1, day2, day3].every(day => !DateNotAvailable.includes(day.toISOString()));
+        if (isAllDaysAvailable) return { checkIn: day1, checkOut: day3 }
+    }
+}
+
+

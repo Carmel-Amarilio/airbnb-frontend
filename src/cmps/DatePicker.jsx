@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 
-export function DatePicker({ setDates, checkIn, checkOut }) {
+export function DatePicker({ setDates, checkIn, checkOut, DateNotAvailable = [] }) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     const handleDateClick = (day) => {
-        if (isPastDate(day)) return
+        if (isNotAvailableDate(day)) return
         if (!checkIn) {
             setDates(prev => ({ ...prev, checkIn: day }))
         } else if (!checkOut) {
@@ -34,9 +34,9 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
         return checkOut && day.getDate() === checkOut.getDate() && day.getMonth() === checkOut.getMonth() && day.getFullYear() === checkOut.getFullYear();
     };
 
-    const isPastDate = (date) => {
-        const today = new Date();
-        return date < today;
+    const isNotAvailableDate = (date) => {
+        const today = new Date()
+        return date < today || DateNotAvailable.some(notAvailable => new Date(notAvailable).getTime() === new Date(date).getTime());
     };
 
     const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
@@ -55,7 +55,7 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                     <KeyboardArrowLeftSharpIcon />
                 </button>
                 <h2>{currentMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
-                <h2>{nextMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
+                <h2 className='nex-month'>{nextMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' })}</h2>
                 <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, currentMonth.getDate()))}>
                     <KeyboardArrowRightSharpIcon />
                 </button>
@@ -72,19 +72,20 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                     {Array.from({ length: firstDayOfMonth }, (_, i) =>
                         <div key={`empty-${i}`} className="empty"></div>
                     )}
-                    {daysArray.map((day) =>{
+                    {daysArray.map((day) => {
                         const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day)
                         return <div
                             key={day}
-                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isPastDate(date) ? 'past-date' : ''}`}
+                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isNotAvailableDate(date) ? 'past-date' : ''}`}
                             onClick={() => handleDateClick(date)}
                         >
                             {day}
-                        </div>}
+                        </div>
+                    }
                     )}
                 </div>
 
-                <div className="calendar-grid">
+                <div className="calendar-grid nex-month">
                     <div className="day">Su</div>
                     <div className="day">Mo</div>
                     <div className="day">Tu</div>
@@ -99,7 +100,7 @@ export function DatePicker({ setDates, checkIn, checkOut }) {
                         const date = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), day)
                         return <div
                             key={day}
-                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isPastDate(date) ? 'past-date' : ''}`}
+                            className={`date ${isStartDate(date) ? 'start-date' : ''} ${isEndDate(date) ? 'end-date' : ''} ${isInRange(date) ? 'selected' : ''} ${isNotAvailableDate(date) ? 'past-date' : ''}`}
                             onClick={() => handleDateClick(date)}
                         >
                             {day}

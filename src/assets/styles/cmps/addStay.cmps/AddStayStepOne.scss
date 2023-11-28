@@ -1,6 +1,5 @@
 .add-stay-step-one {
     gap: 20px;
-    // padding-inline: 100px;
 
     img {
         height: 60vh;
@@ -13,6 +12,30 @@
     p {
         font-size: 18px;
         margin-bottom: 20px;
+    }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
+        img {
+            order: 1;
+            height: 40vh;
+        }
+
+        article {
+            order: 2;
+            h4 {
+                font-size: 16px;
+            }
+        
+            p {
+                font-size: 14px;
+            }
+        }
+
     }
 
 }

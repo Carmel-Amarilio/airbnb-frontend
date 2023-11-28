@@ -2,11 +2,12 @@ import { useSelector } from "react-redux";
 import { StayHeader } from "../cmps/StayHeader";
 import { StayList } from "../cmps/StayList";
 import { useEffect, useState } from "react";
-import { loadStays, updateStays } from "../store/actions/stay.actions";
+import { loadStays, updateStay } from "../store/actions/stay.actions";
 import { StayFilter } from "../cmps/StayFilter";
 import { SingInUp } from "../cmps/SingInUp";
 import { useLocation } from "react-router";
 import { StaysMap } from "../cmps/StaysMap";
+import { StayFooter } from "../cmps/StayFooter";
 
 export function AppIndex() {
     const location = useLocation();
@@ -48,7 +49,7 @@ export function AppIndex() {
         const likeIndx = stayLike.likedByUsers.findIndex((user) => user._id === loggedinUser._id)
         if (likeIndx >= 0) stayLike.likedByUsers.splice(likeIndx, 1);
         else stayLike.likedByUsers.push(loggedinUser)
-        updateStays(stayLike)
+        updateStay(stayLike)
     }
 
     console.log(stays);
@@ -65,8 +66,9 @@ export function AppIndex() {
                         </div>
                     </section> :
                     <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
-                {(stays.length && filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser}  />}
+                {(!!stays.length && !!filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
             </main>
+            <StayFooter setIsLog={setIsLog} />
 
             {isLog && <SingInUp operation={isLog} closeLog={closeLog} />}
         </section>

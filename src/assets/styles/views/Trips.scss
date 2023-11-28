@@ -54,13 +54,33 @@
         color: red;
     }
 
-    .actions {
+    .Actions {
         text-align: center;
 
         .form-btn {
             margin: 0;
             padding: 10px 10px;
             font-size: 14px;
+        }
+    }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        .host,
+        .Check-in,
+        .Check-Out {
+            display: none;
+        }
+    }
+
+    @include for-narrow-layout {
+
+        .host,
+        .Check-in,
+        .Check-Out,
+        .Total {
+            display: none;
         }
     }
 }

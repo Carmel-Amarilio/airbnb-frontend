@@ -1,11 +1,12 @@
 .sing-in-up {
-    position: absolute;
-    top: 0%;
+    position:fixed;
+    top:  0%;
     right: 50%;
-    transform: translate(50%, 50%);
+    transform: translate(50%, 40%);
     padding: 20px;
     background-color: white;
     border: 1px solid $borderClr;
+    z-index: 100;
 
     .back {
         position: absolute;

@@ -28,8 +28,8 @@ export function StayFilter({ filter }) {
         const { adults, children, infants } = guests
         navigate(`/stay?${label ? `label=${label}` : ''}${destinations ? `&destinations=${destinations}` : ''}${checkIn ? `&checkIn=${checkIn}` : ''}${checkOut ? `&checkOut=${checkOut}` : ''}${adults ? `&adults=${adults}` : ''}${children ? `&children=${children}` : ''}${infants ? `&infants=${infants}` : ''}`);
     }
-
-    const chunkSize = Math.floor((screenWidth - 200) / 130 + 1)
+    const layOutPadding = screenWidth > 900 ? 220 : 120
+    const chunkSize = Math.floor((screenWidth - layOutPadding) / 117)
 
     function handleNextChunk() {
         const numberOfOptions = Object.keys(stayOptions).length;
@@ -47,24 +47,24 @@ export function StayFilter({ filter }) {
     }
 
     return (
-        <section className="stay-filter flex full">
-
-            {labels.slice(chunkStartIndex, chunkStartIndex + chunkSize).map((label, i) =>
-                <div
-                    key={i}
-                    className={`label-box ${label === filter.label ? "selected-box" : ""} flex column justify-center align-center`}
-                    onClick={() => setFilter(label)}>
-                    <img src={imgs[Math.floor(chunkStartIndex) + i]} />
-                    <p>{label}</p>
-                </div>
-            )}
-
-            <button disabled={chunkStartIndex <= 0} className="arrow-cont left" onClick={handlePreviousChunk}>
-                <KeyboardArrowLeftSharpIcon className="arrow" />
-            </button>
-            <button disabled={Object.keys(stayOptions).length <= chunkStartIndex + chunkSize} className="arrow-cont right" onClick={handleNextChunk}>
-                <KeyboardArrowRightSharpIcon className="arrow" />
-            </button>
+        <section className="stay-filter main-container">
+            <article className="stay-filter flex full ">
+                {labels.slice(chunkStartIndex, chunkStartIndex + chunkSize).map((label, i) =>
+                    <div
+                        key={i}
+                        className={`label-box ${label === filter.label ? "selected-box" : ""} flex column justify-center align-center`}
+                        onClick={() => setFilter(label)}>
+                        <img src={imgs[Math.floor(chunkStartIndex) + i]} />
+                        <p>{label}</p>
+                    </div>
+                )}
+                <button disabled={chunkStartIndex <= 0} className="arrow-cont left" onClick={handlePreviousChunk}>
+                    <KeyboardArrowLeftSharpIcon className="arrow" />
+                </button>
+                <button disabled={Object.keys(stayOptions).length <= chunkStartIndex + chunkSize} className="arrow-cont right" onClick={handleNextChunk}>
+                    <KeyboardArrowRightSharpIcon className="arrow" />
+                </button>
+            </article>
         </section>
     );
 }

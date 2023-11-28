@@ -52,6 +52,11 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+
+                &.loading {
+                    background-color: $lodeClr;
+                    animation: loadingAnimation 2s infinite;
+                }
             }
 
             .delete {

@@ -50,7 +50,7 @@ async function getLngLan(houseNumber, street, city, country) {
 function getEmptyStay(host) {
     return {
         name: "",
-        type: "Cabins",
+        type: "An entire place",
         imgUrls: [],
         price: 225.00,
         summary: "Take it easy at this unique and tranquil getaway.",
@@ -73,7 +73,8 @@ function getEmptyStay(host) {
             lng: 0
         },
         reviews: [],
-        likedByUsers: []
+        likedByUsers: [],
+        DateNotAvailable: []
     }
 }
 

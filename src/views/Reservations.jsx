@@ -13,6 +13,9 @@ export function Reservations() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
     const orders = useSelector((storeState) => storeState.orderModule.orders)
     const [sort, setSort] = useState('')
+    const [showDashboard, setShowDashboard] = useState(true)
+
+
 
     useEffect(() => {
         if (!loggedinUser) navigate("/stay")
@@ -65,61 +68,67 @@ export function Reservations() {
         }
     }
 
+    function toggleDashboard() {
+        setShowDashboard(!showDashboard)
+    }
+
     console.log(orders);
     const thsLabel = ['Guest', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'To do']
     return (
         <section className="reservations main-container">
             <StayHeader isUserPage={true} />
 
-            {!orders.length && <section className="empty-page" >
+
+            {!orders.length ? <section className="empty-page" >
                 <h1> Reservations</h1>
                 <div>
                     <h2>No trips reservations...yet!</h2>
                     <p>It's time to advertise your home in the best possible way</p>
                     <button className="form-btn" onClick={() => navigate("/about-your-place")}> Airbnb your home</button>
                 </div>
-
-            </section>}
-            {!!orders.length && <main >
-                <h1>{orders.length} Reservations</h1>
-                <table className="form-table">
-                    <tbody>
-                        <tr >
-                            {thsLabel.map(label =>
-                                <th key={label}>
-                                    {label === 'To do' ? label :
-                                        <div className=" flex align-center" onClick={() => onLabel(label)}>
-                                            {label}
-                                            {sort === label ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-                                        </div>}
-                                </th>)}
-                        </tr>
-                        {orders.map(order => {
-                            const { _id, buyer, checkIn, checkOut, stay, status, totalPrice } = order
-                            if (status === 'negotiations') return
-                            return <tr key={_id} >
-                                <td className="buyer flex align-center">
-                                    {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}
-                                    <h3>{buyer.fullName}</h3>
-                                </td>
-                                <td> <p>{utilService.formatDate(checkIn)}</p> </td>
-                                <td> <p>{utilService.formatDate(checkOut)}</p> </td>
-                                <td className="name ">
-                                    {/* <img src={stay.imgUrl} /> */}
-                                    <p>{stay.name}</p>
-                                </td>
-                                <td> <p>₪{totalPrice}</p> </td>
-                                <td> <p className={status}>{status}</p> </td>
-                                <td className="to-do ">
-                                    <button disabled={status != 'pending'} className="approve btn" onClick={() => setStatus(order, "approved")}>Approve</button>
-                                    <button disabled={status != 'pending'} className="reject btn" onClick={() => setStatus(order, "rejected")}>Reject</button>
-                                </td>
-
+            </section> :
+                <main >
+                    <button className="underline-btn dashboard-btn" onClick={toggleDashboard}>Open dashboard <i className={`fa-solid fa-arrow-${showDashboard ? 'down' : 'up'}`}></i></button>
+                    {showDashboard && <ReservationsDashboard orders={orders} />}
+                    <h1>{orders.length} Reservations</h1>
+                    <table className="form-table">
+                        <tbody>
+                            <tr >
+                                {thsLabel.map(label =>
+                                    <th key={label} className={label}>
+                                        {label === 'To do' ? label :
+                                            <div className=" flex align-center" onClick={() => onLabel(label)}>
+                                                {label}
+                                                {sort === label ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                                            </div>}
+                                    </th>)}
                             </tr>
-                        })}
-                    </tbody>
-                </table>
-            </main>}
+                            {orders.map(order => {
+                                const { _id, buyer, checkIn, checkOut, stay, status, totalPrice } = order
+                                if (status === 'negotiations') return
+                                return <tr key={_id} >
+                                    <td className="buyer Guest flex align-center">
+                                        {buyer.imgUrl ? <img src={buyer.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{buyer.fullName[0]}</div>}
+                                        <h3>{buyer.fullName}</h3>
+                                    </td>
+                                    <td className="Check-in"> <p>{utilService.formatDate(checkIn)}</p> </td>
+                                    <td className="Check-Out"> <p>{utilService.formatDate(checkOut)}</p> </td>
+                                    <td className="name Listing">
+                                        {/* <img src={stay.imgUrl} /> */}
+                                        <p>{stay.name}</p>
+                                    </td>
+                                    <td className="Total"> <p>₪{totalPrice}</p> </td>
+                                    <td className="Status"> <p className={status}>{status}</p> </td>
+                                    <td className="to-do ">
+                                        <button disabled={status != 'pending'} className="approve btn" onClick={() => setStatus(order, "approved")}>Approve</button>
+                                        <button disabled={status != 'pending'} className="reject btn" onClick={() => setStatus(order, "rejected")}>Reject</button>
+                                    </td>
+
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
+                </main>}
         </section>
     )
 }

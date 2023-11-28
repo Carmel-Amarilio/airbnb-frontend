@@ -108,7 +108,8 @@
         }
     }
 
-    .pic-date , .add-guests{
+    .pic-date,
+    .add-guests {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -122,5 +123,26 @@
             gap: 14px;
             justify-content: flex-end;
         }
+    }
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        main {
+            padding: 0px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .summary-card {
+            order: 1;
+            position: relative !important;
+            top: 20px !important;
+        }
+        .request-book {
+            order: 2;
+        }
+
     }
 }

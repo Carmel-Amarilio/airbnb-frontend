@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router"; 
 import { StayHeader } from "../cmps/StayHeader";
 import { stayService } from "../services/stay.service";
 import { orderService } from "../services/order.service";
@@ -8,7 +8,7 @@ import { StayImgHeader } from "../cmps/StayImgHeader";
 import { utilService } from "../services/util.service";
 import { Reviews } from "../cmps/reviews";
 import { ActionBtn } from "../cmps/ActionBtn";
-import { updateStays } from "../store/actions/stay.actions";
+import { updateStay } from "../store/actions/stay.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 export function ReviewStay() {
@@ -69,7 +69,7 @@ export function ReviewStay() {
         if(!newReview.txt) return showErrorMsg('Add text')
         const stayToUpdate = currStay
         stayToUpdate.reviews.unshift({ ...newReview, by: loggedinUser, at: new Date() })
-        updateStays(stayToUpdate)
+        updateStay(stayToUpdate)
         setCurrStay(stayToUpdate)
         setNewReview({ txt: "", rate: { cleanliness: 5, communication: 5, "check-in": 5, accuracy: 5, location: 5, value: 5 } })
         showSuccessMsg('Review uploaded successfully')

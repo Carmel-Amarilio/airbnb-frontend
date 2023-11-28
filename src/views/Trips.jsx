@@ -77,9 +77,9 @@ export function Trips() {
                     <tbody>
                         <tr >
                             {thsLabel.map(label =>
-                                <th key={label}>
+                                <th key={label} className={label}>
                                     {label === 'Actions' ? label :
-                                        <div className=" flex align-center" onClick={() => onLabel(label)}>
+                                        <div className='flex align-center' onClick={() => onLabel(label)}>
                                             {label}
                                             {sort === label ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                                         </div>}
@@ -93,12 +93,12 @@ export function Trips() {
                                     {host.imgUrl ? <img src={host.imgUrl} className="profile" /> : <div className='no-img flex justify-center align-center'>{host.fullName[0]}</div>}
                                     <h3>{host.fullName}</h3>
                                 </td>
-                                <td> <p>{utilService.formatDate(checkIn)}</p> </td>
-                                <td> <p>{utilService.formatDate(checkOut)}</p> </td>
-                                <td > <p>{stay.name}</p> </td>
-                                <td> <p>₪{totalPrice}</p> </td>
-                                <td> <p className={status}>{status}</p> </td>
-                                <td className="actions ">
+                                <td className="Check-in"> <p>{utilService.formatDate(checkIn)}</p> </td>
+                                <td className="Check-Out"> <p>{utilService.formatDate(checkOut)}</p> </td>
+                                <td className="Listing"> <p>{stay.name}</p> </td>
+                                <td className="Total payout"> <p>₪{totalPrice}</p> </td>
+                                <td className="Status"> <p className={status}>{status}</p> </td>
+                                <td className="Actions ">
                                     <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(_id)}>Cancel trip</button>
                                 </td>
 
@@ -107,6 +107,6 @@ export function Trips() {
                     </tbody>
                 </table>
             </main>}
-        </section>
+        </section >
     )
 }

@@ -15,7 +15,7 @@ export async function loadStays(filterBy) {
     }
 }
 
-export async function removeStays(stayId) {
+export async function removeStay(stayId) {
     try {
         await stayService.remove(stayId)
         store.dispatch({
@@ -28,7 +28,7 @@ export async function removeStays(stayId) {
     }
 }
 
-export async function updateStays(stay) {
+export async function updateStay(stay) {
     try {
         const savedStay = await stayService.save(stay)
         store.dispatch({
@@ -41,7 +41,7 @@ export async function updateStays(stay) {
     }
 }
 
-export async function addStays(stayToAdd) {
+export async function addStay(stayToAdd) {
     try {
         const stay = await stayService.save(stayToAdd)
         store.dispatch({

@@ -1,12 +1,28 @@
 .app-index {
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     height: 100vh;
+    min-width: 380px;
+
+    .stay-header {
+        .set-stay-btn {
+
+            .anywhere,
+            .week,
+            .guests {
+                display: inline;
+            }
+
+            .search {
+                display: none;
+            }
+        }
+    }
 
     main {
         display: grid;
         grid-template-columns: 1fr auto;
-        max-height: calc(100vh - 187px);
+        max-height: calc(100vh - 195px);
 
         .stays-list {
             overflow-y: scroll;
@@ -20,6 +36,44 @@
             width: 25vw;
             padding: 0;
             margin-inline-start: 20px;
+        }
+    }
+
+
+
+    @include for-normal-layout {
+        grid-template-columns: 20px 1fr 20px;
+
+        .card-grid {
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        }
+
+        .stay-header {
+            .logo {
+                margin-inline-end: 20px;
+            }
+
+            .set-stay-btn {
+
+                .anywhere,
+                .week,
+                .guests {
+                    display: none;
+                }
+
+                .search {
+                    display: inline;
+                    margin-inline-end: 20px;
+                }
+            }
+        }
+
+        main {
+            max-height: calc(100vh - 280px);
+        }
+
+        .stay-footer {
+            display: flex;
         }
     }
 }

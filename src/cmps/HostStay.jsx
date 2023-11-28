@@ -1,6 +1,5 @@
 export function HostStay({ currStay, onContactHost }) {
     const { host, reviews } = currStay
-    console.log(host);
     return (
         <section className="host-stay">
             <div className="host flex align-center">

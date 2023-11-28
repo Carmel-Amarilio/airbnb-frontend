@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { loadStays, updateStays } from "../store/actions/stay.actions";
+import { loadStays, updateStay } from "../store/actions/stay.actions";
 import { StayHeader } from "../cmps/StayHeader";
 import { StayList } from "../cmps/StayList";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ export function Wishlist() {
         const likeIndx = stayLike.likedByUsers.findIndex((user) => user._id === loggedinUser._id)
         if (likeIndx >= 0) stayLike.likedByUsers.splice(likeIndx, 1);
         else stayLike.likedByUsers.push(loggedinUser)
-        updateStays(stayLike)
+        updateStay(stayLike)
     }
 
     return (

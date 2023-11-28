@@ -1,65 +1,66 @@
 .stay-filter {
-    // position: sticky;
-    // top: 92px;
-    background-color: white;
-    padding: 1rem 3rem;
-    justify-content: flex-start;
-    align-items: center;
-    // overflow-x: auto;
-    // overflow-x:hidden;
-    z-index: 5;
+    article {
+        position: relative;
+        background-color: white;
+        padding-block: 10px;
+        justify-content: flex-start;
+        align-items: center;
+        z-index: 5;
 
 
-    .label-box {
-        margin-right: 2rem;
-        opacity: 0.5;
-        border-bottom: 1px solid white;
-        min-width: 85px;
+        .label-box {
+            margin-right: 2rem;
+            opacity: 0.5;
+            border-bottom: 1px solid white;
+            width: 85px;
 
-        img {
-            width: 40px;
-        }
+            img {
+                width: 40px;
+            }
 
-        &:hover,
-        &.selected-box {
-            opacity: 1;
-            border-bottom: 1px solid black;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
+            p {
+                text-align: center;
+            }
 
-        &:first-child {
-            margin-inline-start: 60px;
-        }
-    }
-
-    .arrow-cont {
-        position: absolute;
-        padding: 10px 20px;
-        background: linear-gradient(to left, white, rgba(255, 255, 255, 0.507));
-        background: linear-gradient(to left, white 70%, rgba(255, 255, 255, 0.507) 70%);
-
-        &.left {
-            left: 50px;
-        }
-
-        &.right {
-            right: 50px;
-        }
-
-        .arrow {
-            font-size: 2em;
-            background-color: white;
-            border-radius: 50px;
-            transition: .3s;
-            border: 1px solid $borderClr;
-            cursor: pointer;
-
-            &:hover {
+            &:hover,
+            &.selected-box {
                 opacity: 1;
+                border-bottom: 1px solid black;
+                transition: all 0.3s;
+                cursor: pointer;
+            }
+
+            &:first-child {
+                margin-inline-start: 60px;
+            }
+        }
+
+        .arrow-cont {
+            position: absolute;
+            padding: 10px 20px;
+            background: linear-gradient(to left, white, rgba(255, 255, 255, 0.507));
+            background: linear-gradient(to left, white 70%, rgba(255, 255, 255, 0.507) 70%);
+
+            &.left {
+                left: 0px;
+            }
+
+            &.right {
+                right: 0px;
+            }
+
+            .arrow {
+                font-size: 2em;
+                background-color: white;
+                border-radius: 50px;
+                transition: .3s;
+                border: 1px solid $borderClr;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 1;
+                }
             }
         }
     }
-
-
 }

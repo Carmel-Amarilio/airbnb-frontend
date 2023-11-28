@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import GoogleMapReact from 'google-map-react';
- 
+
 export function StayMap({ loc }) {
-    // const [location, setLocation] = useState({ lat: loc.lat, lng: loc.lng })
     const [zoom, setZoom] = useState(14)
-    console.log(zoom)
 
     const defaultProps = {
         center: {
@@ -15,7 +13,7 @@ export function StayMap({ loc }) {
     };
 
     const AnyReactComponent = () =>
-        <div className="stay-icon" style={{ padding: `${(zoom - 12) * (zoom - 12) * 10}px` }}>
+        <div className="stay-icon" style={{ padding: `${zoom - 12 > 0 ? ((zoom - 12) * (zoom - 12) * 10) : 0}px` }}>
             <i className="fa-solid fa-house"></i>
         </div>;
 

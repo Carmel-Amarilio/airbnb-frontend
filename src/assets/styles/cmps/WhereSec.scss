@@ -2,13 +2,12 @@
     left: 0px;
     text-align: start;
 
-    h4{
+    h4 {
         margin-block: 20px;
     }
 
     .popular-countries {
         display: grid;
-        // grid-column-gap: 5px;
         grid-row-gap: 24px;
         grid-template-columns: repeat(3, min-content);
         row-gap: 24px;
@@ -23,6 +22,15 @@
 
             &:hover {
                 border: 1px solid black;
+            }
+        }
+    }
+
+    @include for-normal-layout {
+        .popular-countries {
+            margin-bottom: 0px;
+            img {
+                width: 80px !important;
             }
         }
     }

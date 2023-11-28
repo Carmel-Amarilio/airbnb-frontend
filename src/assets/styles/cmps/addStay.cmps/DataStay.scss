@@ -1,11 +1,11 @@
 .data-stay {
     gap: 20px;
 
-    h3{
+    h3 {
         margin: 5px;
     }
 
-    p{
+    p {
         margin-block-end: 20px;
     }
 
@@ -41,5 +41,12 @@
             appearance: none;
             margin: 0;
         }
+    }
+
+    @include for-normal-layout {
+        textarea {
+            width: 300px;
+        }
+
     }
 }
