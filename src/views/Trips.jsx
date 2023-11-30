@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { loadOrders, removeOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { socketService } from "../services/socket.service";
-import { showSuccessMsg } from "../services/event-bus.service";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { stayService } from "../services/stay.service";
+import { updateStay } from "../store/actions/stay.actions";
 
 export function Trips() {
 
@@ -49,10 +51,19 @@ export function Trips() {
             })
     }
 
-    function onCancel(orderId) {
-        removeOrder(orderId)
-        _loadOrders()
-        showSuccessMsg('Trip been cancel')
+    async function onCancel(order) {
+        const { _id, checkIn, checkOut, stay } = order
+        try {
+            const currStay = await stayService.get(stay._id)
+            const newDateNotAvailable = currStay.DateNotAvailable.filter((date) => !(date >= checkIn && date <= checkOut))
+            updateStay({ ...currStay, DateNotAvailable: [...newDateNotAvailable] })
+            removeOrder(_id)
+            _loadOrders()
+            showSuccessMsg('Trip been cancel')
+        } catch (error) {
+            console.log("Had issues cancel the trip", error);
+            showErrorMsg("Had issues cancel the trip")
+        }
     }
 
     function onLabel(label) {
@@ -64,7 +75,6 @@ export function Trips() {
         return new Date(date) < today
     }
 
-    console.log(orders);
     const thsLabel = ['host', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'Actions']
     return (
         <section className="trips main-container">
@@ -105,7 +115,7 @@ export function Trips() {
                                 <td className="Total payout"> <p>₪{totalPrice}</p> </td>
                                 <td className="Status"> <p className={status}>{status}</p> </td>
                                 <td className="Actions ">
-                                    <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(_id)}>Cancel trip</button>
+                                    <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(order)}>Cancel trip</button>
                                 </td>
 
                             </tr>

@@ -58,7 +58,7 @@ export function OrderForm({ searchStay, setSearchStay, currStay, rating, reviews
 
                     {(openModal === 'checkIn' || openModal === 'checkOut') && <section className="pic-date sec">
                         <h2>Select dates</h2>
-                        <p>Minimum stay: {2} nights</p>
+                        <p>Minimum stay: {1} night</p>
                         <DatePicker setDates={setSearchStay} checkIn={checkIn} checkOut={checkOut} DateNotAvailable={DateNotAvailable} />
                         <article className="clears flex">
                             <button onClick={() => setSearchStay(prev => ({ ...prev, checkIn: null, checkOut: null }))} className="underline-btn">Clear data</button>

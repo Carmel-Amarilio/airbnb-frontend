@@ -28,15 +28,15 @@ export function OrderStay() {
     const nightsCount = checkIn && checkOut ? utilService.calculateNights(checkIn, checkOut) : null
 
     useEffect(() => {
-            const { orderId, stayId, checkIn, checkOut, adults, children, infants } = params
-            if (!orderId) {
-                setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants } })
-                getStay(stayId)
-            }
-            else {
-                setIsUpdate(true)
-                getOrder(orderId)
-            }
+        const { orderId, stayId, checkIn, checkOut, adults, children, infants } = params
+        if (!orderId) {
+            setOrder({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests: { adults: +adults, children: +children, infants: +infants } })
+            getStay(stayId)
+        }
+        else {
+            setIsUpdate(true)
+            getOrder(orderId)
+        }
     }, [loggedinUser])
 
     async function getStay(stayId) {
@@ -63,15 +63,17 @@ export function OrderStay() {
     async function newOrder() {
         if (!checkIn || !checkOut) return showErrorMsg('You have not specified dates for your trip ')
         if (!guests.adults) return showErrorMsg('You did not specify the number of guests ')
+        if (isDatesAvailable(checkIn, checkOut)) return showErrorMsg('The dates you selected are not available, please choose others')
         const totalPrice = (price * nightsCount + Math.floor((price * nightsCount) * 0.14) + 30 * nightsCount)
         if (isUpdate) {
             try {
-                updateOrder({ ...order, status: 'pending', totalPrice,  lastUpdate: Date.now() })
-                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable , ...utilService.getDatesBetween(checkIn, checkOut)]})
+                updateOrder({ ...order, status: 'pending', totalPrice, lastUpdate: Date.now() })
+                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable, ...utilService.getDatesBetween(checkIn, checkOut)] })
                 showSuccessMsg('The request has been successfully updated')
                 navigate("/trips")
             } catch (error) {
                 console.log("Had issues update order", error);
+                showErrorMsg("Had issues update order")
             }
 
         } else {
@@ -79,18 +81,20 @@ export function OrderStay() {
             const newOrder = orderService.getEmptyOrder({ host, loggedinUser, totalPrice, checkIn, checkOut, guests, miniStay, status: 'pending' })
             try {
                 addOrder(newOrder)
-                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable , ...utilService.getDatesBetween(checkIn, checkOut)]})
+                updateStay({ ...currStay, DateNotAvailable: [...DateNotAvailable, ...utilService.getDatesBetween(checkIn, checkOut)] })
                 showSuccessMsg('booking request sent to host')
                 navigate("/trips")
             } catch (error) {
                 console.log("Had issues create a order", error);
+                showErrorMsg("Had issues update order")
             }
         }
     }
-    console.log(checkIn, checkOut);
-    
-    
-    
+
+    function isDatesAvailable(startDate, endDate){
+        return DateNotAvailable.filter((date) => (date >= startDate.toISOString() && date <= endDate.toISOString())).length
+    }
+
     if (!currStay || currStay.length === 0) return (<div>loading...</div>)
     const { _id, imgUrls, name, host, price, capacity, reviews, DateNotAvailable } = currStay
     const { rating } = utilService.mapRating(reviews)
@@ -179,7 +183,7 @@ export function OrderStay() {
             {(openModal === 'date') &&
                 <section className="pic-date">
                     <h2>Select dates</h2>
-                    <p>Minimum stay: {2} nights</p>
+                    <p>Minimum stay: {1} night</p>
                     <DatePicker setDates={setOrder} checkIn={checkIn} checkOut={checkOut} DateNotAvailable={DateNotAvailable} />
                     <article className="clears flex">
                         <button onClick={() => setOpenModal('')} className="black-btn">Close</button>
