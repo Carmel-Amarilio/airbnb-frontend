@@ -13,9 +13,11 @@
             opacity: 0.5;
             border-bottom: 1px solid white;
             width: 85px;
+            height: 80px;
 
             img {
-                width: 40px;
+                width: 30px;
+                margin-block-end: 10px;
             }
 
             p {
@@ -32,6 +34,20 @@
 
             &:first-child {
                 margin-inline-start: 60px;
+            }
+        }
+
+        .All{
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -1em;
+                transform: translate(-50%, -50%);
+                height: 60%;
+                width: 1px;
+                background-color: black;
             }
         }
 

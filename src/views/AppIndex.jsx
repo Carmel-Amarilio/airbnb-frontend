@@ -28,7 +28,7 @@ export function AppIndex() {
         const children = searchParams.get('children');
         const infants = searchParams.get('infants');
         const newFilter = {
-            label: labelFilter || 'Amazing views', destinations: destinations || "", checkIn: checkIn ? new Date(checkIn) : null, checkOut: checkOut ? new Date(checkOut) : null, guests: { adults: +adults || 0, children: +children || 0, infants: +infants || 0 }
+            label: labelFilter || 'All', destinations: destinations || "", checkIn: checkIn ? new Date(checkIn) : null, checkOut: checkOut ? new Date(checkOut) : null, guests: { adults: +adults || 0, children: +children || 0, infants: +infants || 0 }
         }
         setFilter(newFilter)
         loadStays(newFilter)

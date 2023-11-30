@@ -48,11 +48,11 @@ export function StayFilter({ filter }) {
 
     return (
         <section className="stay-filter main-container">
-            <article className="stay-filter flex full ">
+            <article className="flex full ">
                 {labels.slice(chunkStartIndex, chunkStartIndex + chunkSize).map((label, i) =>
                     <div
                         key={i}
-                        className={`label-box ${label === filter.label ? "selected-box" : ""} flex column justify-center align-center`}
+                        className={`label-box ${label === filter.label ? "selected-box" : ""} ${label} flex column justify-center align-center`}
                         onClick={() => setFilter(label)}>
                         <img src={imgs[Math.floor(chunkStartIndex) + i]} />
                         <p>{label}</p>

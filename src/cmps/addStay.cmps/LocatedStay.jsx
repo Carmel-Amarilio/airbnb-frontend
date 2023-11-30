@@ -10,9 +10,9 @@ export function LocatedStay({ loc, setStay, setIsNext }) {
     const { country, city, street, houseNumber, lat, lng } = loc
 
     useEffect(() => {
-        if (country.length < 2 || city.length < 2 || street.length < 2 || houseNumber.length < 0 || lat === 0 || lng === 0) setIsNext(false)
+        if (country.length < 2 || city.length < 2 || street.length < 2 || lat === 0 || lng === 0) setIsNext(false)
         else setIsNext(true)
-    }, [country, city, street, houseNumber, lat, lng])
+    }, [country, city, street, lat, lng])
 
 
     function handleSearch(key, { target }) {
@@ -23,8 +23,8 @@ export function LocatedStay({ loc, setStay, setIsNext }) {
 
 
     async function getLocOnMap() {
+        if(!country || !city || !street) return
         const res = await stayService.getLngLan(country, city, street, houseNumber);
-        console.log(res);
         const newLoc = { ...loc, ["lat"]: res[0].lat, ["lng"]: res[0].lon }
         setStay("loc", newLoc)
     }

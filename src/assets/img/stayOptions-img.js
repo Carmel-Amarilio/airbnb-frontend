@@ -1,6 +1,7 @@
 export const stayOptions = {
+  "All": "https://res.cloudinary.com/du1jrse2t/image/upload/v1701347874/b887040f-0968-4174-9a4f-2d41f8728248_dmmtfx.png",
   "Amazing views": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347312/download_gwarhs.png",
-  "Chief's kitchens": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347322/download_zyjnp2.png", 
+  "Chef's kitchens": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347322/download_zyjnp2.png", 
   "Luxe": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347326/download_x164kx.png",
   "Ski-in/out": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347331/download_jsrtxe.png",
   "Private rooms": "https://res.cloudinary.com/du1jrse2t/image/upload/v1699347329/download_acbdmp.png",
