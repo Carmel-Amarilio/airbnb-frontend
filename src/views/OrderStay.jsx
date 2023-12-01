@@ -14,6 +14,7 @@ import { orderService } from "../services/order.service";
 import { utilService } from "../services/util.service";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { updateStay } from "../store/actions/stay.actions";
+import { LoaderPage } from "./LoaderPage";
 
 export function OrderStay() {
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
@@ -95,7 +96,7 @@ export function OrderStay() {
         return DateNotAvailable.filter((date) => (date >= startDate.toISOString() && date <= endDate.toISOString())).length
     }
 
-    if (!currStay || currStay.length === 0) return (<div>loading...</div>)
+    if (!currStay || currStay.length === 0) return (<LoaderPage />)
     const { _id, imgUrls, name, host, price, capacity, reviews, DateNotAvailable } = currStay
     const { rating } = utilService.mapRating(reviews)
     return (

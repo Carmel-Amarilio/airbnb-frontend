@@ -64,7 +64,7 @@ export function StayDetails() {
         setIsLog(false)
     }
 
-    if (!currStay || currStay.length === 0) return (<LoaderPage />)
+    if (!currStay) return (<LoaderPage />)
     const { _id, imgUrls, name, host, price, reviews, loc } = currStay
     const { rating, ratingName } = utilService.mapRating(reviews)
     return (

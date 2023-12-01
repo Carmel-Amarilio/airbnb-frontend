@@ -5,6 +5,7 @@ import { StayList } from "../cmps/StayList";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { main } from "@popperjs/core";
+import { LoaderPage } from "./LoaderPage";
 
 export function Wishlist() {
     const navigate = useNavigate();
@@ -32,6 +33,7 @@ export function Wishlist() {
         updateStay(stayLike)
     }
 
+    if (!stays) return (<LoaderPage />)
     return (
         <section className="wishlist main-container">
             <StayHeader isUserPage={true} />

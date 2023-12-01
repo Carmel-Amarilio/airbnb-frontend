@@ -9,6 +9,7 @@ import { ActionBtn } from "../cmps/ActionBtn";
 import logoImgUrl from '../assets/img/logo.png'
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import { socketService } from "../services/socket.service";
+import { LoaderPage } from "./LoaderPage";
 
 export function Messages() {
     const location = useLocation();
@@ -79,6 +80,7 @@ export function Messages() {
     }
 
     if (!loggedinUser) navigate("/stay")
+    if (!orders) return (<LoaderPage />)
     return (
         <section className="messages">
             <StayHeader isUserPage={true} />

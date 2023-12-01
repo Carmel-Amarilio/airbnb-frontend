@@ -8,6 +8,7 @@ import { SingInUp } from "../cmps/SingInUp";
 import { useLocation } from "react-router";
 import { StaysMap } from "../cmps/StaysMap";
 import { StayFooter } from "../cmps/StayFooter";
+import { LoaderPage } from "./LoaderPage";
 
 export function AppIndex() {
     const location = useLocation();
@@ -52,7 +53,7 @@ export function AppIndex() {
         updateStay(stayLike)
     }
 
-    console.log(stays);
+    if (!stays) return (<LoaderPage />)
     return (
         <section className="app-index main-container">
             <StayHeader setIsLog={setIsLog} filter={filter} setFilter={setFilter} />

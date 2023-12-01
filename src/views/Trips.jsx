@@ -10,6 +10,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { stayService } from "../services/stay.service";
 import { updateStay } from "../store/actions/stay.actions";
+import { LoaderPage } from "./LoaderPage";
 
 export function Trips() {
 
@@ -76,6 +77,7 @@ export function Trips() {
     }
 
     const thsLabel = ['host', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'Actions']
+    if (!orders) return (<LoaderPage />)
     return (
         <section className="trips main-container">
             <StayHeader isUserPage={true} />

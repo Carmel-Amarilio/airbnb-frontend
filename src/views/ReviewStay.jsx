@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router"; 
+import { useNavigate, useParams } from "react-router";
 import { StayHeader } from "../cmps/StayHeader";
 import { stayService } from "../services/stay.service";
 import { orderService } from "../services/order.service";
@@ -10,6 +10,7 @@ import { Reviews } from "../cmps/reviews";
 import { ActionBtn } from "../cmps/ActionBtn";
 import { updateStay } from "../store/actions/stay.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { LoaderPage } from "./LoaderPage";
 
 export function ReviewStay() {
     const params = useParams()
@@ -66,7 +67,7 @@ export function ReviewStay() {
     }
 
     function onPost() {
-        if(!newReview.txt) return showErrorMsg('Add text')
+        if (!newReview.txt) return showErrorMsg('Add text')
         const stayToUpdate = currStay
         stayToUpdate.reviews.unshift({ ...newReview, by: loggedinUser, at: new Date() })
         updateStay(stayToUpdate)
@@ -75,7 +76,7 @@ export function ReviewStay() {
         showSuccessMsg('Review uploaded successfully')
     }
 
-    if (!currStay) return (<div>loading...</div>)
+    if (!currStay) return (<LoaderPage />)
     const { reviews } = currStay
     const { rating, ratingName } = utilService.mapRating(reviews)
     return (

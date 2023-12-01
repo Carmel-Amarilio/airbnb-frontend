@@ -8,6 +8,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { ReservationsDashboard } from "../cmps/ReservationsDashboard";
 import { socketService } from "../services/socket.service";
+import { LoaderPage } from "./LoaderPage";
 
 export function Reservations() {
     const navigate = useNavigate();
@@ -67,7 +68,7 @@ export function Reservations() {
             by: loggedinUser
         })
         try {
-            updateOrder({ ...order, status: newStatus, msgs: newMsgs,  lastUpdate: Date.now() })
+            updateOrder({ ...order, status: newStatus, msgs: newMsgs, lastUpdate: Date.now() })
             _loadOrders('')
         } catch (error) {
             console.log("Had issues changing thr status", error);
@@ -78,12 +79,11 @@ export function Reservations() {
         setShowDashboard(!showDashboard)
     }
 
-    console.log(orders);
     const thsLabel = ['Guest', 'Check-in', 'Check-Out', 'Listing', 'Total payout', 'Status', 'To do']
+    if (!orders) return (<LoaderPage />)
     return (
         <section className="reservations main-container">
             <StayHeader isUserPage={true} />
-
 
             {!orders.length ? <section className="empty-page" >
                 <h1> Reservations</h1>

@@ -3,6 +3,7 @@ import { StayHeader } from "../cmps/StayHeader";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadStays } from "../store/actions/stay.actions";
+import { LoaderPage } from "./LoaderPage";
 
 export function Listings() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ export function Listings() {
         }
     }, [loggedinUser])
 
-    console.log(stays);
+    if (!stays) return (<LoaderPage />)
     return (
         <section className="listings main-container">
             <StayHeader isUserPage={true} />
