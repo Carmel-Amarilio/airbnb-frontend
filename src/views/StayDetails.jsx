@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { stayService } from "../services/stay.service";
-
+import { useSelector } from "react-redux";
 import { StayHeader } from "../cmps/StayHeader";
 import { Reviews } from "../cmps/reviews";
 import { StayReviewDetail } from "../cmps/StayReviewDetail";
 import { OrderForm } from "../cmps/OrderForm";
 import { StayMap } from "../cmps/StayMap";
 import { HostStay } from "../cmps/HostStay";
-
-import StarIcon from '@mui/icons-material/Star';
 import { SingInUp } from "../cmps/SingInUp";
-import { useSelector } from "react-redux";
 import { orderService } from "../services/order.service";
 import { addOrder } from "../store/actions/order.actions";
 import { utilService } from "../services/util.service";
 import { StayImgHeader } from "../cmps/StayImgHeader";
+import { LoaderPage } from "./LoaderPage";
+
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
+import StarIcon from '@mui/icons-material/Star';
 
 export function StayDetails() {
     const params = useParams()
@@ -64,7 +64,7 @@ export function StayDetails() {
         setIsLog(false)
     }
 
-    if (!currStay || currStay.length === 0) return (<div>loading...</div>)
+    if (!currStay || currStay.length === 0) return (<LoaderPage />)
     const { _id, imgUrls, name, host, price, reviews, loc } = currStay
     const { rating, ratingName } = utilService.mapRating(reviews)
     return (
