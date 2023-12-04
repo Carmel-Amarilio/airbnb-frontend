@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import GoogleMapReact from 'google-map-react';
 import { StayModal } from "./StayModal";
 
-export function StaysMap({ stays, onLike, loggedinUser}) {
+import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
+import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
+
+export function StaysMap({ stays, onLike, loggedinUser }) {
     const [selectedStay, setSelectedStay] = useState({});
+    const [openMap, setOpenMap] = useState(false);
+
+    function toggleMap() {
+        setOpenMap(!openMap)
+    }
 
     const defaultProps = {
         center: {
@@ -19,7 +27,7 @@ export function StaysMap({ stays, onLike, loggedinUser}) {
         </div>
 
     return (
-        <article className="stay-map">
+        <article className={`stay-map ${openMap ? 'open' : ''}`}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyATDxgaZ8l4WmEcri_46uqKk-1T_M7QCA0" }}
                 center={stays[0].loc}
@@ -38,6 +46,8 @@ export function StaysMap({ stays, onLike, loggedinUser}) {
             </GoogleMapReact>
 
             {selectedStay._id && <StayModal stay={selectedStay} onLike={onLike} loggedinUser={loggedinUser} setSelectedStay={setSelectedStay} />}
+            <button onClick={toggleMap} className="back-btn" title="Map">{ openMap ? <KeyboardArrowRightSharpIcon /> :  <KeyboardArrowLeftSharpIcon />} </button>
+
         </article>
     );
 }

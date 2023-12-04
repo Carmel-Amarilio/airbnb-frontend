@@ -78,7 +78,7 @@ function getEmptyStay(host) {
     }
 }
 
-function _createStays() {
+function _createStay() {
     const stay = {
         name: "Ribeira Charming Duplex",
         type: "House",

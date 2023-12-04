@@ -33,9 +33,17 @@
         }
 
         .stay-map {
+            position: relative;
             width: 25vw;
             padding: 0;
             margin-inline-start: 20px;
+
+            .back-btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: none;
+            }
         }
     }
 
@@ -70,6 +78,20 @@
 
         main {
             max-height: calc(100vh - 280px);
+
+            .stay-map {
+                width: 0vw;
+                margin-inline-start: 0px;
+                transition: .3s;
+
+                &.open{
+                    width: 90vw;
+                }
+
+                .back-btn {
+                    display: block;
+                }
+            }
         }
 
         .stay-footer {

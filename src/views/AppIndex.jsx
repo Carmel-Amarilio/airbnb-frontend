@@ -66,7 +66,7 @@ export function AppIndex() {
                             <p>Try changing or removing some of your filters or adjusting your search area.</p>
                         </div>
                     </section> :
-                    <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
+                    <StayList stays={stays} onLike={onLike} loggedinUser={loggedinUser} />} 
                 {(!!stays.length && !!filter.destinations) && <StaysMap stays={stays} onLike={onLike} loggedinUser={loggedinUser} />}
             </main>
             <StayFooter setIsLog={setIsLog} />
