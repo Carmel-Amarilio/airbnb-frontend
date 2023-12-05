@@ -19,7 +19,6 @@ export function AppIndex() {
     const [filter, setFilter] = useState({});
     const [isLog, setIsLog] = useState(false)
 
-    console.log(filter);
     useEffect(() => {
         const labelFilter = searchParams.get('label');
         const destinations = searchParams.get('destinations');

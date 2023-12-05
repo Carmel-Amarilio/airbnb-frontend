@@ -8,7 +8,7 @@ export function DescribesStay({ labels, setStay, setIsNext }) {
     useEffect(() => {
         labels.length > 0 ? setIsNext(true) : setIsNext(false)
     }, [labels])
-    console.log(labels);
+    
     function setLabels(label) {
         const newLabels = [...labels]
         if (newLabels.includes(label)) newLabels.splice(newLabels.indexOf(label), 1)

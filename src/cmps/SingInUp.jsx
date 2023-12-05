@@ -14,6 +14,7 @@ const SignupSchema = Yup.object().shape({
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
+
     userName: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
@@ -43,8 +44,9 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
             try {
                 const user = await login(val)
                 if (user) showSuccessMsg(`Welcome back ${user.fullName}`)
+                if (!isOrder) closeLog()
             } catch (error) {
-                showErrorMsg('There was an error logging in to your user ')
+                showErrorMsg('There was an error logging in to your user')
             }
         }
 
@@ -52,11 +54,13 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
             try {
                 const user = await signup(val)
                 if (user) showSuccessMsg(`Welcome ${user.fullName}`)
+                if (!isOrder) closeLog()
             } catch (error) {
-                showErrorMsg('There was an error with your registration')
+                error.response.status === 500 ? showErrorMsg('User name is taken, please change it') : showErrorMsg('There was an error with your registration')
+                console.log('There was an error with your registration', error);
             }
         }
-        if (!isOrder) closeLog()
+        // if (!isOrder) closeLog()
     }
 
     async function onAddImg(ev) {
@@ -71,7 +75,7 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
 
             <Formik
                 initialValues={{
-                    fullName: `${(operation === 'in') ? '404' : ''}`,
+                    fullName: `${(operation === 'in') ? 'full name' : ''}`,
                     userName: '',
                     password: '',
                 }}
@@ -97,7 +101,7 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                         </div>
 
                         {operation === 'in' && <ActionBtn line={"Sign In"} className='submit-bnt' type='submit' onClick={() => checkErrors(errors)} />}
-                        {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' onClick={() => checkErrors(errors)}/>}
+                        {operation === 'up' && <ActionBtn line={"Sign Up"} className='submit-bnt' type='submit' onClick={() => checkErrors(errors)} />}
                     </Form>
                     )
                 }}
