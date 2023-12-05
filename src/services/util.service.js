@@ -121,7 +121,7 @@ function findConsecutiveAvailableDates(DateNotAvailable) {
     const threeDaysLater = new Date(today);
     threeDaysLater.setDate(today.getDate() + 3);
 
-    for (let i = 0; i <= DateNotAvailable.length + 1; i++) {
+    for (let i = 0; i <= DateNotAvailable.length + 3; i++) {
         const day1 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 1)
         const day2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 2)
         const day3 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + i + 3)

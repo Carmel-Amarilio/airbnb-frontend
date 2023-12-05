@@ -37,7 +37,7 @@ export function Wishlist() {
     return (
         <section className="wishlist main-container">
             <StayHeader isUserPage={true} />
-            {stays.length && <h1>Wishlists</h1>}
+            {!!stays.length && <h1>Wishlists</h1>}
             {!stays.length ?
                 <section className="empty-page" >
                     <h1>Wishlists</h1>

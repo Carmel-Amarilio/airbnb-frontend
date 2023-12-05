@@ -158,10 +158,11 @@ export function Messages() {
                             <p>{`${currOrder.guests.adults ? `adults: ${currOrder.guests.adults}` : ''}${currOrder.guests.children ? `, children: ${currOrder.guests.children}` : ''}${currOrder.guests.infants ? `, infants: ${currOrder.guests.infants}` : ''}`}</p>
                         </div>}
                         {currOrder.status != 'negotiations' && <h5 className="total"><span>Total price:</span> ₪{currOrder.totalPrice}</h5>}
-                        {currOrder.status != 'negotiations' && <div>
-                            <p>After your stay you can write review about the place</p>
-                            <button disabled={!isPastDate(currOrder.checkIn)} onClick={() => navigate(`/stay/review/${currOrder.stay._id}/${currOrder._id}`)} className="form-btn">Write a review</button>
-                        </div>}
+                        {currOrder.status != 'negotiations' && loggedinUser._id != currOrder.host._id &&
+                            <div>
+                                <p>{isPastDate(currOrder.checkIn) ? 'How was your stay? would you like to write review about the place' : 'After your stay you can write review about the place'}</p>
+                                <button disabled={!isPastDate(currOrder.checkIn)} onClick={() => navigate(`/stay/review/${currOrder.stay._id}/${currOrder._id}`)} className="form-btn">Write a review</button>
+                            </div>}
 
 
                         {currOrder.status === 'negotiations' && <ActionBtn line={"Request to book"} onClick={onOrder} />}

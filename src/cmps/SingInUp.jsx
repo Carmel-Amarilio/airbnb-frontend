@@ -1,5 +1,5 @@
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, connect } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
@@ -60,8 +60,20 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                 console.log('There was an error with your registration', error);
             }
         }
-        // if (!isOrder) closeLog()
     }
+
+    async function connectGuest() {
+        const val = { userName: 'Augustus Guesterson', password: 'Augustus Guesterson' }
+        try {
+            const user = await login(val)
+            if (user) showSuccessMsg(`Welcome back ${user.fullName}`)
+            if (!isOrder) closeLog()
+        } catch (error) {
+            showErrorMsg('There was an error logging in to your user')
+        }
+    }
+
+
 
     async function onAddImg(ev) {
         const imgUrl = await cloudinaryServices.uploadImg(ev)
@@ -106,6 +118,9 @@ export function SingInUp({ operation, closeLog, setOperation, isOrder = false })
                     )
                 }}
             </Formik>
+
+            <p className='or-guest'>Or</p>
+            <ActionBtn line={"Continue as a guest"} className='submit-bnt' type='submit' onClick={connectGuest} />
 
             {isOrder && operation === 'in' && <button className='underline-btn' onClick={() => setOperation("up")}>Sign Up</button>}
             {isOrder && operation === 'up' && <button className='underline-btn' onClick={() => setOperation("in")}>Sign In</button>}

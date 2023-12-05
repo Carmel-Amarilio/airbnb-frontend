@@ -1,8 +1,8 @@
 .sing-in-up {
-    position:fixed;
-    top:  0%;
+    position: fixed;
+    top: 0%;
     right: 50%;
-    transform: translate(50%, 40%);
+    transform: translate(50%, 20%);
     padding: 20px;
     background-color: white;
     border: 1px solid $borderClr;
@@ -19,7 +19,8 @@
             background-color: $borderClr;
         }
     }
-    div{
+
+    div {
         margin: 0;
         width: 100%;
     }
@@ -30,10 +31,12 @@
 
     .upload-profile {
         cursor: pointer;
-        .profile{
+
+        .profile {
             margin-block-end: 10px;
         }
-        .user-icon{
+
+        .user-icon {
             font-size: 3em;
         }
     }
@@ -49,5 +52,11 @@
         min-width: 300px;
         margin-block-end: 20px;
 
+    }
+
+    .or-guest {
+        padding-block: 20px;
+        text-align: center;
+        border-block-start: 1px solid $borderClr;
     }
 }

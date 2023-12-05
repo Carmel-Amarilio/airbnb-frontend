@@ -117,7 +117,7 @@ export function Trips() {
                                 <td className="Total payout"> <p>₪{totalPrice}</p> </td>
                                 <td className="Status"> <p className={status}>{status}</p> </td>
                                 <td className="Actions ">
-                                    <button disabled={isPastDate(checkIn)} className="form-btn" onClick={() => onCancel(order)}>Cancel trip</button>
+                                    <button disabled={isPastDate(checkIn) || status === 'approved'} className="form-btn" onClick={() => onCancel(order)}>Cancel trip</button>
                                 </td>
 
                             </tr>
