@@ -19,7 +19,7 @@ export function StayHeader({ setIsLog, filter, setFilter, isUserPage = false }) 
         setIsModal(!isModal)
     }
 
-    function onAirbnbYourHome() {
+    function onAircncYourHome() {
         if (!loggedinUser) setIsLog("in")
         else navigate("/about-your-place")
     }
@@ -43,7 +43,7 @@ export function StayHeader({ setIsLog, filter, setFilter, isUserPage = false }) 
                 </section>}
 
                 <section className='sating flex align-center' >
-                    {!isUserPage && <button className='your-home' onClick={onAirbnbYourHome}>Airbnb your home</button>}
+                    {!isUserPage && <button className='your-home' onClick={onAircncYourHome}>Aircnc your home</button>}
 
                     <article className='user-log flex align-center' onClick={toggleModal}>
                         <MenuSharpIcon className='menu-icon' />

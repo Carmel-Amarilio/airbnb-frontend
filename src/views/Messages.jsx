@@ -92,7 +92,7 @@ export function Messages() {
                             <div>
                                 <h2>You have no unread messages</h2>
                                 <p>When you book a trip or experience, messages from your host will show up here</p>
-                                <button className="form-btn" onClick={() => navigate("/stay")}> Explore Airbnb</button>
+                                <button className="form-btn" onClick={() => navigate("/stay")}> Explore Aircnc</button>
                             </div>
                         </section> :
                         <section className="orders-list">

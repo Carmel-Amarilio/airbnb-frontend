@@ -6,7 +6,7 @@ export function StayFooter({ setIsLog, filter, setFilter, isDetails = false, isU
     const navigate = useNavigate();
     const loggedinUser = useSelector((storeState) => storeState.userModule.user)
 
-    function onAirbnbYourHome() {
+    function onAircncYourHome() {
         if (!loggedinUser) setIsLog("in")
         else navigate("/about-your-place")
     }
@@ -14,9 +14,9 @@ export function StayFooter({ setIsLog, filter, setFilter, isDetails = false, isU
     return (
         <section className="stay-footer flex justify-center align-center space-between ">
             {!loggedinUser && <button onClick={() => setIsLog("in")}>Log in</button>}
-            {!loggedinUser && <button className='flex column align-center' onClick={onAirbnbYourHome}>
+            {!loggedinUser && <button className='flex column align-center' onClick={onAircncYourHome}>
                 <i className="fa-brands fa-airbnb"></i>
-                Airbnb your home
+                Aircnc your home
             </button>}
             {!loggedinUser && <button onClick={() => setIsLog("up")}>Sing up</button>}
             {loggedinUser && <button className='flex column align-center' onClick={() => navigate("/messages")}>

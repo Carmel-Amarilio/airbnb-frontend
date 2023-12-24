@@ -169,7 +169,7 @@ export function OrderStay() {
                             <p>₪{Math.floor((price * nightsCount) * 0.14)}</p>
                         </div>
                         <div className="flex space-between align-center">
-                            <p>Airbnb service fee</p>
+                            <p>Aircnc service fee</p>
                             <p>₪{30 * nightsCount}</p>
                         </div>
                         <div className="total flex space-between align-center">
